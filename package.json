@@ -1,0 +1,61 @@
+{
+  "name": "blog1997-admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve && webpack-dev-serve --inline --hot --open",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "commit": "cz"
+  },
+  "dependencies": {
+    "@antv/data-set": "^0.11.7",
+    "@antv/g2": "^4.0.15",
+    "@blog1997/animate": "0.0.3-beta",
+    "@blog1997/vue-umeditor": "^0.1.10",
+    "axios": "^0.21.1",
+    "axios-progress-bar": "^1.2.0",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.15.6",
+    "highlight.js": "^10.4.1",
+    "jsencrypt": "^3.2.1",
+    "marked": "^3.0.3",
+    "node-sass": "^4.14.1",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-standard": "^5.1.2",
+    "babel-eslint": "^10.1.0",
+    "css-loader": "^6.3.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "eslint-plugin-vue": "^6.2.2",
+    "install": "^0.13.0",
+    "npm": "^7.24.0",
+    "postcss": "^8.3.7",
+    "postcss-pxtorem": "^5.1.1",
+    "raw-loader": "^4.0.2",
+    "sass-loader": "^7.3.1",
+    "style-loader": "^3.2.1",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "bit": {
+    "env": {
+      "compiler": "bit.envs/bundlers/vue@2.6.21"
+    },
+    "componentsDefaultDirectory": "components/{name}",
+    "packageManager": "npm"
+  }
+}

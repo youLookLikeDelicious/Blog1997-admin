@@ -1,0 +1,28 @@
+.el-upload--picture-card {
+  $size: 13rem;
+  width: $size !important;
+  height: $size !important;
+  line-height: $size !important;
+}
+
+.el-table__header {
+  th {
+    background-color: #f5f7fa !important;
+  }
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+  background-color: rgba($blue, .12) !important;
+}
+
+.el-form-item__content {
+  line-height: normal !important;
+}
+
+.el-form-item__label {
+  line-height: 3rem !important;
+}
+
+.el-upload-dragger {
+  line-height: normal;
+}
