@@ -193,8 +193,20 @@ export default {
           subMenu: [
             {
               url: '/gallery',
-              title: '查看图片',
+              title: '搜索',
               icon: 'icofont-image',
+              permission: 'gallery.index'
+            },
+            {
+              url: '/gallery/album',
+              title: '相册',
+              icon: 'iconfont icon-chakanxiangce',
+              permission: 'gallery.index'
+            },
+            {
+              url: '/gallery/place',
+              title: '位置',
+              icon: 'iconfont icon-zhiyuandidian5',
               permission: 'gallery.index'
             }
           ]
@@ -279,13 +291,18 @@ export default {
         }
       ],
       currentPathBack: '',
-      toggleStack: [],
+      preEl: '',
       isMounted: false
     }
   },
   computed: {
     currentPath () {
-      return this.$route.path
+      const route = this.$route
+      let path = route.path
+      if (route.params.id) {
+        path = path.replace(new RegExp('/' + route.params.id + '$'), '')
+      }
+      return path
     }
   },
   watch: {
@@ -333,19 +350,18 @@ export default {
      * 执行菜单栏动画
      * @param {Element} target
      */
-    execToggleAnimation (target, isPush = true) {
+    execToggleAnimation (target) {
       const arrow = target.querySelector('.icofont-caret-down')
-      if (isPush && !this.toggleStack.includes(target)) {
-        this.toggleStack.push(target)
-      }
 
-      if (this.toggleStack.length > 1) {
-        this.execToggleAnimation(this.toggleStack.shift(), false)
-      }
-
+      // 展开操作
       if (arrow.style.transform.indexOf('180') === -1) {
+        if (this.preEl && this.preEl !== target) {
+          this.execToggleAnimation(this.preEl)
+        }
+        this.preEl = target
         arrow.style.transform = 'rotate(-180deg)'
       } else {
+        this.preEl = ''
         arrow.style.transform = 'rotate(0)'
       }
 
@@ -430,6 +446,7 @@ export default {
     overflow: hidden;
     font-size: 1.5rem;
     li {
+      transition: background-color .3s;
       &:hover {
         border-radius: 0.3rem;
         background-color: #e6e6e6;

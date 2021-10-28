@@ -20,7 +20,7 @@
     </template>
     <!-- 搜索 end -->
     <template
-      v-slot:header="{ create }"
+      v-slot:create="{ create }"
     >
       <create-manager
         ref="create"

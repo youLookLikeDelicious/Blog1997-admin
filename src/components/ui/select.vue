@@ -40,7 +40,7 @@
             v-for="(item, index) in filterItem"
             :key="index"
             :class="{
-              'no-pointer': item.id === false && !allowCreate,
+              'no-pointer': item.id === false,
               on: checkItemIsSelected(item) !== false,
               disabled: item.disabled
             }"
@@ -110,6 +110,15 @@ export default {
       default () {
         return false
       }
+    },
+    props: {
+      type: Object,
+      default () {
+        return {
+          label: 'name',
+          value: 'id'
+        }
+      }
     }
   },
   data () {
@@ -133,26 +142,28 @@ export default {
       if (!this.inputValue && !this.createList.length) {
         return this.options.length
           ? this.options
-          : [{ name: '暂无记录', id: false }]
+          : [{ name: '暂无记录', [this.props.value]: false }]
       }
 
       // 正则匹配选项
-      const preg = new RegExp(`.*${this.inputValue}.*`, 'i')
-      const result = this.options.filter((item) => preg.test(item.name || item))
+      let result = []
+      if (this.inputValue) {
+        const preg = new RegExp(`.*${this.inputValue}.*`, 'i')
+        result = this.options.filter((item) => preg.test(item.name || item))
+      } else {
+        result = [...this.options]
+      }
 
       // 如果允许创建新的值，向结果中追加新的值
       if (this.allowCreate) {
         result.push(...this.createList)
         if (this.inputValue) {
-          result.push({ name: this.inputValue, id: -1 })
+          result.push({ name: this.inputValue, [this.props.value]: -1 })
         }
       }
 
-      if (
-        (result.length === 1 && this.allowCreate) ||
-        (!result.length && !this.allowCreate)
-      ) {
-        result.push({ name: '暂无记录', id: false })
+      if (!result.length) {
+        result.push({ name: '暂无记录', [this.props.value]: false })
       }
 
       return result
@@ -186,7 +197,10 @@ export default {
      * 通过父组件 绑定的值，来设置当前组件 selectedOptions
      */
     '$attrs.value': {
-      handler () {
+      handler (val) {
+        if (!val && this.allowCreate && this.createList.length) {
+          this.createList = []
+        }
         if (this.allowCreate) {
           this.appendCreateList()
         }
@@ -247,10 +261,10 @@ export default {
       if (!newName || createListIndex >= 0) {
         return
       }
-      this.createList.push({ name: newName, id: -1 })
+      this.createList.push({ name: newName, [this.props.value]: -1 })
     },
     /**
-     * 根据给定的值，返回选项列表中对应的元素
+     * 返回选中的元素
      *
      * @return {array|object}
      */
@@ -261,7 +275,7 @@ export default {
         .concat(this.createList)
         .filter((item) =>
           values.includes(
-            this.checkItemIsCreatedByUser(item) ? item.name : item.id
+            this.checkItemIsCreatedByUser(item) ? item.name : item[this.props.value]
           )
         )
     },
@@ -311,7 +325,7 @@ export default {
       const currentItem = this.filterItem[index]
 
       // 没有id的值设置为不能选中
-      if (currentItem.id === false) {
+      if (currentItem[[this.props.value]] === false) {
         return
       }
 
@@ -320,7 +334,7 @@ export default {
         this.syncValue(
           this.checkItemIsCreatedByUser(currentItem)
             ? currentItem.name
-            : currentItem.id
+            : currentItem[this.props.value]
         )
         return
       }
@@ -337,7 +351,7 @@ export default {
       result.push(
         this.checkItemIsCreatedByUser(currentItem)
           ? currentItem.name
-          : currentItem.id || currentItem
+          : currentItem[this.props.value] || currentItem
       )
 
       this.syncValue(result)
@@ -371,7 +385,7 @@ export default {
      * @return {boolean}
      */
     checkItemIsCreatedByUser (item) {
-      return item.id === -1
+      return item[this.props.value] === -1
     },
     /**
      * 选中 | 取消选中当前的元素
@@ -409,7 +423,7 @@ export default {
       const finder = (currentItem) =>
         this.checkItemIsCreatedByUser(currentItem)
           ? item.name === currentItem.name
-          : item.id === currentItem.id
+          : item[this.props.value] === currentItem[this.props.value]
       const index = this.selectedOptions.findIndex(finder)
       return index >= 0 ? index : false
     },
@@ -468,7 +482,7 @@ export default {
         this.$refs['ul-wrapper'],
         { ani: 'slideUp', opacity: 0, duration: 251 },
         (el) => {
-          el.style.height = 'auth'
+          el.style.height = 'auto'
           el.style.display = 'none'
           this.zIndex = 2
           this.setInputValue('')
@@ -584,7 +598,7 @@ export default {
     display: none;
     max-height: 45rem;
     position: absolute;
-    box-shadow: 0 0.12rem .7rem 0 rgba(#c6c6c6, .7);
+    box-shadow: 0 0.12rem .7rem 0 rgba(#c6c6c6, .3);
     top: 2rem;
     border: 0;
     @extend %scroll-bar-min;
@@ -623,7 +637,9 @@ export default {
       justify-content: space-around;
       border: 0.1rem solid #e6e6e6;
       .no-pointer {
-        cursor: default;
+        cursor: text;
+        color: #999;
+        text-align: center;
         background-color: inherit !important;
       }
       li {

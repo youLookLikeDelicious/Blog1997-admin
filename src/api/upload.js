@@ -11,3 +11,18 @@ export function uploadImage (data) {
 export function getGalleryInfo (id) {
   return axios.get('/admin/gallery/' + id)
 }
+
+// 添加备注
+export function addRemark (data, id) {
+  return axios.put('/admin/gallery/' + id, data)
+}
+
+// 获取所有相册
+export function getAlbumAll () {
+  return axios.get('/admin/gallery/album-all')
+}
+
+// 获取所有图片
+export function getGalleryAll () {
+  return axios.get('/admin/gallery/all')
+}

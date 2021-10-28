@@ -10,7 +10,6 @@
       <p>&copy; www.blog1997.com</p>
     </div>
     <prompt-message @shift-message="shiftMessage" :prompt="prompt" />
-    <waiting />
   </div>
 </template>
 

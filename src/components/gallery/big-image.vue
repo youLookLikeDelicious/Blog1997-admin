@@ -30,51 +30,62 @@
         <v-button v-show="showArrow" text @click="next"><i class="icofont-rounded-double-left right-arrow"></i></v-button>
       </div>
       <!-- 图片详情部分 -->
-      <div v-if="showExif" class="image-exif">
-        <el-row>
-          <el-col :span="24">
-            <span>经纬度: {{ infoData.lng_lat || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>拍摄位置: {{ infoData.location || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>拍摄时间: {{ infoData.date_time || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>设备名称: {{ infoData.camera_name || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>曝光时间: {{ infoData.exposure_time || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>焦距: {{ infoData.focal_length || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>描述: {{ infoData.remark || '-' }}</span>
-            <span><v-button text icon="el-icon-edit"></v-button></span>
-          </el-col>
-          <el-col :span="24">
-            <span>光圈数量: {{ infoData.f_number || '-' }}</span>
-          </el-col>
-          <el-col :span="24">
-            <span>颜色: </span>
-            <div class="color-box">
-              <div v-for="(color, index) in infoData.colors.split(';')" :key="index">
-                <span :style="{ background: `rgb(${color})` }"></span>
-                #{{color.split(',').map(item => (+item).toString(16).padStart(2, '0')).join('')}}
+      <transition name="big-image-info">
+        <div v-if="showExif" class="image-exif">
+          <el-row>
+            <el-col :span="24">
+              <span>经纬度: {{ infoData.lng_lat || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>拍摄位置: {{ infoData.location || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>拍摄时间: {{ infoData.date_time || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>设备名称: {{ infoData.camera_name || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>曝光时间: {{ infoData.exposure_time || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>焦距: {{ infoData.focal_length || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>描述: </span>
+              <span v-if="!infoData.showEditRemark">
+                {{ infoData.remark || '-' }} <v-button text icon="el-icon-edit" @click="handleEditRemark"></v-button>
+              </span>
+            </el-col>
+            <el-col v-if="infoData.showEditRemark">
+              <v-input v-model="infoData.remark" textarea class="image-remark" autocomplete="off" style="width: 97%"></v-input>
+              <div class="text-align-right" style="padding-right: 1.2rem; padding-top: 1.2rem">
+                <v-button text @click="handleAddRemark">提交</v-button>
+                <v-button text @click="handleHideEditBox">取消</v-button>
               </div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+            </el-col>
+            <el-col :span="24">
+              <span>光圈数量: {{ infoData.f_number || '-' }}</span>
+            </el-col>
+            <el-col :span="24">
+              <span>颜色: </span>
+              <div class="color-box">
+                <div v-for="(color, index) in infoData.colors.split(';')" :key="index">
+                  <span :style="{ background: `rgb(${color})` }"></span>
+                  #{{color.split(',').map(item => (+item).toString(16).padStart(2, '0')).join('')}}
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+      </transition>
     </div>
   </transition>
 </template>
 
 <script>
-import { getGalleryInfo } from '~/api/upload'
 import { rafThrottle } from 'element-ui/src/utils/util'
+import { getGalleryInfo, addRemark } from '~/api/upload'
 export default {
   name: 'BigImage',
   data () {
@@ -104,7 +115,7 @@ export default {
     currentIndex: {
       type: Number,
       default () {
-        return 0
+        return -1
       }
     }
   },
@@ -112,7 +123,6 @@ export default {
     currentIndex: {
       handler (val) {
         this.index = val
-        this.loadImage()
       },
       immediate: true
     },
@@ -129,10 +139,10 @@ export default {
   methods: {
     handleVisible () {
       this.visible = true
-      this.loadImage()
     },
     // 关闭对话框
     handleClose () {
+      this.showExif = false
       this.visible = false
     },
     /**
@@ -237,6 +247,24 @@ export default {
     // 显示图片的exif信息
     handleShowExif () {
       this.showExif = !this.showExif
+      this.handleHideEditBox()
+    },
+    // 编辑描述
+    handleEditRemark () {
+      this.$set(this.infoData, 'showEditRemark', true)
+    },
+    // 隐藏编辑描述
+    handleHideEditBox () {
+      if (this.infoData.showEditRemark) {
+        this.infoData.showEditRemark = false
+      }
+    },
+    // 添加描述
+    handleAddRemark () {
+      addRemark({ remark: this.infoData.remark }, this.infoData.id)
+        .then(_ => {
+          this.handleHideEditBox()
+        })
     }
   }
 }
@@ -409,6 +437,7 @@ export default {
   .color-box{
     display: flex;
     flex-wrap: wrap;
+    margin-top: 1.2rem;
     div {
       flex: 1 1 50%;
     }
@@ -419,5 +448,17 @@ export default {
       display: inline-block;
     }
   }
+  .image-remark{
+    textarea {
+      color: #f5f7fa !important
+    }
+  }
+}
+.big-image-info-enter-active, .big-image-info-leave-active{
+  transition: transform .3s, opacity .3s;
+}
+.big-image-info-enter, .big-image-info-leave-to{
+  transform: translate(20rem, 0) scaleX(.7);
+  opacity: 0;
 }
 </style>

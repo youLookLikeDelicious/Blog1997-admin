@@ -13,7 +13,7 @@
             :meta="meta"
             :getList="getList" />
         </template>
-        <el-row class="search-tools flex">
+        <el-row class="search-tools flex" :gutter="8">
           <template v-if="$scopedSlots.search" >
             <slot
               name="search"
@@ -122,6 +122,12 @@ export default {
       default () {
         return false
       }
+    },
+    propQuery: {
+      type: Object,
+      default () {
+        return {}
+      }
     }
   },
   data () {
@@ -156,10 +162,10 @@ export default {
         this.$parent.search(this.query)
         return
       }
-      const query = {}
-      for (const key in this.query) {
-        if (this.query[key]) {
-          query[key] = this.query[key]
+      const query = { ...this.query, ...this.propQuery }
+      for (const key in query) {
+        if (!query[key]) {
+          delete query[key]
         }
       }
       this.$axios.get(this.requestApi, { params: query }).then((response) => {
@@ -174,12 +180,16 @@ export default {
      *
      * @param {FormDate} model
      * @param {int} id
+     * @param {String} url
      * @return {Promise}
      */
-    create (model, id) {
+    create (model, id, url) {
       if (this.creating) {
         return
       }
+
+      url = (url || this.requestApi) + '/' + id
+
       this.creating = true
       if (id) {
         if (model instanceof FormData) {
@@ -187,22 +197,16 @@ export default {
         } else {
           model._method = 'PUT'
         }
-        return this.$axios
-          .post(`${this.requestApi}/${id}`, model)
-          .then(() => {
-            this.handleHideCreate()
-            this.getList()
-          })
-          .then(() => {
-            this.creating = false
-          })
       }
+
       return this.$axios
-        .post(this.requestApi, model)
-        .then((response) => response.data.data)
+        .post(url, model)
         .then(() => {
           this.handleHideCreate()
           this.getList()
+        })
+        .finally(() => {
+          this.creating = false
         })
     },
     /**

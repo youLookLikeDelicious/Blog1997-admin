@@ -1,6 +1,17 @@
 <template>
-  <div v-if="theme === 'inline'" class="v-input-inline relative-position">
+  <div v-if="theme === 'inline'" :class="['v-input-inline', 'relative-position', { 'v-input-line_textarea': textarea }]">
+    <textarea
+      v-if="textarea"
+      :placeholder="placeholder"
+      v-model="currentValue"
+      :autocomplete="autocomplete"
+      :readonly="readonly"
+      @keydown="handleKeydown"
+      @blur="blurInput($event)"
+      @focus="focus($event)"
+      @change="$emit('change', currentValue)"></textarea>
     <input
+      v-else
       :name="name"
       :type="currentType"
       :placeholder="placeholder"
@@ -33,6 +44,8 @@
 </template>
 
 <script>
+import calcTextareaHeight from 'element-ui/packages/input/src/calcTextareaHeight'
+import _ from 'lodash'
 export default {
   name: 'VInput',
   props: {
@@ -76,6 +89,12 @@ export default {
       type: String,
       default () {
         return 'on'
+      }
+    },
+    textarea: {
+      type: Boolean,
+      default () {
+        return false
       }
     }
   },
@@ -146,7 +165,13 @@ export default {
       if (this.$attrs.value !== this.currentValue) {
         this.currentValue = this.$attrs.value
       }
-    }
+    },
+    // 按下键盘,重新计算textarea的高度
+    handleKeydown: _.throttle((event) => {
+      const { minHeight, height } = calcTextareaHeight(event.target)
+      event.target.style.minHeight = minHeight
+      event.target.style.height = height
+    }, 24)
   }
 }
 </script>
@@ -154,13 +179,15 @@ export default {
 <style lang="scss">
 %v-input {
   width: 100%;
-  height: 3rem;
   padding-left: 0.3rem;
   box-sizing: border-box;
 }
 .v-input-inline {
   width: 23rem;
   input {
+    height: 3rem;
+  }
+  input, textarea {
     @extend %v-input;
     border-bottom: 0;
     background-color: transparent;
@@ -171,6 +198,13 @@ export default {
     &::-webkit-input-placeholder{
       color: #C0C4CC
     }
+  }
+  input {
+    height: 3rem;
+  }
+  textarea {
+    height: 2.5rem;
+    font-size: 1.4rem;
   }
   .hr-wrap {
     width: 100%;
@@ -198,16 +232,31 @@ export default {
     }
   }
 }
+.v-input-line_textarea{
+  overflow: hidden;
+  .hr-wrap {
+    margin-top: -.5rem;
+  }
+  textarea{
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    transition: height .3s;
+    box-sizing: border-box;
+    padding-bottom: .7rem;
+  }
+}
 .v-input-box {
   border: 0.1rem solid #DCDFE6;
   box-sizing: border-box;
   border-radius: 0.3rem;
-  width: 23rem;
+  // width: 23rem;
   padding-left: .7rem;
   padding-right: .7rem;
   transition: border-color 0.3s;
   input {
     @extend %v-input;
+    height: 3rem;
     border: 0;
     box-sizing: border-box;
   }

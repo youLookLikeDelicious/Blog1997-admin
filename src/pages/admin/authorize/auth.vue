@@ -3,7 +3,6 @@
     :requestApi="requestApi"
     :showCreate="true"
     @updated="updatedCallback"
-    :limit="100"
     hiddenPagination
   >
     <template v-slot:search="{ query }">
@@ -16,10 +15,10 @@
       </div>
     </template>
     <template
-      v-slot:header="{ create }"
+      v-slot:create="{ create }"
     >
       <create-auth
-      ref="create"
+        ref="create"
         @create="create"
       />
     </template>

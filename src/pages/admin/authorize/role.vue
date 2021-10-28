@@ -6,7 +6,7 @@
       </div>
     </template>
     <template
-      v-slot:header="{ create }"
+      v-slot:create="{ create }"
     >
       <create-role
         ref="create"

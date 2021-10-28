@@ -88,7 +88,6 @@ export default {
       this.model = { category_id: 0, file: '' }
     },
     handleBeforeUpload (file) {
-      console.log(/text\/\w+/.test(file.raw.type))
       if (!/text\/\w+/.test(file.raw.type)) {
         this.$setMessage({ msg: '不支持的文件格式', status: false })
         this.$refs.upload.uploadFiles = []

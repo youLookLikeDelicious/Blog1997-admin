@@ -11,6 +11,8 @@ import TagList from '~/pages/admin/article/tag/index'
 import Published from '~/pages/admin/published'
 
 import Gallery from '~/pages/admin/gallery'
+import Album from '~/pages/admin/gallery/album'
+import AlbumList from '~/components/gallery/album/list'
 import FriendLink from '~/pages/admin/friend-link'
 import Message from '~/pages/admin/message'
 import Report from '~/pages/admin/message/report'
@@ -101,6 +103,32 @@ const routes = [{
   path: '/gallery',
   name: 'gallery',
   component: Gallery,
+  meta: {
+    permission: 'gallery.index'
+  }
+}, {
+  path: '/gallery/album',
+  component: Album,
+  meta: {
+    permission: 'gallery.index'
+  },
+  children: [
+    {
+      path: '',
+      component: AlbumList,
+      name: 'Album'
+    },
+    {
+      path: ':id',
+      component: Gallery,
+      name: 'AlbumGallery',
+      props: true
+    }
+  ]
+}, {
+  path: '/gallery/place',
+  name: 'albumPlace',
+  component: () => import('@/pages/admin/gallery/place'),
   meta: {
     permission: 'gallery.index'
   }
