@@ -1,0 +1,500 @@
+{
+    "comment": "权限列表",
+    "status": "success",
+    "message": "success",
+    "data": [
+        {
+            "id": 1,
+            "name": "博客管理",
+            "route_name": "blog.manage",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 2,
+                    "name": "文章管理",
+                    "parent_id": 1,
+                    "child": [
+                        {
+                            "id": 6,
+                            "name": "添加文章",
+                            "parent_id": 2,
+                            "child": []
+                        },
+                        {
+                            "id": 7,
+                            "name": "修改文章",
+                            "parent_id": 2,
+                            "child": []
+                        },
+                        {
+                            "id": 8,
+                            "name": "删除文章",
+                            "parent_id": 2,
+                            "child": []
+                        },
+                        {
+                            "id": 9,
+                            "name": "查看列表",
+                            "parent_id": 2,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "name": "标签管理",
+                    "parent_id": 1,
+                    "child": [
+                        {
+                            "id": 5,
+                            "name": "添加标签",
+                            "parent_id": 4,
+                            "child": []
+                        },
+                        {
+                            "id": 10,
+                            "name": "查看标签",
+                            "parent_id": 4,
+                            "child": []
+                        },
+                        {
+                            "id": 11,
+                            "name": "更新标签",
+                            "parent_id": 4,
+                            "child": []
+                        },
+                        {
+                            "id": 12,
+                            "name": "删除标签",
+                            "parent_id": 4,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 13,
+                    "name": "专题管理",
+                    "parent_id": 1,
+                    "child": [
+                        {
+                            "id": 14,
+                            "name": "查看专题",
+                            "parent_id": 13,
+                            "child": []
+                        },
+                        {
+                            "id": 15,
+                            "name": "创建专题",
+                            "parent_id": 13,
+                            "child": []
+                        },
+                        {
+                            "id": 16,
+                            "name": "修改专题",
+                            "parent_id": 13,
+                            "child": []
+                        },
+                        {
+                            "id": 17,
+                            "name": "删除专题",
+                            "parent_id": 13,
+                            "child": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 18,
+            "name": "工作台",
+            "route_name": "workbench",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 19,
+                    "name": "仪表盘",
+                    "parent_id": 18,
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": 20,
+            "name": "授权管理",
+            "route_name": "authorize.manage",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 21,
+                    "name": "权限管理",
+                    "parent_id": 20,
+                    "child": [
+                        {
+                            "id": 22,
+                            "name": "查看权限",
+                            "parent_id": 21,
+                            "child": []
+                        },
+                        {
+                            "id": 23,
+                            "name": "添加权限",
+                            "parent_id": 21,
+                            "child": []
+                        },
+                        {
+                            "id": 24,
+                            "name": "更改权限",
+                            "parent_id": 21,
+                            "child": []
+                        },
+                        {
+                            "id": 25,
+                            "name": "删除权限",
+                            "parent_id": 21,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 26,
+                    "name": "角色管理",
+                    "parent_id": 20,
+                    "child": [
+                        {
+                            "id": 27,
+                            "name": "查看角色",
+                            "parent_id": 26,
+                            "child": []
+                        },
+                        {
+                            "id": 28,
+                            "name": "添加角色",
+                            "parent_id": 26,
+                            "child": []
+                        },
+                        {
+                            "id": 29,
+                            "name": "修改角色",
+                            "parent_id": 26,
+                            "child": []
+                        },
+                        {
+                            "id": 30,
+                            "name": "删除角色",
+                            "parent_id": 26,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 31,
+                    "name": "管理员管理",
+                    "parent_id": 20,
+                    "child": [
+                        {
+                            "id": 32,
+                            "name": "添加管理员",
+                            "parent_id": 31,
+                            "child": []
+                        },
+                        {
+                            "id": 33,
+                            "name": "查看管理员",
+                            "parent_id": 31,
+                            "child": []
+                        },
+                        {
+                            "id": 34,
+                            "name": "删除管理员",
+                            "parent_id": 31,
+                            "child": []
+                        },
+                        {
+                            "id": 35,
+                            "name": "修改管理员",
+                            "parent_id": 31,
+                            "child": []
+                        },
+                        {
+                            "id": 82,
+                            "name": "管理员界面获取用户信息",
+                            "parent_id": 31,
+                            "child": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 36,
+            "name": "画廊管理",
+            "route_name": "",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 37,
+                    "name": "查看图片",
+                    "parent_id": 36,
+                    "child": []
+                },
+                {
+                    "id": 38,
+                    "name": "上传图片",
+                    "parent_id": 36,
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": 39,
+            "name": "友链管理",
+            "route_name": "",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 40,
+                    "name": "添加友链",
+                    "parent_id": 39,
+                    "child": []
+                },
+                {
+                    "id": 41,
+                    "name": "查看友链",
+                    "parent_id": 39,
+                    "child": []
+                },
+                {
+                    "id": 42,
+                    "name": "修改友链",
+                    "parent_id": 39,
+                    "child": []
+                },
+                {
+                    "id": 43,
+                    "name": "删除友链",
+                    "parent_id": 39,
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": 44,
+            "name": "敏感词汇管理",
+            "route_name": "sensitive-word.manage",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 45,
+                    "name": "分类管理",
+                    "parent_id": 44,
+                    "child": [
+                        {
+                            "id": 46,
+                            "name": "查看分类",
+                            "parent_id": 45,
+                            "child": []
+                        },
+                        {
+                            "id": 47,
+                            "name": "删除分类",
+                            "parent_id": 45,
+                            "child": []
+                        },
+                        {
+                            "id": 48,
+                            "name": "添加分类",
+                            "parent_id": 45,
+                            "child": []
+                        },
+                        {
+                            "id": 49,
+                            "name": "修改分类",
+                            "parent_id": 45,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 50,
+                    "name": "词汇管理",
+                    "parent_id": 44,
+                    "child": [
+                        {
+                            "id": 51,
+                            "name": "添加词汇",
+                            "parent_id": 50,
+                            "child": []
+                        },
+                        {
+                            "id": 52,
+                            "name": "查看词汇",
+                            "parent_id": 50,
+                            "child": []
+                        },
+                        {
+                            "id": 53,
+                            "name": "修改词汇",
+                            "parent_id": 50,
+                            "child": []
+                        },
+                        {
+                            "id": 54,
+                            "name": "删除词汇",
+                            "parent_id": 50,
+                            "child": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 56,
+            "name": "系统管理",
+            "route_name": "system.manage",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 68,
+                    "name": "系统日志",
+                    "parent_id": 56,
+                    "child": [
+                        {
+                            "id": 70,
+                            "name": "查看日志",
+                            "parent_id": 68,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 69,
+                    "name": "系统设置",
+                    "parent_id": 56,
+                    "child": [
+                        {
+                            "id": 74,
+                            "name": "查看系统设置",
+                            "parent_id": 69,
+                            "child": []
+                        },
+                        {
+                            "id": 75,
+                            "name": "更新系统设置",
+                            "parent_id": 69,
+                            "child": []
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 59,
+            "name": "消息管理",
+            "route_name": "",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 60,
+                    "name": "举报信息管理",
+                    "parent_id": 59,
+                    "child": [
+                        {
+                            "id": 61,
+                            "name": "查看举报信息",
+                            "parent_id": 60,
+                            "child": []
+                        },
+                        {
+                            "id": 62,
+                            "name": "删除被举报的内容",
+                            "parent_id": 60,
+                            "child": []
+                        },
+                        {
+                            "id": 63,
+                            "name": "忽略举报的内容",
+                            "parent_id": 60,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 64,
+                    "name": "待审核评论管理",
+                    "parent_id": 59,
+                    "child": [
+                        {
+                            "id": 65,
+                            "name": "批准评论",
+                            "parent_id": 64,
+                            "child": []
+                        },
+                        {
+                            "id": 66,
+                            "name": "查看待审核评论",
+                            "parent_id": 64,
+                            "child": []
+                        },
+                        {
+                            "id": 67,
+                            "name": "驳回评论",
+                            "parent_id": 64,
+                            "child": []
+                        }
+                    ]
+                },
+                {
+                    "id": 73,
+                    "name": "通知",
+                    "parent_id": 59,
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": 76,
+            "name": "账号设置",
+            "route_name": "",
+            "parent_id": 0,
+            "child": [
+                {
+                    "id": 77,
+                    "name": "查看账号信息",
+                    "parent_id": 76,
+                    "child": []
+                },
+                {
+                    "id": 78,
+                    "name": "绑定社交账号",
+                    "parent_id": 76,
+                    "child": []
+                },
+                {
+                    "id": 79,
+                    "name": "取消绑定",
+                    "parent_id": 76,
+                    "child": []
+                },
+                {
+                    "id": 80,
+                    "name": "重新绑定社交账号",
+                    "parent_id": 76,
+                    "child": []
+                },
+                {
+                    "id": 81,
+                    "name": "修改基本信息",
+                    "parent_id": 76,
+                    "child": []
+                }
+            ]
+        },
+        {
+            "id": 83,
+            "name": "访问后台",
+            "route_name": "admin.index",
+            "parent_id": 0,
+            "child": []
+        }
+    ]
+}

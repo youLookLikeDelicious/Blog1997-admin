@@ -43,7 +43,7 @@
         </tr>
         <tr>
           <td>
-            <v-button :class="['auth-btn', { 'auth-btn-disable': !allowSubmit }]">登 陆</v-button>
+            <v-button :class="['auth-btn', { 'auth-btn-disable': !allowSubmit }]" @click="login('click')">登 陆</v-button>
           </td>
         </tr>
       </table>
@@ -128,7 +128,7 @@ export default {
      * 通过账号密码登陆
      */
     login ($e) {
-      if ((!this.allowSubmit || $e.keyCode) && $e.keyCode !== 13) {
+      if ($e !== 'click' && (!this.allowSubmit || $e.keyCode) && $e.keyCode !== 13) {
         return
       }
 

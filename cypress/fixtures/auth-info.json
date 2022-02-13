@@ -1,0 +1,14 @@
+{
+  "comment": "权限详情",
+  "status": "success",
+  "message": "success",
+  "data": {
+    "id": 2,
+    "name": "文章管理",
+    "parent_id": 1,
+    "auth_path": "1_2_",
+    "route_name": "",
+    "created_at": "1602942820",
+    "updated_at": "1633172621"
+  }
+}

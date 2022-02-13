@@ -1,0 +1,17 @@
+{
+  "baseUrl": null,
+  "video": false,
+  "videoCompression": false,
+  "experimentalRunEvents": true,
+  "responseTimeout": 10000,
+  "requestTimeout": 10000,
+  "port": 1997,
+  "chromeWebSecurity": false,
+  "viewportHeight": 1000,
+  "viewportWidth": 1600,
+  "projectId": "wahuwk",
+  "env": {
+    "host": "http://localhost:9090",
+    "api_url": "https://www.blog1997.com/api"
+  }
+}

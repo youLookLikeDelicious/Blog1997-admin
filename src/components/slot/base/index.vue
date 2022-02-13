@@ -13,6 +13,7 @@
             :meta="meta"
             :getList="getList" />
         </template>
+        <!-- 搜索部分 -->
         <el-row class="search-tools flex" :gutter="8">
           <template v-if="$scopedSlots.search" >
             <slot
@@ -39,13 +40,10 @@
         </el-row>
       </div>
     </div>
+    <!-- 列表部分 -->
     <div
-      v-if="
-        (dataList && dataList.length) ||
-        forceRenderContent
-      "
-      class="sub-container"
-    >
+      v-if="(dataList && dataList.length) || forceRenderContent"
+      class="sub-container">
       <slot
         :edit="edit"
         :meta="meta"
@@ -188,7 +186,7 @@ export default {
         return
       }
 
-      url = (url || this.requestApi) + '/' + id
+      url = (url || this.requestApi) + (id ? `/${id}` : '')
 
       this.creating = true
       if (id) {

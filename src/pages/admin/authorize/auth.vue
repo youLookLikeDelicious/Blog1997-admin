@@ -1,3 +1,4 @@
+/** @page 权限列表 */
 <template>
   <base-component
     :requestApi="requestApi"
@@ -8,8 +9,9 @@
     <template v-slot:search="{ query }">
       <div class="mr-min">
         <v-input
-          placeholder="权限名称"
           theme="box"
+          @change="search(query)"
+          placeholder="权限名称"
           v-model="query.name"
         ></v-input>
       </div>
@@ -22,7 +24,7 @@
         @create="create"
       />
     </template>
-    <template v-slot:default="{ data, create, deleteRecord }">
+    <template v-slot:default="{ data, handleShowCreate, deleteRecord }">
       <div class="sub-container">
         <el-table :data="data" border row-key="id" :tree-props="{ children: 'child' }">
           <el-table-column label="名称" prop="name">
@@ -33,7 +35,7 @@
           <el-table-column label="Route Name" prop="route_name" align="center"></el-table-column>
           <el-table-column label="操作" prop="name" align="center">
             <template v-slot="{ row }">
-              <v-button type="primary" text icon="icofont-edit" @click="create(row.id)">编 辑</v-button>
+              <v-button type="primary" text icon="icofont-edit" @click="handleShowCreate(row.id)">编 辑</v-button>
               <v-button type="danger" text icon="icofont-delete" @click="deleteRecord(row.id)">删除</v-button>
             </template>
           </el-table-column>

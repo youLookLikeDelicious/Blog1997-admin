@@ -76,7 +76,6 @@ export default {
      * 关闭该窗口
      */
     close () {
-      this.$emit('close')
       this.$emit('update:visible', false)
     }
   }

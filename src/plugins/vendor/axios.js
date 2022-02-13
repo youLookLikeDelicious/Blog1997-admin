@@ -70,7 +70,9 @@ axios.interceptors.request.use(function (config) {
   if (!config.params) {
     config.params = {}
   }
-  config.params._token = store.state.globalState.csrfToken
+
+  config.headers['X-CSRF-TOKEN'] = store.state.globalState.csrfToken
+
   return config
 }, function (error) {
   return Promise.reject(error)

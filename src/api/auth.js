@@ -12,3 +12,8 @@ export function getAuthAll () {
 export function getRoleInfo (id) {
   return axios.get('/admin/role/' + id)
 }
+
+// 获取权限详情
+export function getAuthInfo (id) {
+  return axios.get('/admin/auth/' + id)
+}
