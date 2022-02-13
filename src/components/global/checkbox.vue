@@ -98,11 +98,12 @@ export default {
   width: 3rem;
   height: 3rem;
   overflow: hidden;
-  line-height: 3rem;
   box-sizing: border-box;
   text-align: center;
+  justify-content: center;
   vertical-align: middle;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   label {
     width: 1.4rem;

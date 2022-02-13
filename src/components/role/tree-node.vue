@@ -4,32 +4,34 @@
       <li
         v-for="(leaf, index) in tree"
         :key="index"
-        :style="{
-          'padding-left': deepth * 2 + 'em',
-        }"
       >
         <div class="tree-node">
-          <v-button v-if="leaf.child"
+          <span :style="{ width: depth * 2 + 'em', display: 'inline-block'}"></span>
+          <v-button v-if="leaf[childrenKey]"
             type="text"
             :icon="'icofont-caret-down ' + (visibleleafStack.includes(index) ? 'list-slide-up' : 'list-slide-down')"
             @click="toggleleaf(index)"
             ></v-button>
-          <span v-else class="no-child"></span>
+          <span v-else :class="{'no-child': true, 'first-no-child': !depth}"></span>
           <v-checkbox
+            v-if="showCheckbox"
             :label="leaf.id"
             v-model="leaf.checked"
             :indeterminate="leaf.indeterminate"
             @change="handleCheckboxChange"
           />
+          <span v-else>&nbsp;</span>
           <!-- :selected-state="computeSelectState(leaf)" -->
-          <span>{{ leaf.name }}</span>
+          <node-content :node="leaf"></node-content>
         </div>
 
         <auth-tree
-          v-if="leaf.child"
-          :tree="leaf.child"
+          v-if="leaf[childrenKey]"
+          :tree="leaf[childrenKey]"
           :visibility="isVisible(index)"
-          :deepth="deepth + 1"
+          :depth="depth + 1"
+          :show-checkbox="showCheckbox"
+          :render-content="renderContent"
           @change="handleChildChange"
         ></auth-tree>
       </li>
@@ -51,7 +53,7 @@ export default {
     /**
      * 递归的深度
      */
-    deepth: {
+    depth: {
       type: [Number, String],
       default () {
         return 0
@@ -65,16 +67,38 @@ export default {
       default () {
         return true
       }
+    },
+    showCheckbox: Boolean,
+    renderContent: Function
+  },
+  components: {
+    NodeContent: {
+      props: {
+        node: {
+          required: true
+        }
+      },
+      render (h) {
+        const parent = this.$parent
+        const node = this.node
+        return parent.renderContent
+          ? parent.renderContent.call(parent._renderProxy, h, { context: parent.$vnode.context, node })
+          : h('span', node.name)
+      }
     }
   },
   data () {
     return {
+      childrenKey: 'children',
       rootTree: '', // 递归组件的根节点
       visibleleafStack: [] // 保存子树的显隐状态
     }
   },
   created () {
-    this.rootTree = this.deepth ? this.$parent.rootTree : this.$parent
+    this.rootTree = this.depth ? this.$parent.rootTree : this.$parent
+    if (this.childrenKey !== this.rootTree.childrenKey) {
+      this.childrenKey = this.rootTree.childrenKey
+    }
   },
   methods: {
     /**
@@ -122,7 +146,11 @@ export default {
      * @return {void}
      */
     leave (el, done) {
-      this.$animate(el, { ani: 'slideUp', duration: 168 }, done)
+      const height = this.$animate.css(el, 'height')
+      this.$animate(el, { ani: 'slideUp', duration: 168 }, el => {
+        el.setAttribute('slideto', height)
+        done()
+      })
     },
     // checkbox修改事件
     handleCheckboxChange (val, preVal) {
@@ -134,7 +162,7 @@ export default {
       }
 
       // 修改子节的的状态
-      if (leaf.child) {
+      if (leaf[this.childrenKey]) {
         const traverse = (node, checked) => {
           if (!node) return
           node.forEach(item => {
@@ -143,13 +171,13 @@ export default {
             } else if (checked && !item.checked) {
               this.$set(item, 'checked', item.id)
             }
-            traverse(item.child, checked)
+            traverse(item[this.childrenKey], checked)
           })
         }
-        traverse(leaf.child, val)
+        traverse(leaf[this.childrenKey], val)
       }
 
-      if (!this.deepth) return
+      if (!this.depth) return
       this.$emit('change', { parentId: leaf.parent_id })
     },
     // 处理子节点修改事件
@@ -159,13 +187,13 @@ export default {
       // 选中操作,计算父节点的选中状态
       let selectedNum = 0; let indeterminateNum = 0
 
-      leaf.child.forEach(item => {
+      leaf[this.childrenKey].forEach(item => {
         if (item.checked) ++selectedNum
         if (item.indeterminate) ++indeterminateNum
       })
-      const isIndeterminate = Boolean((selectedNum && selectedNum < leaf.child.length) || indeterminateNum)
+      const isIndeterminate = Boolean((selectedNum && selectedNum < leaf[this.childrenKey].length) || indeterminateNum)
       this.$set(leaf, 'indeterminate', isIndeterminate)
-      this.$set(leaf, 'checked', selectedNum === leaf.child.length ? leaf.id : false)
+      this.$set(leaf, 'checked', selectedNum === leaf[this.childrenKey].length ? leaf.id : false)
 
       // 修改父节点的状态
       if (!leaf.parent_id) return
@@ -183,11 +211,13 @@ export default {
     margin: 0.3rem 0;
   }
   .tree-node {
-    padding: 0.3rem;
-    height: 3rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    height: 3.5rem;
+    padding: 0 0.3rem;
     box-sizing: border-box;
-    line-height: 3rem;
-    transition: background-color .3s;
+    transition: background .3s;
     &:hover {
       background-color: $hover-color;
     }
@@ -215,9 +245,15 @@ export default {
   }
   .no-child {
     height: 2rem;
-    width: 2em;
+    width: 0;
     margin-right: 0.7rem;
     display: inline-block;
+  }
+  .first-no-child{
+    width: .4em;
+  }
+  .v-button:not(first-child){
+    margin-left: 0;
   }
 }
 </style>

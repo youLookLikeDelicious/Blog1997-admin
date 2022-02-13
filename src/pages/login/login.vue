@@ -113,7 +113,7 @@ export default {
   },
   mounted () {
     // 尝试获取email
-    this.attempGetEmail()
+    this.attemptGetEmail()
 
     // 获取参数
     const params = window.location.search.match(/(code|type|redirect)=([^&]+)/gi)
@@ -144,11 +144,13 @@ export default {
     },
     // 获取表单数据
     getFormData () {
-      const formData = { ...this.model }
-      const encryptor = new JSEncrypt()
-      encryptor.setPublicKey(this.RSA_PUB_KEY)
-      formData.email = encryptor.encrypt(formData.email)
-      formData.password = encryptor.encrypt(formData.password)
+      const formData = { ...this.model, remember: 1 }
+      if (this.RSA_PUB_KEY) {
+        const encryptor = new JSEncrypt()
+        encryptor.setPublicKey(this.RSA_PUB_KEY)
+        formData.email = encryptor.encrypt(formData.email)
+        formData.password = encryptor.encrypt(formData.password)
+      }
       return formData
     },
     /**
@@ -166,7 +168,7 @@ export default {
     /**
      * 尝试获取邮箱
      */
-    attempGetEmail () {
+    attemptGetEmail () {
       if (this.$route.query.email) {
         this.model.email = this.$route.query.email
       }

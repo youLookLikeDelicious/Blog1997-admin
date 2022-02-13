@@ -1,6 +1,12 @@
 const path = require('path')
 const webpack = require('webpack')
-const RSA_PUB_KEY = require('./rsa_pub.js')
+const dotenv = require('dotenv')
+
+const env = dotenv.config().parsed
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[next] = JSON.stringify(env[next])
+  return prev
+}, {})
 
 module.exports = {
   pages: {
@@ -37,9 +43,7 @@ module.exports = {
       }
     },
     plugins: [
-      new webpack.DefinePlugin({
-        RSA_PUB_KEY: JSON.stringify(RSA_PUB_KEY)
-      })
+      new webpack.DefinePlugin(envKeys)
     ]
   },
   css: {

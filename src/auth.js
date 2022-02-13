@@ -14,7 +14,9 @@ import { loadProgressBar } from 'axios-progress-bar'
 Vue.prototype.$animate = animate
 // eslint-disable-next-line no-undef
 Vue.prototype.RSA_PUB_KEY = RSA_PUB_KEY
-Vue.prototype.$appUrl = process.env.VUE_APP_URL
+
+// eslint-disable-next-line no-undef
+Vue.prototype.$appUrl = VUE_APP_URL
 Vue.use(axios)
 loadProgressBar()
 store.dispatch('globalState/GET_CSRF_TOKEN')

@@ -8,9 +8,9 @@
 
 <script>
 export default {
-  name: 'Message'
+  name: 'BaseLayout'
 }
 </script>
 
-<style>
+<style lang="scss">
 </style>

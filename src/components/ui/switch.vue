@@ -6,7 +6,7 @@
       { 'v-switch-off': !selected },
       { 'v-switch-disable': disable },
     ]"
-    :title="currentValue"
+    :title="selected ? leftName : rightName"
     @click="toggleSwitch"
   ></div>
 </template>
@@ -16,15 +16,25 @@ export default {
   name: 'VSwitch',
   props: {
     leftValue: {
-      type: [String, Boolean],
+      type: [String, Boolean, Number],
       default () {
         return true
       }
     },
     rightValue: {
-      type: [String, Boolean],
+      type: [String, Boolean, Number],
       default () {
         return false
+      }
+    },
+    leftName: {
+      default () {
+        ''
+      }
+    },
+    rightName: {
+      default () {
+        return ''
       }
     },
     disable: {

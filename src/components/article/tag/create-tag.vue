@@ -75,15 +75,6 @@ export default {
     }
   },
   methods: {
-    /**
-     * 创建表单
-     */
-    submit () {
-      this.$refs.form.validate().then(() => {
-        const formData = this.$json2FormData(this.model)
-        this.$emit('create', formData, this.model.id)
-      })
-    },
     // 获取表单详情
     getOriginModel (id) {
       getTagInfo(id).then(res => {

@@ -1,3 +1,4 @@
+/** @layout 空白的布局 */
 <template>
   <div id="app">
     <router-view></router-view>

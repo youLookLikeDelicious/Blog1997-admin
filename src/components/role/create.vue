@@ -21,7 +21,7 @@
         </el-col>
         <el-col>
           <el-form-item label="权限">
-            <auth-tree ref="tree" :tree="authList" :default-checked="model.authorities"></auth-tree>
+            <auth-tree ref="tree" :tree="authList" childrenKey="child" :default-checked="model.authorities"></auth-tree>
           </el-form-item>
         </el-col>
       </el-row>
@@ -59,12 +59,12 @@ export default {
     /**
      * 提交表单
      *
-     * @reutrn void
+     * @return void
      */
     submit () {
       this.$refs.form.validate()
         .then(() => {
-          const model = { ...this.model, authorities: this.$refs.tree.getCheckedValus() }
+          const model = { ...this.model, authorities: this.$refs.tree.getCheckedValues() }
 
           this.$emit('create', model, this.id)
         })

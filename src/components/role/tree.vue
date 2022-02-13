@@ -1,5 +1,5 @@
 <template>
-  <tree-node :tree="tree"></tree-node>
+  <tree-node :tree="tree" :render-content="renderContent" childrenKey="child" :show-checkbox="showCheckbox"></tree-node>
 </template>
 
 <script>
@@ -19,6 +19,19 @@ export default {
       type: Array,
       default () {
         return []
+      }
+    },
+    renderContent: Function,
+    showCheckbox: {
+      type: Boolean,
+      default () {
+        return true
+      }
+    },
+    childrenKey: {
+      type: String,
+      default () {
+        return 'children'
       }
     }
   },
@@ -56,18 +69,18 @@ export default {
     }
   },
   methods: {
-    getCheckedValus () {
+    getCheckedValues () {
       const arr = []
-      const travle = function (node) {
+      const travel = function (node) {
         if (!node) return
         node.forEach(item => {
           if (item.checked) {
             arr.push(item.id)
           }
-          travle(item.child)
+          travel(item.child)
         })
       }
-      travle(this.tree)
+      travel(this.tree)
       return arr
     }
   }

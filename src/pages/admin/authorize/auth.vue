@@ -76,7 +76,7 @@ export default {
      * 修改标签
      *
      * @param {int} index
-     * @reutrn void
+     * @return void
      */
     edit (index) {
       this.selectedIndex = index

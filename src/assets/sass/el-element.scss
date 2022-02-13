@@ -26,3 +26,7 @@
 .el-upload-dragger {
   line-height: normal;
 }
+
+.el-image-viewer__wrapper {
+  z-index: 9999 !important;
+}

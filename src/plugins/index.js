@@ -8,6 +8,8 @@ import helper from './tool/helper'
 import compareArray from './tool/compare-array'
 import checkElementAncestor from './tool/check-element-ancestors'
 
+import { hideCascader } from '../utils/utils'
+
 import './register-components'
 import './filters'
 import Verify from './verify'
@@ -25,3 +27,8 @@ Vue.use(Verify)
 Vue.use(auth)
 Vue.use(lazy)
 Vue.use(jsonToFormData)
+Vue.use({
+  install (vue) {
+    vue.prototype.$hideCascader = hideCascader
+  }
+})

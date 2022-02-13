@@ -69,6 +69,12 @@ export default {
       default () {
         return ''
       }
+    },
+    mouseenter: {
+      type: Function
+    },
+    mouseleave: {
+      type: Function
     }
   },
   methods: {
@@ -77,6 +83,14 @@ export default {
         return
       }
       this.$emit('click')
+    }
+  },
+  mounted () {
+    if (this.mouseenter) {
+      this.$el.addEventListener('mouseenter', this.mouseenter)
+    }
+    if (this.mouseleave) {
+      this.$el.addEventListener('mouseleave', this.mouseleave)
     }
   }
 }

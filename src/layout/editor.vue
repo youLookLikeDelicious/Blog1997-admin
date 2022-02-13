@@ -1,3 +1,4 @@
+/** @layout 新建文章的布局 */
 <template>
   <div id="app">
     <router-view class="editor-layout"></router-view>

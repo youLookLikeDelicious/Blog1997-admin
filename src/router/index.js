@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import store from '../store'
 import { can } from '~/plugins/tool/auth'
+
+import BaseLayout from '~/layout/base-layout'
 import Index from '../pages/admin'
 import VueRouter from 'vue-router'
-import Article from '~/pages/admin/article'
-import ArticleList from '~/components/article'
+import ArticleList from '~/pages/admin/article'
 import ArticleCreate from '~/pages/admin/article/create'
 import TopicList from '~/pages/admin/article/topic/index'
 import TagList from '~/pages/admin/article/tag/index'
@@ -14,7 +15,6 @@ import Gallery from '~/pages/admin/gallery'
 import Album from '~/pages/admin/gallery/album'
 import AlbumList from '~/components/gallery/album/list'
 import FriendLink from '~/pages/admin/friend-link'
-import Message from '~/pages/admin/message'
 import Report from '~/pages/admin/message/report'
 import VerifyComments from '~/pages/admin/message/comments'
 import Notification from '~/pages/admin/message/notification'
@@ -56,7 +56,7 @@ const routes = [{
 // 文章相关路由
 {
   path: '/article',
-  component: Article,
+  component: BaseLayout,
   children: [{
     path: 'create/:id?',
     component: ArticleCreate,
@@ -141,7 +141,7 @@ const routes = [{
   }
 }, {
   path: '/message',
-  component: Message,
+  component: BaseLayout,
   children: [{
     path: 'illegal-info',
     component: Report,
@@ -223,6 +223,23 @@ const routes = [{
     permission: 'user.profile'
   }
 }, {
+  path: '/manual',
+  component: BaseLayout,
+  // meta: { permission: 'manual.index' },
+  children: [
+    {
+      path: '',
+      component: () => import('@/pages/admin/manual')
+    }, {
+      path: ':id',
+      component: () => import('@/pages/admin/manual/manual-info')
+    }, {
+      path: ':manual_id/article/:id?',
+      name: 'manual-article',
+      component: () => import('@/pages/admin/manual/create-article')
+    }
+  ]
+}, {
   path: '/401',
   component: PermissionDeny
 }, {
@@ -299,23 +316,25 @@ function checkCurrentUser () {
  * @param {Route} to
  * @return {void}
  */
-function specifyLayoutAndTile (to) {
+async function specifyLayoutAndTile (to) {
   // 判断路由组件是否定义模板，如果式，将模板添加到meta中
-  to.matched.some(record => {
-    const [layout, title] = [record.components.default.layout, record.components.default.title]
+  if (!to.matched.length) return
+  let component = to.matched[to.matched.length - 1].components.default
+  if (typeof component === 'function') {
+    const { default: _ } = await component()
+    component = _
+  }
 
-    to.meta.layout = layout || 'default'
+  const { layout = 'default', title = process.env.TITLE } = component
+  to.meta.layout = layout
 
-    const currentTitle = document.head.querySelector('title').innerHTML
-    if (!title) {
-      setTitle(process.env.TITLE)
-      return
-    }
+  const currentTitle = document.head.querySelector('title').innerHTML
 
-    if (currentTitle !== title) {
-      setTitle(title)
-    }
-  })
+  if (currentTitle !== title) {
+    setTitle(title)
+  }
+  // to.matched.some(record => {
+  // })
 }
 
 /**

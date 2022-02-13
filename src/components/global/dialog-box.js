@@ -9,7 +9,7 @@ export default {
   methods: {
     handleVisible (id) {
       this.id = id
-      if (id && this.getOriginModel) {
+      if (id && typeof this.getOriginModel === 'function') {
         this.getOriginModel(id)
       }
       this.dialogVisible = true
@@ -19,6 +19,20 @@ export default {
     },
     closeDialog () {
       this.dialogVisible = false
+    },
+    /**
+     * 创建表单
+     */
+    submit () {
+      this.$refs.form.validate().then(() => {
+        const formData = this.$json2FormData(this.model)
+        this.$emit('create', formData, this.model.id || '')
+      })
+    },
+    closeCallback () {
+      if (this.$refs.form) {
+        this.$refs.form.resetFields()
+      }
     }
   }
 }

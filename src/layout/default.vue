@@ -1,3 +1,4 @@
+/** @layout 最顶级的组件 */
 <template>
   <div id="app" class="sidebar-visible">
     <navigate />

@@ -2,16 +2,17 @@
   <div v-if="theme === 'inline'" :class="['v-input-inline', 'relative-position', { 'v-input-line_textarea': textarea }]">
     <textarea
       v-if="textarea"
+      ref="textarea"
       :placeholder="placeholder"
       v-model="currentValue"
       :autocomplete="autocomplete"
       :readonly="readonly"
-      @keydown="handleKeydown"
       @blur="blurInput($event)"
       @focus="focus($event)"
       @change="$emit('change', currentValue)"></textarea>
     <input
       v-else
+      ref="input"
       :name="name"
       :type="currentType"
       :placeholder="placeholder"
@@ -31,6 +32,7 @@
       placeholder
     }}</span>
     <input
+      ref="input"
       v-model="currentValue"
       :readonly="readonly"
       :type="currentType"
@@ -45,7 +47,6 @@
 
 <script>
 import calcTextareaHeight from 'element-ui/packages/input/src/calcTextareaHeight'
-import _ from 'lodash'
 export default {
   name: 'VInput',
   props: {
@@ -63,7 +64,7 @@ export default {
     },
     readonly: {
       type: Boolean,
-      defautl () {
+      default () {
         return false
       }
     },
@@ -96,6 +97,12 @@ export default {
       default () {
         return false
       }
+    },
+    autoFocus: {
+      type: Boolean,
+      default () {
+        return false
+      }
     }
   },
   data () {
@@ -115,6 +122,7 @@ export default {
     },
     '$attrs.value' () {
       this.syncCurrentValue()
+      this.resizeTextarea()
     },
     focused () {
       if (this.theme !== 'box') {
@@ -167,11 +175,18 @@ export default {
       }
     },
     // 按下键盘,重新计算textarea的高度
-    handleKeydown: _.throttle((event) => {
-      const { minHeight, height } = calcTextareaHeight(event.target)
-      event.target.style.minHeight = minHeight
-      event.target.style.height = height
-    }, 24)
+    resizeTextarea () {
+      if (!this.$refs.textarea) return
+      const { minHeight, height } = calcTextareaHeight(this.$refs.textarea)
+      this.$refs.textarea.style.minHeight = minHeight
+      this.$refs.textarea.style.height = height
+    }
+  },
+  mounted () {
+    this.resizeTextarea()
+    if (this.autoFocus) {
+      this.$refs.input.focus()
+    }
   }
 }
 </script>

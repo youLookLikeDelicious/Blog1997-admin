@@ -187,6 +187,18 @@ export default {
           ]
         },
         {
+          header: '手册',
+          icon: 'iconfont icon-shouce',
+          permission: '',
+          subMenu: [
+            {
+              url: '/manual',
+              title: '手册列表',
+              icon: 'iconfont icon-caozuoshouce'
+            }
+          ]
+        },
+        {
           header: '画廊',
           icon: 'icofont-pixels',
           permission: ['gallery.index', 'gallery.store'].join(','),
@@ -277,7 +289,7 @@ export default {
           ]
         },
         {
-          header: '用户中心',
+          header: '个人中心',
           icon: 'icofont-user-alt-5',
           permission: 'user.profile',
           subMenu: [
