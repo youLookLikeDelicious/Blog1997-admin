@@ -10,8 +10,6 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '~/assets/sass/nprogress.scss'
 import { loadProgressBar } from 'axios-progress-bar'
 
-// eslint-disable-next-line no-undef
-Vue.prototype.RSA_PUB_KEY = RSA_PUB_KEY
 Vue.use(ElementUI)
 loadProgressBar()
 new Vue({

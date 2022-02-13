@@ -4,7 +4,7 @@ import router from '~/router'
 
 axios.defaults.withCredentials = true
 // eslint-disable-next-line no-undef
-axios.defaults.baseURL = VUE_APP_BASE_URL
+axios.defaults.baseURL = API_URL
 // axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
 
 const requestStack = []

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import Vue from 'vue'
 import animate from './vendor/animate'
 import axios from './vendor/axios'
@@ -16,6 +17,7 @@ import Verify from './verify'
 import auth from './tool/auth'
 import lazy from './tool/lazy-load'
 import jsonToFormData from './tool/json-2-formdata'
+
 Vue.use(animate)
 Vue.use(axios)
 Vue.use(imagePreview)
@@ -30,5 +32,11 @@ Vue.use(jsonToFormData)
 Vue.use({
   install (vue) {
     vue.prototype.$hideCascader = hideCascader
+    Vue.prototype.TITLE = TITLE
+    Vue.prototype.APP_URL = APP_URL
+    Vue.prototype.API_URL = API_URL
+    Vue.prototype.RSA_PUB_KEY = RSA_PUB_KEY
+    Vue.prototype.WECHAT_APP_ID = WECHAT_APP_ID
+    Vue.prototype.GIT_CLIENT_ID = GIT_CLIENT_ID
   }
 })

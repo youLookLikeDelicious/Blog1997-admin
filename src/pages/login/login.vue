@@ -33,7 +33,7 @@
               </div>
               <div class="capcha-wrapper">
                 <img
-                  :src="`${$appUrl}/admin/captcha?${captchaRand}`"
+                  :src="`${this.API_URL}/captcha?${captchaRand}`"
                   @click="refreshCaptcha"
                   alt="验证码"
                 />
@@ -43,22 +43,18 @@
         </tr>
         <tr>
           <td>
-            <a
-              :class="['auth-btn', { 'auth-btn-disable': !allowSubmit }]"
-              @click.stop.prevent
-              @click="login"
-              href="/"
-              >登 陆</a>
+            <v-button :class="['auth-btn', { 'auth-btn-disable': !allowSubmit }]">登 陆</v-button>
           </td>
         </tr>
       </table>
       <div class="login-box">
         <a
+          v-if="GIT_CLIENT_ID"
           :href="githubUrl"
           class="git"
         />
-        <a :href="wechatUrl" class="wechat" />
-        <a href="javascript:;" class="qq" />
+        <a v-if="WECHAT_APP_ID" :href="wechatUrl" class="wechat" />
+        <!-- <a href="javascript:;" class="qq" /> -->
       </div>
     </div>
   </div>
@@ -84,8 +80,8 @@ export default {
     wechatUrl () {
       const baseUrl = 'https://open.weixin.qq.com/connect/qrconnect?'
       const query = [
-        `appid=${process.env.WECHAT_APP_ID}`,
-        `redirect_uri=${process.env.APP_URL}/admin/login%3ftype=wechat%26redirect=admin`,
+        `appid=${this.WECHAT_APP_ID}`,
+        `redirect_uri=${this.APP_URL}/admin/login%3ftype=wechat%26redirect=admin`,
         'response_type=code',
         'scope=snsapi_login',
         'state=state'
@@ -96,8 +92,8 @@ export default {
     githubUrl () {
       const baseUrl = 'https://github.com/login/oauth/authorize?'
       const query = [
-        'client_id=' + process.env.GIT_CLIENT_ID,
-        `redirect_uri=${process.env.APP_URL}/admin/login%3ftype=github%26redirect=admin`
+        'client_id=' + this.GIT_CLIENT_ID,
+        `redirect_uri=${this.APP_URL}/admin/login%3ftype=github%26redirect=admin`
       ]
       return baseUrl + query.join('&')
     },

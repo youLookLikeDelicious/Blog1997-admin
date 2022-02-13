@@ -66,8 +66,8 @@ export default {
     wechatRebindUrl () {
       const baseurl = 'https://open.weixin.qq.com/connect/qrconnect?'
       const query = [
-        `appid=${process.env.WECHAT_APP_ID}`,
-        `redirect_uri=${process.env.APP_URL}/admin/profile/wechat%3faction=rebind`,
+        `appid=${this.WECHAT_APP_ID}`,
+        `redirect_uri=${this.APP_URL}/admin/profile/wechat%3faction=rebind`,
         'response_type=code',
         'scope=snsapi_login',
         'state=state'
@@ -77,8 +77,8 @@ export default {
     githubRebindUrl () {
       const baseUrl = 'https://github.com/login/oauth/authorize?'
       const query = [
-        'client_id=' + process.env.GIT_CLIENT_ID,
-        `redirect_uri=${process.env.APP_URL}/admin/profile/github%3faction=rebind`
+        'client_id=' + this.GIT_CLIENT_ID,
+        `redirect_uri=${this.APP_URL}/admin/profile/github%3faction=rebind`
       ]
 
       return baseUrl + query.join('&')

@@ -166,8 +166,8 @@ export default {
     wechatHref () {
       const baseurl = 'https://open.weixin.qq.com/connect/qrconnect?'
       const query = [
-        `appid=${process.env.WECHAT_APP_ID}`,
-        `redirect_uri=${process.env.APP_URL}/admin/profile/wechat`,
+        `appid=${this.WECHAT_APP_ID}`,
+        `redirect_uri=${this.APP_URL}/admin/profile/wechat`,
         'response_type=code',
         'scope=snsapi_login',
         'state=state'
@@ -177,8 +177,8 @@ export default {
     githubHref () {
       const baseUrl = 'https://github.com/login/oauth/authorize?'
       const query = [
-        'client_id=' + process.env.GIT_CLIENT_ID,
-        `redirect_uri=${process.env.APP_URL}/admin/profile/github`
+        'client_id=' + this.GIT_CLIENT_ID,
+        `redirect_uri=${this.APP_URL}/admin/profile/github`
       ]
 
       return baseUrl + query.join('&')

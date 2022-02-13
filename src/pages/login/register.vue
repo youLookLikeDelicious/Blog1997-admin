@@ -107,7 +107,6 @@ export default {
       }
 
       this.$axios.post(this.postUrl, this.model).then(() => {
-        // window.location.replace(`${process.env.SENTRY_DSN_PUBLIC}/admin/login`)
         this.$router.push({
           path: '/login',
           query: { email: this.model.email }

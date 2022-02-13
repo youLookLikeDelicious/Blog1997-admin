@@ -250,7 +250,6 @@ const routes = [{
 
 const router = new VueRouter({
   mode: 'history',
-  // base: process.env.VUE_BASE_URL
   routes
 })
 
@@ -325,7 +324,7 @@ async function specifyLayoutAndTile (to) {
     component = _
   }
 
-  const { layout = 'default', title = process.env.TITLE } = component
+  const { layout = 'default', title = Vue.prototype.TITLE } = component
   to.meta.layout = layout
 
   const currentTitle = document.head.querySelector('title').innerHTML

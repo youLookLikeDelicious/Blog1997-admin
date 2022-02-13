@@ -32,7 +32,7 @@ export default {
       return this.$store.getters['article/publishedArticle']
     },
     articleUrl () {
-      return process.env.SENTRY_DSN_PUBLIC + '/article/' + btoa(this.publishedArticle.id)
+      return this.APP_URL + '/article/' + btoa(this.publishedArticle.id)
     }
   },
   beforeDestroy () {

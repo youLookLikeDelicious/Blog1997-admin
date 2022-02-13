@@ -112,13 +112,16 @@ export default {
   }
 }
 .auth-btn {
-  color: #fff !important;
   width: 21rem;
   height: 4rem;
   line-height: 4rem;
+  padding: 0;
+  font-size: 1.6rem;
   border-radius: 0.3rem;
   display: inline-block;
   box-sizing: border-box;
+  color: #fff !important;
+  margin-left: 0 !important;
   background-color: #6cacff;
   transition: background-color 0.5s;
   &:hover {
