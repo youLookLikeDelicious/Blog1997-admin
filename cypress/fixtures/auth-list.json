@@ -18,25 +18,25 @@
                             "id": 6,
                             "name": "添加文章",
                             "parent_id": 2,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 7,
                             "name": "修改文章",
                             "parent_id": 2,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 8,
                             "name": "删除文章",
                             "parent_id": 2,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 9,
                             "name": "查看列表",
                             "parent_id": 2,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -49,25 +49,25 @@
                             "id": 5,
                             "name": "添加标签",
                             "parent_id": 4,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 10,
                             "name": "查看标签",
                             "parent_id": 4,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 11,
                             "name": "更新标签",
                             "parent_id": 4,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 12,
                             "name": "删除标签",
                             "parent_id": 4,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -80,25 +80,25 @@
                             "id": 14,
                             "name": "查看专题",
                             "parent_id": 13,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 15,
                             "name": "创建专题",
                             "parent_id": 13,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 16,
                             "name": "修改专题",
                             "parent_id": 13,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 17,
                             "name": "删除专题",
                             "parent_id": 13,
-                            "child": []
+                            "child": null
                         }
                     ]
                 }
@@ -114,7 +114,7 @@
                     "id": 19,
                     "name": "仪表盘",
                     "parent_id": 18,
-                    "child": []
+                    "child": null
                 }
             ]
         },
@@ -133,25 +133,25 @@
                             "id": 22,
                             "name": "查看权限",
                             "parent_id": 21,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 23,
                             "name": "添加权限",
                             "parent_id": 21,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 24,
                             "name": "更改权限",
                             "parent_id": 21,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 25,
                             "name": "删除权限",
                             "parent_id": 21,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -164,25 +164,25 @@
                             "id": 27,
                             "name": "查看角色",
                             "parent_id": 26,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 28,
                             "name": "添加角色",
                             "parent_id": 26,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 29,
                             "name": "修改角色",
                             "parent_id": 26,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 30,
                             "name": "删除角色",
                             "parent_id": 26,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -195,31 +195,31 @@
                             "id": 32,
                             "name": "添加管理员",
                             "parent_id": 31,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 33,
                             "name": "查看管理员",
                             "parent_id": 31,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 34,
                             "name": "删除管理员",
                             "parent_id": 31,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 35,
                             "name": "修改管理员",
                             "parent_id": 31,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 82,
                             "name": "管理员界面获取用户信息",
                             "parent_id": 31,
-                            "child": []
+                            "child": null
                         }
                     ]
                 }
@@ -235,13 +235,13 @@
                     "id": 37,
                     "name": "查看图片",
                     "parent_id": 36,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 38,
                     "name": "上传图片",
                     "parent_id": 36,
-                    "child": []
+                    "child": null
                 }
             ]
         },
@@ -255,25 +255,25 @@
                     "id": 40,
                     "name": "添加友链",
                     "parent_id": 39,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 41,
                     "name": "查看友链",
                     "parent_id": 39,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 42,
                     "name": "修改友链",
                     "parent_id": 39,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 43,
                     "name": "删除友链",
                     "parent_id": 39,
-                    "child": []
+                    "child": null
                 }
             ]
         },
@@ -292,25 +292,25 @@
                             "id": 46,
                             "name": "查看分类",
                             "parent_id": 45,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 47,
                             "name": "删除分类",
                             "parent_id": 45,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 48,
                             "name": "添加分类",
                             "parent_id": 45,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 49,
                             "name": "修改分类",
                             "parent_id": 45,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -323,25 +323,25 @@
                             "id": 51,
                             "name": "添加词汇",
                             "parent_id": 50,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 52,
                             "name": "查看词汇",
                             "parent_id": 50,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 53,
                             "name": "修改词汇",
                             "parent_id": 50,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 54,
                             "name": "删除词汇",
                             "parent_id": 50,
-                            "child": []
+                            "child": null
                         }
                     ]
                 }
@@ -362,7 +362,7 @@
                             "id": 70,
                             "name": "查看日志",
                             "parent_id": 68,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -375,13 +375,13 @@
                             "id": 74,
                             "name": "查看系统设置",
                             "parent_id": 69,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 75,
                             "name": "更新系统设置",
                             "parent_id": 69,
-                            "child": []
+                            "child": null
                         }
                     ]
                 }
@@ -402,19 +402,19 @@
                             "id": 61,
                             "name": "查看举报信息",
                             "parent_id": 60,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 62,
                             "name": "删除被举报的内容",
                             "parent_id": 60,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 63,
                             "name": "忽略举报的内容",
                             "parent_id": 60,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -427,19 +427,19 @@
                             "id": 65,
                             "name": "批准评论",
                             "parent_id": 64,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 66,
                             "name": "查看待审核评论",
                             "parent_id": 64,
-                            "child": []
+                            "child": null
                         },
                         {
                             "id": 67,
                             "name": "驳回评论",
                             "parent_id": 64,
-                            "child": []
+                            "child": null
                         }
                     ]
                 },
@@ -447,7 +447,7 @@
                     "id": 73,
                     "name": "通知",
                     "parent_id": 59,
-                    "child": []
+                    "child": null
                 }
             ]
         },
@@ -461,31 +461,31 @@
                     "id": 77,
                     "name": "查看账号信息",
                     "parent_id": 76,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 78,
                     "name": "绑定社交账号",
                     "parent_id": 76,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 79,
                     "name": "取消绑定",
                     "parent_id": 76,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 80,
                     "name": "重新绑定社交账号",
                     "parent_id": 76,
-                    "child": []
+                    "child": null
                 },
                 {
                     "id": 81,
                     "name": "修改基本信息",
                     "parent_id": 76,
-                    "child": []
+                    "child": null
                 }
             ]
         },
@@ -494,7 +494,7 @@
             "name": "访问后台",
             "route_name": "admin.index",
             "parent_id": 0,
-            "child": []
+            "child": null
         }
     ]
 }

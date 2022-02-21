@@ -1,0 +1,849 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Master",
+      "remark": "Supper admin",
+      "authorities": [
+        {
+          "id": 38,
+          "name": "上传图片",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 38
+          }
+        },
+        {
+          "id": 13,
+          "name": "专题管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 13
+          }
+        },
+        {
+          "id": 60,
+          "name": "举报信息管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 60
+          }
+        },
+        {
+          "id": 19,
+          "name": "仪表盘",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 19
+          }
+        },
+        {
+          "id": 16,
+          "name": "修改专题",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 16
+          }
+        },
+        {
+          "id": 49,
+          "name": "修改分类",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 49
+          }
+        },
+        {
+          "id": 42,
+          "name": "修改友链",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 42
+          }
+        },
+        {
+          "id": 81,
+          "name": "修改基本信息",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 81
+          }
+        },
+        {
+          "id": 7,
+          "name": "修改文章",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 7
+          }
+        },
+        {
+          "id": 35,
+          "name": "修改管理员",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 35
+          }
+        },
+        {
+          "id": 29,
+          "name": "修改角色",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 29
+          }
+        },
+        {
+          "id": 53,
+          "name": "修改词汇",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 53
+          }
+        },
+        {
+          "id": 45,
+          "name": "分类管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 45
+          }
+        },
+        {
+          "id": 15,
+          "name": "创建专题",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 15
+          }
+        },
+        {
+          "id": 17,
+          "name": "删除专题",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 17
+          }
+        },
+        {
+          "id": 47,
+          "name": "删除分类",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 47
+          }
+        },
+        {
+          "id": 43,
+          "name": "删除友链",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 43
+          }
+        },
+        {
+          "id": 8,
+          "name": "删除文章",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 8
+          }
+        },
+        {
+          "id": 25,
+          "name": "删除权限",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 25
+          }
+        },
+        {
+          "id": 12,
+          "name": "删除标签",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 12
+          }
+        },
+        {
+          "id": 34,
+          "name": "删除管理员",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 34
+          }
+        },
+        {
+          "id": 62,
+          "name": "删除被举报的内容",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 62
+          }
+        },
+        {
+          "id": 30,
+          "name": "删除角色",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 30
+          }
+        },
+        {
+          "id": 54,
+          "name": "删除词汇",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 54
+          }
+        },
+        {
+          "id": 1,
+          "name": "博客管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 1
+          }
+        },
+        {
+          "id": 39,
+          "name": "友链管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 39
+          }
+        },
+        {
+          "id": 79,
+          "name": "取消绑定",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 79
+          }
+        },
+        {
+          "id": 18,
+          "name": "工作台",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 18
+          }
+        },
+        {
+          "id": 64,
+          "name": "待审核评论管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 64
+          }
+        },
+        {
+          "id": 63,
+          "name": "忽略举报的内容",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 63
+          }
+        },
+        {
+          "id": 65,
+          "name": "批准评论",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 65
+          }
+        },
+        {
+          "id": 20,
+          "name": "授权管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 20
+          }
+        },
+        {
+          "id": 44,
+          "name": "敏感词汇管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 44
+          }
+        },
+        {
+          "id": 2,
+          "name": "文章管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 2
+          }
+        },
+        {
+          "id": 24,
+          "name": "更改权限",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 24
+          }
+        },
+        {
+          "id": 11,
+          "name": "更新标签",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 11
+          }
+        },
+        {
+          "id": 75,
+          "name": "更新系统设置",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 75
+          }
+        },
+        {
+          "id": 21,
+          "name": "权限管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 21
+          }
+        },
+        {
+          "id": 14,
+          "name": "查看专题",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 14
+          }
+        },
+        {
+          "id": 61,
+          "name": "查看举报信息",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 61
+          }
+        },
+        {
+          "id": 46,
+          "name": "查看分类",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 46
+          }
+        },
+        {
+          "id": 9,
+          "name": "查看列表",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 9
+          }
+        },
+        {
+          "id": 41,
+          "name": "查看友链",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 41
+          }
+        },
+        {
+          "id": 37,
+          "name": "查看图片",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 37
+          }
+        },
+        {
+          "id": 66,
+          "name": "查看待审核评论",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 66
+          }
+        },
+        {
+          "id": 70,
+          "name": "查看日志",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 70
+          }
+        },
+        {
+          "id": 22,
+          "name": "查看权限",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 22
+          }
+        },
+        {
+          "id": 10,
+          "name": "查看标签",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 10
+          }
+        },
+        {
+          "id": 33,
+          "name": "查看管理员",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 33
+          }
+        },
+        {
+          "id": 74,
+          "name": "查看系统设置",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 74
+          }
+        },
+        {
+          "id": 27,
+          "name": "查看角色",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 27
+          }
+        },
+        {
+          "id": 52,
+          "name": "查看词汇",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 52
+          }
+        },
+        {
+          "id": 77,
+          "name": "查看账号信息",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 77
+          }
+        },
+        {
+          "id": 4,
+          "name": "标签管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 4
+          }
+        },
+        {
+          "id": 59,
+          "name": "消息管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 59
+          }
+        },
+        {
+          "id": 48,
+          "name": "添加分类",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 48
+          }
+        },
+        {
+          "id": 40,
+          "name": "添加友链",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 40
+          }
+        },
+        {
+          "id": 6,
+          "name": "添加文章",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 6
+          }
+        },
+        {
+          "id": 23,
+          "name": "添加权限",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 23
+          }
+        },
+        {
+          "id": 5,
+          "name": "添加标签",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 5
+          }
+        },
+        {
+          "id": 32,
+          "name": "添加管理员",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 32
+          }
+        },
+        {
+          "id": 28,
+          "name": "添加角色",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 28
+          }
+        },
+        {
+          "id": 51,
+          "name": "添加词汇",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 51
+          }
+        },
+        {
+          "id": 36,
+          "name": "画廊管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 36
+          }
+        },
+        {
+          "id": 82,
+          "name": "管理员界面获取用户信息",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 82
+          }
+        },
+        {
+          "id": 31,
+          "name": "管理员管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 31
+          }
+        },
+        {
+          "id": 68,
+          "name": "系统日志",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 68
+          }
+        },
+        {
+          "id": 56,
+          "name": "系统管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 56
+          }
+        },
+        {
+          "id": 69,
+          "name": "系统设置",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 69
+          }
+        },
+        {
+          "id": 78,
+          "name": "绑定社交账号",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 78
+          }
+        },
+        {
+          "id": 26,
+          "name": "角色管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 26
+          }
+        },
+        {
+          "id": 83,
+          "name": "访问后台",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 83
+          }
+        },
+        {
+          "id": 50,
+          "name": "词汇管理",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 50
+          }
+        },
+        {
+          "id": 76,
+          "name": "账号设置",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 76
+          }
+        },
+        {
+          "id": 73,
+          "name": "通知",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 73
+          }
+        },
+        {
+          "id": 80,
+          "name": "重新绑定社交账号",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 80
+          }
+        },
+        {
+          "id": 67,
+          "name": "驳回评论",
+          "pivot": {
+            "role_id": 1,
+            "auth_id": 67
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Author",
+      "remark": "ss",
+      "authorities": [
+        {
+          "id": 7,
+          "name": "修改文章",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 7
+          }
+        },
+        {
+          "id": 8,
+          "name": "删除文章",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 8
+          }
+        },
+        {
+          "id": 18,
+          "name": "工作台",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 18
+          }
+        },
+        {
+          "id": 2,
+          "name": "文章管理",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 2
+          }
+        },
+        {
+          "id": 9,
+          "name": "查看列表",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 9
+          }
+        },
+        {
+          "id": 6,
+          "name": "添加文章",
+          "pivot": {
+            "role_id": 2,
+            "auth_id": 6
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "用户",
+      "remark": "个人理解只要平常工作中是做软件开发，涉及系统架构的，前两门通过的概率都很大，最难得通过的应该就是论文了，所以重点介绍一下论文。\n    论文要求在两个小时内，写一篇2000~2500字的论文，估算一下，两个小时120分钟，除去审题，构思，写作时间可能只有100分钟，每分钟需要写20~25个字，每2~3秒写一个字，你可以感受一下。  \n    参加工作后，实际写字机会已经不多，不要说写作，就是写字，有时都提笔忘字，所有论文一定要提前准备好3~5篇，最好抄写两遍，否则难有机会通过。",
+      "authorities": [
+        {
+          "id": 13,
+          "name": "专题管理",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 13
+          }
+        },
+        {
+          "id": 19,
+          "name": "仪表盘",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 19
+          }
+        },
+        {
+          "id": 16,
+          "name": "修改专题",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 16
+          }
+        },
+        {
+          "id": 7,
+          "name": "修改文章",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 7
+          }
+        },
+        {
+          "id": 15,
+          "name": "创建专题",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 15
+          }
+        },
+        {
+          "id": 17,
+          "name": "删除专题",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 17
+          }
+        },
+        {
+          "id": 8,
+          "name": "删除文章",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 8
+          }
+        },
+        {
+          "id": 12,
+          "name": "删除标签",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 12
+          }
+        },
+        {
+          "id": 1,
+          "name": "博客管理",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 1
+          }
+        },
+        {
+          "id": 18,
+          "name": "工作台",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 18
+          }
+        },
+        {
+          "id": 2,
+          "name": "文章管理",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 2
+          }
+        },
+        {
+          "id": 11,
+          "name": "更新标签",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 11
+          }
+        },
+        {
+          "id": 14,
+          "name": "查看专题",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 14
+          }
+        },
+        {
+          "id": 9,
+          "name": "查看列表",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 9
+          }
+        },
+        {
+          "id": 10,
+          "name": "查看标签",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 10
+          }
+        },
+        {
+          "id": 4,
+          "name": "标签管理",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 4
+          }
+        },
+        {
+          "id": 6,
+          "name": "添加文章",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 6
+          }
+        },
+        {
+          "id": 5,
+          "name": "添加标签",
+          "pivot": {
+            "role_id": 3,
+            "auth_id": 5
+          }
+        }
+      ]
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/role?page=1",
+    "last": "https://www.blog1997.com/api/admin/role?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/role",
+    "per_page": 10,
+    "to": 3,
+    "total": 3
+  },
+  "message": "success"
+}

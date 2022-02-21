@@ -1,3 +1,4 @@
+/** @component 添加角色 */
 <template>
   <v-dialog
     :visible.sync="dialogVisible"
@@ -11,12 +12,12 @@
       <el-row :gutter="8">
         <el-col>
           <el-form-item label="角色名称" prop="name">
-            <el-input v-model="model.name" placeholder="角色名称" size="mini" clearable></el-input>
+            <v-input v-model="model.name" style="width: 100%" placeholder="角色名称" clearable></v-input>
           </el-form-item>
         </el-col>
         <el-col>
           <el-form-item label="备注" prop="remark">
-            <el-input type="textarea" v-model="model.remark" placeholder="备注" size="mini" :autosize="{ minRows: 3 }"></el-input>
+            <v-input textarea v-model="model.remark" placeholder="备注" style="width: 100%" :autosize="{ minRows: 3 }"></v-input>
           </el-form-item>
         </el-col>
         <el-col>
@@ -33,7 +34,6 @@
 import AuthTree from './tree'
 import { getAuthAll, getRoleInfo } from '~/api/auth'
 import DialogBox from '~/components/global/dialog-box'
-import convertChild from '~/plugins/tool/convert-child'
 
 export default {
   name: 'CreateRole',
@@ -72,9 +72,7 @@ export default {
     loadData () {
       this.loading = true
       getAuthAll().then(res => {
-        const data = res.data.data
-        convertChild(data)
-        this.authList = data
+        this.authList = res.data.data
       }).finally(() => {
         this.loading = false
       })

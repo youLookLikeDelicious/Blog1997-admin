@@ -9,10 +9,11 @@ export default {
   methods: {
     handleVisible (id) {
       this.id = id
+      this.dialogVisible = true
+
       if (id && typeof this.getOriginModel === 'function') {
         this.getOriginModel(id)
       }
-      this.dialogVisible = true
       if (typeof this.loadData === 'function') {
         this.loadData()
       }

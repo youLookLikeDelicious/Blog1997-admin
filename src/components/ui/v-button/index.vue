@@ -12,7 +12,7 @@
     ]"
     >
       <template v-if="icon">
-        <i :class="icon"></i>&nbsp;
+        <i :class="icon"></i>
       </template>
       <slot></slot>
     </a>
@@ -28,7 +28,7 @@
     :title="title"
     >
     <template v-if="icon">
-      <i :class="icon"></i>&nbsp;
+      <i :class="icon"></i>
     </template>
     <slot></slot>
   </a>
@@ -112,6 +112,9 @@ export default {
   white-space: nowrap;
   &:not(first-child) {
     margin-left: 1.2rem;
+  }
+  i {
+    margin-right: .3rem;
   }
 }
 </style>

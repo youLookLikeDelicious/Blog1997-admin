@@ -29,10 +29,10 @@
         <el-table :data="data" border row-key="id" :tree-props="{ children: 'child' }">
           <el-table-column label="名称" prop="name">
             <template v-slot="{ row }">
-              <i v-if="!row.child.length && !row.parent_id">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>{{ row.name }}
+              <i v-if="!row.child && !row.parent_id">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>{{ row.name }}
             </template>
           </el-table-column>
-          <el-table-column label="Route Name" prop="route_name" align="center"></el-table-column>
+          <el-table-column label="路由名称" prop="route_name" align="center"></el-table-column>
           <el-table-column label="操作" prop="name" align="center">
             <template v-slot="{ row }">
               <v-button type="primary" text icon="icofont-edit" @click="handleShowCreate(row.id)">编 辑</v-button>

@@ -32,7 +32,7 @@
             <slot name="rightButton" :handleShowCreate="handleShowCreate"></slot>
           </template>
           <el-col v-else-if="showCreate" :span="3" class="right-btn">
-            <v-button type="primary" icon="icofont-ui-edit" @click="handleShowCreate">添 加</v-button>
+            <v-button type="primary" icon="el-icon-plus" @click="handleShowCreate">添 加</v-button>
           </el-col>
         </el-row>
         <el-row v-if="$scopedSlots.create" style="width: 100%">

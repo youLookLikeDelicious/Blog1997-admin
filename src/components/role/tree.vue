@@ -37,6 +37,7 @@ export default {
   },
   data () {
     return {
+      watchNode: '',
       checkedIds: []
     }
   },
@@ -60,10 +61,20 @@ export default {
   },
   watch: {
     defaultChecked: {
-      handler () {
-        this.defaultChecked.forEach(nodeId => {
-          this.$set(this.nodeMap[nodeId], 'checked', nodeId)
-        })
+      handler (val) {
+        const mapLength = Object.keys(this.nodeMap).length
+        if (!val || !mapLength) {
+          // 处理defaultChecked比tree先赋值的问题
+          if (!mapLength && !this.watchNode) {
+            this.watchNode = this.$watch('nodeMap', _ => {
+              this.syncDefaultSelected()
+              this.watchNode()
+              this.watchNode = ''
+            })
+          }
+          return
+        }
+        this.syncDefaultSelected()
       },
       immediate: true
     }
@@ -82,6 +93,11 @@ export default {
       }
       travel(this.tree)
       return arr
+    },
+    syncDefaultSelected () {
+      this.defaultChecked.forEach(nodeId => {
+        this.$set(this.nodeMap[nodeId], 'checked', nodeId)
+      })
     }
   }
 }

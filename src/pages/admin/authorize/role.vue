@@ -1,8 +1,8 @@
 <template>
   <base-component :requestApi="requestApi" :showCreate="true">
-    <template v-slot:search>
+    <template v-slot:search="{ query, getList }">
       <div>
-        <v-input v-model="filter.name" theme="box" placeholder="角色名称"></v-input>
+        <v-input v-model="query.name" theme="box" @change="getList" placeholder="角色名称"></v-input>
       </div>
     </template>
     <template
@@ -16,7 +16,7 @@
     <template v-slot:default="{ data, handleShowCreate, deleteRecord }">
       <el-table :data="data" border>
         <el-table-column label="角色名称" prop="name" align="center"></el-table-column>
-        <el-table-column label="备注" prop="remark" align="center"></el-table-column>
+        <el-table-column label="备注" prop="remark" show-overflow-tooltip align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template v-slot="{ row }">
             <v-button type="primary" text icon="icofont-edit" @click="handleShowCreate(row.id)">编辑</v-button>

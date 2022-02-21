@@ -250,7 +250,7 @@ export default {
     display: inline-block;
   }
   .first-no-child{
-    width: .4em;
+    width: .7em;
   }
   .v-button:not(first-child){
     margin-left: 0;

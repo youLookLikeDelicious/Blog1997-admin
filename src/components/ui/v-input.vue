@@ -50,14 +50,9 @@ import calcTextareaHeight from 'element-ui/packages/input/src/calcTextareaHeight
 export default {
   name: 'VInput',
   props: {
+    value: [String, Number],
     placeholder: {
       type: String,
-      default () {
-        return ''
-      }
-    },
-    val: {
-      type: [String, Number],
       default () {
         return ''
       }
@@ -107,7 +102,7 @@ export default {
   },
   data () {
     return {
-      currentValue: this.$attrs.vaue || this.val || '',
+      currentValue: this.value,
       currentType: this.type,
       focused: false,
       boxInputClass: ''
@@ -117,12 +112,13 @@ export default {
     this.syncCurrentValue()
   },
   watch: {
-    currentValue () {
+    currentValue (val, preVal) {
+      if (val === preVal) return
       this.$emit('input', this.currentValue)
+      this.$nextTick(this.resizeTextarea)
     },
-    '$attrs.value' () {
+    value () {
       this.syncCurrentValue()
-      this.resizeTextarea()
     },
     focused () {
       if (this.theme !== 'box') {
@@ -170,8 +166,8 @@ export default {
       this.$animate(hr, { width: '100%', duration: 230, easing: 'bezier(0.2, 0.2)', finish: true })
     },
     syncCurrentValue () {
-      if (this.$attrs.value !== this.currentValue) {
-        this.currentValue = this.$attrs.value
+      if (this.value !== this.currentValue) {
+        this.currentValue = this.value
       }
     },
     // 按下键盘,重新计算textarea的高度

@@ -114,6 +114,7 @@ export default {
     margin: 17vh auto 0 auto;
     padding: 0 0 7rem 0;
     max-width: 98%;
+    max-height: 80vh !important;
     border: 0.1rem solid #c6c6c6;
   }
   .dialog-slot-container {
