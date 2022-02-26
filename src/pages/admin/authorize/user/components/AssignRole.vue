@@ -1,15 +1,17 @@
 <template>
-  <v-dialog title="分配角色" width="55rem" :visible.sync="dialogVisible" height="23rem" @confirm="submit">
+  <v-dialog title="分配角色" width="58rem" :visible.sync="dialogVisible" height="23rem" @confirm="submit">
     <el-form v-loading="loading" label-width="7rem">
       <el-row style="padding-left: 2.1rem; font-size: 1.4rem">
         <el-col :span="12">
           <el-form-item label="用户名">
-            <span>{{userInfo.name}}</span>
+            <span class="el-form-item_text">{{userInfo.name}}</span>
           </el-form-item>
         </el-col>
         <el-col :span="12">
           <el-form-item label="邮箱">
-            {{userInfo.email}}
+            <span class="el-form-item_text">
+              {{userInfo.email}}
+            </span>
           </el-form-item>
         </el-col>
         <el-col>
@@ -27,7 +29,7 @@
 <script>
 import DialogBox from '~/components/global/dialog-box'
 
-import { getRolesAll, getUserInfo } from '~/api/user'
+import { getRolesAll, getUserInfo, assignRole } from '~/api/user'
 import axios from 'axios'
 export default {
   extends: DialogBox,
@@ -56,7 +58,11 @@ export default {
     },
     // 提交表单
     submit () {
-
+      assignRole({ roles: this.model.roles, id: this.userInfo.id })
+        .then(_ => {
+          this.$emit('success')
+          this.closeDialog()
+        })
     }
   }
 }

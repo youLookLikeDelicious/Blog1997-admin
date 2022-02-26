@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/user?page=1",
+    "last": "https://www.blog1997.com/api/admin/user?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/user",
+    "per_page": 10,
+    "to": 2,
+    "total": 0
+  },
+  "message": "success"
+}

@@ -494,3 +494,10 @@ input {
 .el-tooltip__popper {
     max-width: 45rem;
 }
+
+/** el-form-item 右侧文本 */
+.el-form-item_text {
+    height: 3rem;
+    display: inline-block;
+    line-height: 3rem;
+}

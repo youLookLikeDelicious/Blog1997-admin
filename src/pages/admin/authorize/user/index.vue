@@ -8,22 +8,24 @@
 <template>
   <div>
     <base-component ref="base" :requestApi="requestApi">
-      <template v-slot:search="{query}">
+      <!-- 搜索部分 -->
+      <template v-slot:search="{query, getList}">
         <el-col :span="4">
-          <v-input theme="box" v-model="query.name" placeholder="用户名"></v-input>
+          <v-input theme="box" v-model="query.name" @change="getList" placeholder="用户名"></v-input>
         </el-col>
         <el-col :span="4">
-          <el-select v-model="query.role" placeholder="角色" clearable style="width: 100%" size="small">
+          <el-select v-model="query.role" popper-class="auth-user-popper" placeholder="角色" @change="getList" clearable style="width: 100%" size="small">
             <el-option v-for="role in roleList" :key="role.id" :label="role.name" :value="role.id"></el-option>
           </el-select>
         </el-col>
       </template>
+      <!-- 列表部分 -->
       <template v-slot="{ data }">
         <el-table :data="data" border>
-          <el-table-column label="用户名" prop="name" align="center">
+          <el-table-column label="用户名" prop="name" show-overflow-tooltip align="center">
             <template v-slot="{ row }">
               <div class="user-name-wrapper">
-                <el-image :src="row.avatar" class="avatar" fit="cover">
+                <el-image :src="row.avatar" :preview-src-list="[row.avatar]" class="avatar" fit="cover">
                   <div slot="placeholder">
                     <span class="el-icon-picture-outline loading-avatar"></span>
                   </div>
@@ -57,7 +59,7 @@
         </el-table>
       </template>
     </base-component>
-    <assign-role ref="assignRole" />
+    <assign-role ref="assignRole" @success="$refs.base.getList()" />
   </div>
 </template>
 
@@ -116,7 +118,14 @@ export default {
   vertical-align: middle;
   justify-content: center;
   .info {
+    width: 5rem;
     margin-left: .7rem;
+    p {
+      overflow: hidden;
+      white-space: nowrap;
+      word-break: keep-all;
+      text-overflow: ellipsis;
+    }
   }
   .gender{
     color: #999;

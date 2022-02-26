@@ -12,6 +12,7 @@
   "projectId": "wahuwk",
   "env": {
     "host": "http://localhost:9090",
-    "api_url": "https://www.blog1997.com/api"
+    "api_url": "https://www.blog1997.com/api",
+    "image_url": "https://www.blog1997.com"
   }
 }

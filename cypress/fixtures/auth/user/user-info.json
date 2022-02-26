@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "message": "success",
+  "data": {
+    "id": 2,
+    "name": "Master",
+    "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg",
+    "email": "454948077@qq.com",
+    "article_sum": 2,
+    "created_at": {
+      "date": "2021-09-23 21:11:56.000000",
+      "timezone_type": 3,
+      "timezone": "Asia/Shanghai"
+    },
+    "roles": []
+  }
+}

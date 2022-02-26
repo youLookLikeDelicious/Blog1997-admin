@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "name": "阿呆",
+      "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg",
+      "gender": "保密",
+      "email": "adai@qq.com",
+      "created_at": "1970-01-01 08:00",
+      "status": {
+        "code": 3,
+        "text": "已冻结"
+      },
+      "roles": [
+        "注册用户"
+      ]
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/user?page=1",
+    "last": "https://www.blog1997.com/api/admin/user?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/user",
+    "per_page": 10,
+    "to": 2,
+    "total": 1
+  },
+  "message": "success"
+}

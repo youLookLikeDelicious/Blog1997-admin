@@ -71,3 +71,8 @@ export function freeze (id) {
 export function unfreeze (id) {
   return axios.put('/admin/user/unfreeze/' + id)
 }
+
+// 给用户分配角色
+export function assignRole (data) {
+  return axios.put(`/admin/manager/${data.id}`, data)
+}

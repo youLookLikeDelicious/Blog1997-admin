@@ -1,63 +1,60 @@
 describe('Test authorize manage', () => {
   before(() => {
     cy.intercept('post', Cypress.env('api_url') + '/oauth/currentUser', { fixture: 'user.json' }).as('user')
-    cy.intercept('get', Cypress.env('api_url') + '/admin/auth', { fixture: 'auth-list' }).as('auth.list')
+    cy.intercept('get', Cypress.env('api_url') + '/admin/manager/create', { fixture: 'auth/user/manager-create.json' }).as('manager.create')
+    cy.intercept('post', Cypress.env('api_url') + '/csrf', { fixture: 'user/csrf.json' })
+    cy.intercept('get', Cypress.env('api_url') + '/admin/user', { fixture: 'auth/user/user-list-0' }).as('user.list')
+    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' }).as('avatar')
+    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
   })
 
   it('Load page', () => {
-    cy.visit(Cypress.env('host') + '/auth')
-    cy.wait(['@user', '@auth.list'])
+    cy.visit(Cypress.env('host') + '/user')
+    cy.wait(['@user', '@user.list', '@avatar'])
   })
 
   it('Test manage manager', () => {
-    cy.intercept('get', Cypress.env('api_url') + '/admin/manager?role_id=3', { fixture: 'manager-search' })
+    let userListTick = 0
+    cy.intercept('get', Cypress.env('api_url') + '/admin/user*', req => {
+      req.reply({ fixture: `auth/user/user-list-${userListTick++}` })
+    }).as('user.list')
     cy.intercept('get', Cypress.env('api_url') + '/admin/manager/create', { fixture: 'manager-create' }).as('manager.create')
-    cy.intercept('get', Cypress.env('api_url') + '/admin/manager/user/454948077@qq.com', { fixture: 'manager-user' }).as('manager.user')
-    cy.intercept('get', Cypress.env('api_url') + '/admin/manager', { fixture: 'manager' })
-    // 用户的头像
-    cy.intercept('get', 'https://www.blog1997.com/image/avatar/2020-10-29/95a5c0e7e08e4873cefa7b3962a66884', { fixture: 'images/avatar2.jpg' })
-    cy.intercept('post', Cypress.env('api_url') + '/admin/manager/3', (req) => {
-      const fixture = req.body.indexOf('roles') >= 0 ? { fixture: 'manager-store' } : { fixture: 'manager-store-without-role' }
-      req.reply(fixture)
-    }).as('manager.store')
+    cy.intercept('get', Cypress.env('api_url') + '/admin/user/2', { fixture: 'auth/user/user-info' }).as('user.info')
+    cy.intercept('put', Cypress.env('api_url') + '/admin/manager/2', req => {
+      req.reply({message: '角色分配成功'})
+    }).as('assign.role')
+    cy.intercept('post', Cypress.env('api_url') + '/admin/user/freeze/2', req => { req.reply({message: '冻结成功'}) }).as('freeze')
 
-    cy.get('.sidebar a[href="/admin/manager"]').click()
+    // 头像
+    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
+    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' })
 
-    // 添加一个管理员
+    // 分配权限
+    cy.get('.link-btn-primary').eq(1).click()
+    cy.wait(['@user.info', '@manager.create'])
+    cy.get('.dialog .el-select').click()
     cy.wait(1000)
-    cy.get('.tool-bar a[name="create"]').click()
-    cy.wait('@manager.create')
-    // ------------ 填写邮箱
-    cy.get('.create-manager input').eq(0).click()
-    cy.wait(300)
-    cy.get('.create-manager input').eq(0).type('454948077@qq.com')
+    cy.get('body > .el-select-dropdown .el-select-dropdown__item').eq(2).click()
     cy.wait(1000)
-    // ------------ 选择角色
-    cy.get('.create-manager input[type="checkbox"]').eq(0).click()
-    cy.get('.create-manager input[type="checkbox"]').eq(2).click()
-    cy.get('.create-manager input[type="checkbox"]').eq(1).click()
-    // ------------ 提交
-    cy.get('.create-manager .btn-enable').click()
-    cy.wait('@manager.store')
+    // -------------提交表单
+    cy.get('.dialog .btn-primary').click()
+    cy.wait(['@assign.role', '@user.list'])
 
-    // 去除管理员所有的角色
-    cy.wait(1000)
-    cy.get('.data-list .icofont-edit').eq(2).click()
-    cy.get('.create-manager input[type="checkbox"]').eq(0).click()
-    cy.get('.create-manager input[type="checkbox"]').eq(2).click()
-    cy.get('.create-manager input[type="checkbox"]').eq(1).click()
-    // ------------ 提交
-    cy.get('.create-manager .btn-enable').click()
-    cy.wait('@manager.store')
+    // 冻结
+    cy.get('.link-btn-danger').eq(1).click()
+    cy.wait(['@freeze', '@user.list'])
     cy.wait(1000)
 
-    // 搜索管理员
-    cy.get('.search-tools .ui-select').click()
+    // 搜索
+    cy.get('.search-tools .v-input-box').click()
     cy.wait(1000)
-    cy.get('.search-tools .ui-select input').type('a')
-    cy.get('.search-tools .ui-select li').eq(0).click()
-    // -------- 点击搜索按钮
-    cy.get('.search-tools .btn-enable').click()
+    cy.get('.search-tools .v-input-box input').type('呆')
+    cy.get('.search-tools .v-input-box input').blur()
+    cy.wait(['@user.list'])
     cy.wait(1000)
+    cy.get('.search-tools .el-select').click()
+    cy.get('.auth-user-popper .el-select-dropdown__item').eq(1).click()
+    cy.wait('@user.list')
+    cy.wait(2000)
   })
 })
