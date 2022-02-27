@@ -5,7 +5,7 @@
     @drop.prevent
     @drop="dropImage"
   >
-    <textarea ref="textarea" v-model="content" name="" spellcheck="false" @scroll="syncScroll" @paste="paste"></textarea>
+    <textarea ref="textarea" v-model="content" name="" tabindex="0" spellcheck="false" @scroll="syncScroll" @paste="paste"></textarea>
     <div ref="preview" class="marked-content" v-html="markedContent"></div>
   </div>
 </template>

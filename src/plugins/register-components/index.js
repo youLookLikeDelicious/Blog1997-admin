@@ -11,6 +11,7 @@ import Avatar from '~/components/global/avatar'
 import DropDown from '~/components/ui/drop-down'
 import baseComponent from '~/components/slot/base'
 import VCheckbox from '~/components/global/checkbox'
+import UploadImage from '~/components/global/upload-image'
 import CascadeSelect from '~/components/ui/cascade-select'
 import promptMessage from '~/components/global/prompt-message'
 
@@ -31,6 +32,7 @@ Vue.use({
     Vue.component('v-button', VButton)
     Vue.component('v-checkbox', VCheckbox)
     Vue.component('v-drop-down', DropDown)
+    Vue.component('upload-image', UploadImage)
     Vue.component('CascadeSelect', CascadeSelect)
     Vue.component('prompt-message', promptMessage)
     Vue.component('base-component', baseComponent)

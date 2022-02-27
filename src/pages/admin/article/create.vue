@@ -46,7 +46,7 @@
       :visible.sync="dialogVisible"
       title="发布文章"
       width="62rem"
-      height="38rem"
+      height="40rem"
       @confirm="submit"
       :disableConfirm="!allowSubmit"
     >
@@ -54,7 +54,6 @@
         class="create-article-table font-size-14"
         @drop.prevent
         @dragover.prevent
-        @drop="setcover"
       >
         <tr>
           <td><span class="error">*</span> 专题:</td>
@@ -94,23 +93,7 @@
         <tr>
           <td>封面:</td>
           <td>
-            <img
-              v-if="coverSrc"
-              class="article-cover"
-              :src="coverSrc"
-              alt="封面"
-            />
-            <a
-              href="/"
-              class="btn-green-fade relative-position upload-articke-cover"
-            >
-              <input
-                type="file"
-                @change="setcover"
-                accept="image/x-png,image/gif,image/jpeg,image/webp"
-              />封 面
-            </a>
-            <span class="fade"> 可拖拽</span>
+            <upload-image v-model="model.cover"></upload-image>
           </td>
         </tr>
         <tr>
@@ -278,7 +261,7 @@ export default {
 
       const formData = this.getFormData(isDraft)
 
-      saveArticle(formData.id, formData)
+      saveArticle(this.routeId, formData)
         .then((response) => response.data.data)
         .then((article) => {
           if (isDraft) {
@@ -321,8 +304,6 @@ export default {
         .then((article) => {
           // 文章获取成功,初始化文章模型
           this.initArticle(article)
-          // 设置封面
-          this.setCoverSrc(article.gallery.url)
         })
     },
     /**
@@ -369,26 +350,6 @@ export default {
       this.uploadArticle(true)
     },
     /**
-     * 赋值cover
-     * @param {DragEvent|Event} event
-     */
-    setcover (event) {
-      const cover =
-        event instanceof DragEvent
-          ? event.dataTransfer.files[0]
-          : event.target.files[0]
-
-      if (cover && !/^image\/[a-zA-Z]*/.test(cover.type)) {
-        this.setMessage({
-          msg: '未识别的图片类型',
-          status: false
-        })
-        return
-      }
-      this.model.cover = cover
-      this.setCoverSrc(cover)
-    },
-    /**
      * 切换编辑器的状态
      */
     changeEditorType () {
@@ -419,21 +380,6 @@ export default {
       } else {
         this.setEditorVisibility()
       }
-    },
-    /**
-     * 设置封面的地址
-     */
-    setCoverSrc (cover) {
-      if (!cover) {
-        return
-      }
-
-      if (typeof cover === 'string') {
-        this.coverSrc = cover + '?t=origin'
-        return
-      }
-
-      this.coverSrc = URL.createObjectURL(cover)
     }
   }
 }

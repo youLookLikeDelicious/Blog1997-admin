@@ -4,11 +4,11 @@
     :style="{ 'z-index': zIndex, width }"
     @click="focusSelect"
   >
-    <div class="flex input-wrapper" @mouseenter="mouseIsEnter = true" @mouseleave="mouseIsEnter = false">
+    <div class="flex relative-position input-wrapper" @mouseenter="mouseIsEnter = true" @mouseleave="mouseIsEnter = false">
       <!-- <span> 被选中的内容 -->
-      <span v-if="multiple">
+      <span v-if="multiple" class="absolute-position tag-wrapper">
         <span v-for="(option, index) in selectedOptions" :key="index" class="tag"
-          >{{ generateTag(option) }} <i @click="cancelSelect(index)">x</i></span
+          >{{ generateTag(option) }} <i class="el-icon-close" @click.stop="cancelSelect(index)"></i></span
         >
       </span>
       <!-- </span> -->
@@ -54,6 +54,8 @@
 </template>
 
 <script>
+import { isEqual } from 'element-ui/src/utils/util'
+
 export default {
   name: 'v-select',
   props: {
@@ -118,6 +120,11 @@ export default {
           label: 'name',
           value: 'id'
         }
+      }
+    },
+    value: {
+      default () {
+        return ''
       }
     }
   },
@@ -184,20 +191,21 @@ export default {
     currentPlaceHolder () {
       // 单选的情况
       if (!this.multiple) {
-        return this.$attrs.value === ''
+        return this.value === ''
           ? this.placeholder
           : this.generateTag(this.selectedOptions[0])
       }
-      return this.$attrs.value.length ? '' : this.placeholder
+      return this.value.length ? '' : this.placeholder
     }
   },
   watch: {
     /**
-     * listen $attrs attribute
-     * 通过父组件 绑定的值，来设置当前组件 selectedOptions
+     * listen
+     * 通过v-model的值，来设置当前组件 selectedOptions
      */
-    '$attrs.value': {
-      handler (val) {
+    value: {
+      handler (val, preVal) {
+        if (isEqual(val, preVal)) return
         if (!val && this.allowCreate && this.createList.length) {
           this.createList = []
         }
@@ -207,8 +215,8 @@ export default {
 
         let selectedOptions = this.getSelectedOptions()
 
-        if (!selectedOptions.length && this.$attrs.value) {
-          this.appendCreateList(this.$attrs.value)
+        if (!selectedOptions.length && this.value) {
+          this.appendCreateList(this.value)
         }
 
         // 如果当前值没有再选项列表中，再createList追加之
@@ -216,10 +224,10 @@ export default {
         if (
           !selectedOptions.length &&
           this.allowCreate &&
-          this.$attrs.value &&
-          this.$attrs.value.length
+          this.value &&
+          this.value.length
         ) {
-          this.appendCreateList(this.$attrs.value)
+          this.appendCreateList(this.value)
           selectedOptions = this.getSelectedOptions()
         }
 
@@ -269,7 +277,7 @@ export default {
      * @return {array|object}
      */
     getSelectedOptions () {
-      const values = this.$attrs.value instanceof Array ? this.$attrs.value : [this.$attrs.value]
+      const values = this.value instanceof Array ? this.value : [this.value]
 
       return this.options
         .concat(this.createList)
@@ -302,17 +310,9 @@ export default {
       }
 
       // 多选的操作
-      const tempArray = [...this.$attrs.value]
+      const tempArray = [...this.value]
       tempArray.splice(index, 1)
       this.syncValue(tempArray)
-
-      // 如果还有选项，重新聚焦
-      this.setInputValue('')
-      if (tempArray.length) {
-        window.setTimeout(() => {
-          this.$refs.input.focus()
-        }, 0)
-      }
     },
     /**
      * 选中当前元素
@@ -340,12 +340,12 @@ export default {
       }
 
       // 超过最大数量的限制
-      if (this.$attrs.value.length >= this.maxOptions) {
+      if (this.value.length >= this.maxOptions) {
         return
       }
       // 多选的值
       const result =
-        this.$attrs.value instanceof Array ? [...this.$attrs.value] : []
+        this.value instanceof Array ? [...this.value] : []
 
       // id === -1表示选项是用户创建的
       result.push(
@@ -409,8 +409,8 @@ export default {
         this.cancelSelect(selectedIndex)
       }
 
-      if (!this.isSelectMultple()) {
-        this.hidSlectList()
+      if (!this.isSelectMultiple()) {
+        this.hidSelectList()
       }
     },
     /**
@@ -432,7 +432,7 @@ export default {
      *
      * @return {boolean}
      */
-    isSelectMultple () {
+    isSelectMultiple () {
       return this.multiple
     },
     /**
@@ -473,9 +473,9 @@ export default {
         return
       }
 
-      this.hidSlectList()
+      this.hidSelectList()
     },
-    hidSlectList () {
+    hidSelectList () {
       this.zIndex = 9998
       this.setFocusState(false)
       this.$animate(
@@ -526,6 +526,7 @@ export default {
   flex-wrap: wrap;
   padding: 0.2rem 0;
   position: relative;
+  max-width: 100%;
   border-radius: 0.3rem;
   box-sizing: border-box;
   background-color: #fff;
@@ -533,43 +534,58 @@ export default {
   .icofont-tick-mark {
     color: #47d147;
   }
-  // 被选中标签样式
-  .tag {
-    flex: 0.1 1 auto;
-    align-self: auto;
-    font-size: 1.2rem;
-    display: inline-block;
-    padding: 0.3rem 0.5rem;
-    background-color: #eaeaea;
-    color: #666;
-    margin: 0.5rem 0.7rem;
-    i {
-      $size: 1.5rem;
-      display: inline-block;
-      text-align: center;
-      width: $size;
-      height: $size;
-      vertical-align: middle;
-      overflow: hidden;
-      line-height: $size - 0.2rem;
-      cursor: pointer;
-      border-radius: $size;
-      font-size: 1.4rem;
-      font-style: normal;
-      box-sizing: border-box;
-      &:hover {
-        background-color: #666;
-        color: #e6e6e6;
+  .tag-wrapper {
+    left: 0;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    display: contents;
+    flex-wrap: wrap;
+    height: fit-content;
+    transform: translateY(-50%);
+    z-index: 2;
+    // 被选中标签样式
+    .tag {
+      display: flex;
+      align-self: auto;
+      font-size: 1.2rem;
+      align-items: center;
+      padding: 0.2rem 0.5rem;
+      border-radius: .3rem;
+      background-color: #eaeaea;
+      color: #666;
+      margin: .1rem 0.7rem;
+      i {
+        $size: 1.4rem;
+        margin-left: .3rem;
+        display: inline-block;
+        text-align: center;
+        width: $size;
+        height: $size;
+        line-height: $size;
+        cursor: pointer;
+        border-radius: $size;
+        font-size: 1rem;
+        box-sizing: border-box;
+        &:hover {
+          background-color: #666;
+          color: #e6e6e6;
+        }
+        transition: background-color .3s, color .3s;
       }
     }
   }
   // 下拉列表输入框的样式
   .input-wrapper {
     flex: 1;
-    top: 1rem;
     width: 100%;
+    height: 100%;
     flex-wrap: wrap;
-    align-content: stretch;
+    overflow: hidden;
+    min-width: 100%;
+    align-items: center;
+    justify-self: stretch;
+    align-content: center;
     justify-content: stretch;
     input {
       z-index: 0;
@@ -655,9 +671,9 @@ export default {
         }
       }
     }
-  }
-  .on {
-    color: #409eff;
+    .on {
+      color: #409eff;
+    }
   }
   .disabled {
     color: #C0C4cc;

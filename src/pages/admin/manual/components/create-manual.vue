@@ -27,10 +27,9 @@
 <script>
 import DialogBox from '~/components/global/dialog-box'
 import { getManualInfo } from '~/api/manual'
-import UploadImage from '~/components/global/upload-image'
+
 export default {
   extends: DialogBox,
-  components: { UploadImage },
   data () {
     return {
       model: {

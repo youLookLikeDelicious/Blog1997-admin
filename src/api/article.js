@@ -50,9 +50,10 @@ export function getTagInfo (id) {
  */
 export function saveArticle (id, data) {
   if (id) {
-    return axios.put('/admin/article/' + id, data)
+    data.append('_method', 'put')
+    return axios.post('/admin/article/' + id, data)
   }
-  return axios.post('/admin/article/', data)
+  return axios.post('/admin/article', data)
 }
 
 /**

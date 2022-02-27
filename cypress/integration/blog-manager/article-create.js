@@ -1,6 +1,6 @@
 export default function () {
     // 点击新建文章
-    cy.get('.article-list-header a[href="/admin/article/create"]').click()
+    cy.get('.right-btn .create-btn').click()
     
     // 切换为富文本编辑器
     cy.get('.icofont-refresh').click()
@@ -13,6 +13,10 @@ export default function () {
     cy.get('.edui-icon-formula').click()
     cy.get('.edui-dropdown-menu').should('have.css', 'display', 'block')
     cy.get('.edui-formula-latex-item').eq(1).click()
+
+    cy.get('.edui-icon-formula').click()
+    cy.get('.edui-formula-latex-item').eq(8).click()
+    cy.wait(1000)
 
     // 插入代码
     cy.get('.edui-icon-code').click()
@@ -44,11 +48,11 @@ export default function () {
 
     // 切换到markdown编辑器
     cy.get('.icofont-refresh').click()
-    cy.get('.marked-editor').type('## BLOG-1997\n')
-    cy.get('.marked-editor').type('```javascript\n')
-    cy.get('.marked-editor').type('const i = 21\n')
-    cy.get('.marked-editor').type('```\n')
-    cy.get('.marked-editor').type('![](https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?cs=srgb&dl=pexels-miriam-espacio-110854.jpg&fm=jpg)\n')
+    cy.get('.marked-editor textarea').type('## BLOG-1997\n')
+    cy.get('.marked-editor textarea').type('```javascript\n')
+    cy.get('.marked-editor textarea').type('const i = 21\n')
+    cy.get('.marked-editor textarea').type('```\n')
+    cy.get('.marked-editor textarea').type('![](https://images.pexels.com/photos/110854/pexels-photo-110854.jpeg?cs=srgb&dl=pexels-miriam-espacio-110854.jpg&fm=jpg)\n')
     
     // 输入标题
     cy.get('.create-article header input').type('2020-12-12')
@@ -74,11 +78,12 @@ export default function () {
 
     cy.get('.dialog header').click()
     // 提交
-    cy.get('.btn-enable').click()
+    cy.get('.dialog-footer .btn-primary').click()
     cy.wait('@article.store')
     cy.wait(1000)
 
     // 返回文章列表
-    cy.get('.sub-container').eq(2).find('a').click()
-    cy.wait(1000)
+    // cy.get('.dialog-footer .btn-primary').click()
+    // cy.get('@article.store')
+    // cy.wait(1000)
 }

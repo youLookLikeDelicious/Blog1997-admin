@@ -2,9 +2,9 @@
   <base-component ref="base" requestApi="/admin/article">
     <template v-slot:tools="{ meta, query, getList }">
       <el-row :span="24" class="article-tab mb-min">
-        <v-button type="text" icon="icofont-archive" @click="() => { query.type = ''; getList() }">全部 ({{ meta.total || 0 }})</v-button>
-        <v-button type="text" icon="icofont-bucket" @click="() => { query.type = 'draft'; getList() }">草稿箱 ({{ meta.draft || 0 }})</v-button>
-        <v-button type="text" icon="icofont-ui-delete" @click="() => { query.type = 'deleted'; getList() }">回收站 ({{ meta.deleted || 0 }})</v-button>
+        <v-button :type="!query.type ? 'primary' : ''" text icon="icofont-archive" @click="() => { query.topicId = ''; query.type = ''; getList() }">全部 ({{ meta.aggregate || 0 }})</v-button>
+        <v-button :type="query.type === 'draft' ? 'primary' : ''" text icon="icofont-bucket" @click="() => { query.topicId = ''; query.type = 'draft'; getList() }">草稿箱 ({{ meta.draft || 0 }})</v-button>
+        <v-button :type="query.type === 'deleted' ? 'primary' : ''" text icon="icofont-ui-delete" @click="() => { query.topicId = ''; query.type = 'deleted'; getList() }">回收站 ({{ meta.deleted || 0 }})</v-button>
       </el-row>
     </template>
     <template v-slot:search="{ data, query, meta, getList }">
@@ -13,16 +13,16 @@
           :options="meta.topics"
           placeholder="请选择专题"
           @change="getList"
-          v-model="topicId"
+          v-model="query.topicId"
         ></v-select>
       </el-col>
-      <el-col :span="3" style="text-align: center">
+      <div style="display: content">
         <div class="order-by">
           <v-button :type="orderBy === 'new' || !orderBy ? 'primary' : 'default'" text @click="query.orderBy = 'new'">最新排序</v-button>
-          <span>&nbsp;&nbsp;&nbsp;&nbsp;| </span>
+          <span style="margin-right: -.7rem"> |</span>
           <v-button :type="orderBy === 'hot' ? 'primary' : 'default'" text @click="query.orderBy = 'hot'">最热排序</v-button>
         </div>
-      </el-col>
+      </div>
     </template>
     <el-col :span="2" slot="rightButton" class="right-btn">
       <router-link
@@ -31,16 +31,16 @@
         title="写文章"
       ></router-link>
     </el-col>
-    <template v-slot:default="{ data, deleteRecord }">
+    <template v-slot:default="{ data : ArticleList, deleteRecord }">
       <ul class="article-list">
         <li
-          v-for="(article, index) in data"
+          v-for="(article) in ArticleList"
           :key="article.id"
           class="mb-min"
         >
           <div class="mb-min">
             <span class="draft-tab" v-if="article.is_draft === 'yes'">草稿</span>
-            <v-button v-if="article.is_draft === 'yes' || article.is_draft === undefined">
+            <v-button v-if="article.is_draft === 'yes' || article.is_draft === undefined" text>
               <h2>{{ article.title }}</h2>
             </v-button>
             <a v-else target="__blank" :href="article.id">
@@ -67,7 +67,7 @@
               >
                &nbsp;编辑</router-link>
               <v-button v-if="isDeleteList" type="primary" text @click="restoreArticle(article.id)" icon="icofont-refresh">回复</v-button>
-              <v-button type="danger" text danger @click="deleteRecord(index, deleted)" icon="icofont-delete">{{ isDeleteList ? '彻底删除' : '删除' }}</v-button>
+              <v-button type="danger" text danger @click="deleteRecord(article.id)" icon="icofont-delete">{{ isDeleteList ? '彻底删除' : '删除' }}</v-button>
             </div>
           </div>
         </li>
@@ -82,9 +82,6 @@ export default {
   name: 'ArticleList',
   data () {
     return {
-      inited: false,
-      topicId: '',
-      previousTopciId: '',
       orderBy: '', // 排序的方式
       type: '' // 类型
     }

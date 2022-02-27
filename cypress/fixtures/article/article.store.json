@@ -1,0 +1,37 @@
+{
+  "status": "success",
+  "message": "文章创建成功",
+  "data": {
+    "title": "2020-12-12",
+    "topic_id": 1,
+    "is_origin": "yes",
+    "order_by": "50",
+    "content": "asfd",
+    "is_draft": "no",
+    "is_markdown": "yes",
+    "summary": "asfd",
+    "gallery_id": 7,
+    "user_id": 1,
+    "updated_at": "1645964481",
+    "created_at": "1645964481",
+    "id": 7,
+    "tags": [
+      {
+        "id": 1,
+        "name": "PHP",
+        "pivot": {
+          "article_id": 7,
+          "tag_id": 1
+        }
+      },
+      {
+        "id": 2,
+        "name": "Laravel",
+        "pivot": {
+          "article_id": 7,
+          "tag_id": 2
+        }
+      }
+    ]
+  }
+}
