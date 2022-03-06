@@ -24,7 +24,7 @@
               v-if="row.editAble"
               predefinedVisible
               style="padding-left: 7rem"
-              :origin-model="{ name: row.name }"
+              :origin-model="{ name: row.name, id: row.id }"
               @create="create"
               @close="edit($index)"
             />
