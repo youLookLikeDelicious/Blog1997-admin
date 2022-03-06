@@ -2,7 +2,9 @@
   <base-component :requestApi="requestApi" :showCreate="true">
     <!-- 搜索 begin -->
     <template v-slot:search="{ query, getList }">
-      <v-input v-model="query.name" @change="getList" placeholder="名称" theme="box" />
+      <el-col :span="4">
+        <v-input v-model="query.name" @change="getList" placeholder="名称" theme="box" />
+      </el-col>
     </template>
     <!-- 搜索 end -->
     <template v-slot:create="{ create }">
@@ -21,7 +23,7 @@
         </el-table-column>
         <el-table-column label="封面" align="center">
           <template v-slot="{ row }">
-            <el-image :src="row.cover" style="width: 5rem">
+            <el-image :src="row.cover" :preview-src-list="[row.cover]" style="width: 5rem">
               <div slot="placeholder" class="image-slot">
                 <span class="dot el-icon-picture">...</span>
               </div>

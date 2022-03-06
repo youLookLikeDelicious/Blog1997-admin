@@ -9,7 +9,7 @@
       :readonly="readonly"
       @blur="blurInput($event)"
       @focus="focus($event)"
-      @change="$emit('change', currentValue)"></textarea>
+      @change="handleChange"></textarea>
     <input
       v-else
       ref="input"
@@ -21,7 +21,7 @@
       :readonly="readonly"
       @blur="blurInput($event)"
       @focus="focus($event)"
-      @change="$emit('change', currentValue)"
+      @change="handleChange"
     />
     <div class="hr-wrap">
       <hr />
@@ -40,15 +40,18 @@
       @focus="focused = true"
       @blur="focused = false"
       :autocomplete="autocomplete"
-      @change="$emit('change', currentValue)"
+      @change="handleChange"
     />
   </div>
 </template>
 
 <script>
+import emitter from 'element-ui/src/mixins/emitter'
 import calcTextareaHeight from 'element-ui/packages/input/src/calcTextareaHeight'
+
 export default {
   name: 'VInput',
+  mixins: [emitter],
   props: {
     value: [String, Number],
     placeholder: {
@@ -115,6 +118,7 @@ export default {
     currentValue (val, preVal) {
       if (val === preVal) return
       this.$emit('input', this.currentValue)
+      this.dispatch('ElFormItem', 'el.form.change', [val])
       this.$nextTick(this.resizeTextarea)
     },
     value () {
@@ -176,6 +180,9 @@ export default {
       const { minHeight, height } = calcTextareaHeight(this.$refs.textarea)
       this.$refs.textarea.style.minHeight = minHeight
       this.$refs.textarea.style.height = height
+    },
+    handleChange (event) {
+      this.$emit('change', event.target.value)
     }
   },
   mounted () {

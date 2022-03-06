@@ -1,0 +1,23 @@
+{
+    "comment": "创建标签,需要的表单数据",
+    "status": "success",
+    "message": "success",
+    "data": [
+        {
+            "id": 2,
+            "name": "\u524d\u7aef"
+        },
+        {
+            "id": 3,
+            "name": "Docker"
+        },
+        {
+            "id": 4,
+            "name": "Javascript"
+        },
+        {
+            "id": 5,
+            "name": "Go"
+        }
+    ]
+}

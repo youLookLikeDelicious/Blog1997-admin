@@ -1,5 +1,5 @@
 import testTopic from './blog-manager/article-topic'
-import testTag from './blog-manager/article-tag'
+import testTag from './blog-manager/article-tag-.spec'
 beforeEach(() => {
   cy.on('window:confirm', () => true)
 })
