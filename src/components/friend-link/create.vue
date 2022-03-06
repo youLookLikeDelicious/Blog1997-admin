@@ -6,11 +6,10 @@
         <v-input placeholder="网站名称" v-model="model.name"></v-input>
       </div>&nbsp;&nbsp;&nbsp;&nbsp;地址:&nbsp;&nbsp;
       <div class="input-wrapper">
-        <v-input
-            v-model="model.url" placeholder="网站地址"></v-input>
+        <v-input v-model="model.url" placeholder="网站地址"></v-input>
       </div>
-      <div>&nbsp;&nbsp;
-        <v-button type="primary" text @click="closeDialog">取消</v-button>
+      <div>
+        <v-button type="primary" text icon="icofont-undo" @click="closeDialog">取消</v-button>
         <v-button type="primary" text icon="icofont-upload-alt" @click="submit">提交</v-button>
       </div>
     </div>
@@ -57,7 +56,7 @@ export default {
   margin-top: -2rem;
   margin-left: -3rem;
   white-space: nowrap;
-  align-items: flex-end;
+  align-items: center;
   p {
     margin-left: 1.2rem;
     a {

@@ -1,0 +1,23 @@
+{
+  "comment": "友链列表",
+  "status": "success",
+  "message": "success",
+  "data": [
+    {
+      "id": 3,
+      "name": "Docker",
+      "url": "https:\/\/www.docker.com",
+      "editAble": 0
+    }
+  ],
+  "meta": {
+    "total": 1,
+    "uri": "?",
+    "currentPage": 1,
+    "next": null,
+    "previous": null,
+    "first": 1,
+    "last": 1,
+    "pages": 1
+  }
+}
