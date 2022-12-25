@@ -1,60 +1,32 @@
 {
-    "status": "success",
-    "message": "success",
-    "data": {
-        "pagination": {
-            "total": 6,
-            "uri": "?",
-            "currentPage": 1,
-            "next": null,
-            "previous": null,
-            "first": 1,
-            "last": 1,
-            "pages": 1
+    "data": [
+        {
+            "id": 1,
+            "name": "AA",
+            "count": 553,
+            "rank": 1
         },
-        "records": [
-            {
-                "id": 5,
-                "name": "\u654f\u611f\u8bcd",
-                "count": 0,
-                "rank": 2,
-                "editAble": 0
-            },
-            {
-                "id": 10,
-                "name": "\u8d2a\u8150\u8bcd\u6c47",
-                "count": 0,
-                "rank": 1,
-                "editAble": 0
-            },
-            {
-                "id": 11,
-                "name": "\u653f\u6cbb",
-                "count": 1,
-                "rank": 1,
-                "editAble": 0
-            },
-            {
-                "id": 12,
-                "name": "\u5e7f\u544a",
-                "count": 566,
-                "rank": 1,
-                "editAble": 0
-            },
-            {
-                "id": 13,
-                "name": "\u975e\u6cd5\u94fe\u63a5",
-                "count": 1,
-                "rank": 1,
-                "editAble": 0
-            },
-            {
-                "id": 14,
-                "name": "\u8272\u60c5",
-                "count": 0,
-                "rank": 1,
-                "editAble": 0
-            }
-        ]
-    }
+        {
+            "id": 2,
+            "name": "ASS",
+            "count": 0,
+            "rank": 2
+        }
+    ],
+    "links": {
+        "first": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+        "last": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "https://www.blog1997.com/api/admin/sensitive-word-category",
+        "per_page": 10,
+        "to": 2,
+        "total": 2
+    },
+    "message": "success"
 }

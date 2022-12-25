@@ -13,6 +13,7 @@
           end-placeholder="结束时间"
           value-format="yyyy-MM-dd"
           @change="getList"
+          style="width: 100%"
           :picker-options="pickerOptions">
         </el-date-picker>
       </el-col>

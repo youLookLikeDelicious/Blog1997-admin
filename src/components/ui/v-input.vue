@@ -271,6 +271,7 @@ export default {
   // width: 23rem;
   padding-left: .7rem;
   padding-right: .7rem;
+  background-color: #fff;
   transition: border-color 0.3s;
   input {
     @extend %v-input;

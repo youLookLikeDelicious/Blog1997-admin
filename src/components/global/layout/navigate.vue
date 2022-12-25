@@ -7,7 +7,7 @@
       </a>
     </div>
     <div class="user-info-wrapper">
-      <div class="user-info" v-if="user.id">
+      <div class="user-box" v-if="user.id">
         <avatar :user="user" :alt="user.name" />
         <a href="/" @click.stop.prevent @click="logout" class="icofont-logout"></a>
       </div>
@@ -95,6 +95,15 @@ export default {
     }
     .icofont-logout{
         font-weight: bolder;
+    }
+    .user-box {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      padding-right: 2rem;
+      .user-info {
+        padding-right: .4rem;
+      }
     }
 }
 .hamburger-menu-off{

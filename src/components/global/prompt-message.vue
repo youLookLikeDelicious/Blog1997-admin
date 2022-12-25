@@ -36,7 +36,7 @@ export default {
         el,
         { top: el.offsetTop + el.offsetHeight + 'px', opacity: 1, duration: 256 },
         () => {
-          setTimeout(() => this.leave(el), 5000)
+          setTimeout(() => this.leave(el), 3000)
           done()
         }
       )

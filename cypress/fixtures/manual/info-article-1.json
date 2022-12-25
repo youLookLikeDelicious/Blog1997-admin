@@ -1,0 +1,32 @@
+{
+  "status": "success",
+  "message": "success",
+  "data": {
+    "id": 4,
+    "name": "asfd",
+    "summary": "asdf",
+    "user_id": 1,
+    "is_public": 1,
+    "cover": "https://www.blog1997.com/image/manual/2022-09-26/650.908525001666331b4dcddcfa4.88183094.png",
+    "created_at": "1664201949",
+    "updated_at": "2022-09-26 22:19",
+    "deleted_at": null,
+    "catalogs": [
+      {
+        "id": 18,
+        "name": "月光光,照大床",
+        "level": 0,
+        "type": 2,
+        "pre_node_id": 0,
+        "next_node_id": 0,
+        "parent_id": 0,
+        "manual_id": 4,
+        "is_public": 1,
+        "created_at": "1665064826",
+        "updated_at": "2022-10-06 22:02",
+        "deleted_at": null,
+        "children": null
+      }
+    ]
+  }
+}

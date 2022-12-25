@@ -73,18 +73,15 @@ export default {
 
 <style lang="scss">
 .manual-list-wrapper{
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  column-gap: 3%;
+  row-gap: 1.6rem;
   .manual-list-box{
-    flex: 1 1 10%;
-    height: 21rem;
-    margin: .7rem 1.2rem;
-    max-width: 10%;
-    cursor: pointer;
-    overflow: hidden;
+    width: 100%;
+    height: 35rem;
     position: relative;
-    border-radius: .5rem;
-    box-sizing: border-box;
+    overflow: hidden;
     &:hover {
       .el-image {
         width: 110%;

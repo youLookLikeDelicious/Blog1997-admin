@@ -1,32 +1,36 @@
 <template>
   <base-component :request-api="requestApi" :showCreate="true">
     <!-- 搜索 begin -->
-    <template v-slot:search>
-      <div class="mr-min">
+    <template v-slot:search="{query, getList}">
+      <el-col :span="4">
         <v-input
           theme="box"
-          v-model="filter.name"
+          v-model="query.name"
           placeholder="分类名称"
+          @change="getList"
         ></v-input>
-      </div>
-      <v-select
-        :options="shieldLevel"
-        v-model="filter.rank"
-        placeholder="屏蔽级别"
-      ></v-select>
+      </el-col>
+      <el-col :span="4">
+        <v-select
+          :options="shieldLevel"
+          v-model="query.rank"
+          clearable
+          placeholder="屏蔽级别"
+          @change="getList"
+        ></v-select>
+      </el-col>
     </template>
     <!-- 搜索 end -->
     <!-- 新建分类 begin -->
-    <template v-slot:create="{ create, meta }">
+    <template v-slot:create="{ create }">
       <createCategory
         ref="create"
-        :categoryList="meta.categoryList"
         @create="create"
         :shield-level="shieldLevel"
       />
     </template>
     <!-- 列表部分 -->
-    <template v-slot:default="{ data, deleteRecord, edit, create, meta }">
+    <template v-slot:default="{ data, deleteRecord, edit, create }">
       <el-table :data="data" border :span-method="spanMethod">
         <el-table-column label="分类名称" prop="name" align="center">
           <template v-slot="{ row, $index }">
@@ -35,8 +39,8 @@
             </span>
             <createCategory
               v-else
-              :categoryList="meta.categoryList"
               predefinedVisible
+              :originModel="{ name: row.name, rank: row.rank, id: row.id }"
               @create="create"
               @close="edit($index)"
               :shield-level="shieldLevel"
@@ -55,8 +59,8 @@
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template v-slot="{ row, $index }">
-            <v-button type="primary" text @click="edit($index)">编 辑</v-button>
-            <v-button type="danger" text @click="deleteRecord(row.id)">删 除</v-button>
+            <v-button type="primary" icon="icofont-edit" text @click="edit($index)">编 辑</v-button>
+            <v-button type="danger" text icon="icofont-delete" @click="deleteRecord(row.id)">删 除</v-button>
           </template>
         </el-table-column>
       </el-table>
@@ -80,10 +84,6 @@ export default {
   data () {
     return {
       showCreateCategory: false,
-      filter: {
-        name: '',
-        rank: 0
-      },
       requestApi: '/admin/sensitive-word-category',
       baseApi: '/admin/sensitive-word-category',
       shieldLevel

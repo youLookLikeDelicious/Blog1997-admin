@@ -4,8 +4,8 @@ describe('Test authorize manage', () => {
     cy.intercept('get', Cypress.env('api_url') + '/admin/manager/create', { fixture: 'auth/user/manager-create.json' }).as('manager.create')
     cy.intercept('post', Cypress.env('api_url') + '/csrf', { fixture: 'user/csrf.json' })
     cy.intercept('get', Cypress.env('api_url') + '/admin/user', { fixture: 'auth/user/user-list-0' }).as('user.list')
-    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' }).as('avatar')
-    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
+    cy.intercept('get', Cypress.env('domain') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' }).as('avatar')
+    cy.intercept('get', Cypress.env('domain') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
   })
 
   it('Load page', () => {
@@ -26,8 +26,8 @@ describe('Test authorize manage', () => {
     cy.intercept('post', Cypress.env('api_url') + '/admin/user/freeze/2', req => { req.reply({message: '冻结成功'}) }).as('freeze')
 
     // 头像
-    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
-    cy.intercept('get', Cypress.env('image_url') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' })
+    cy.intercept('get', Cypress.env('domain') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg', { fixture: 'images/avatar2' })
+    cy.intercept('get', Cypress.env('domain') + '/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.jpg', { fixture: 'images/avatar' })
 
     // 分配权限
     cy.get('.link-btn-primary').eq(1).click()

@@ -1,25 +1,19 @@
 {
-    "status": "success",
-    "message": "success",
-    "data": {
-        "pagination": {
-            "total": 1,
-            "uri": "?",
-            "currentPage": 1,
-            "next": null,
-            "previous": null,
-            "first": 1,
-            "last": 1,
-            "pages": 1
-        },
-        "records": [
-            {
-                "id": 16,
-                "name": "\u4e0d\u9ad8\u5174",
-                "count": 0,
-                "rank": 2,
-                "editAble": 0
-            }
-        ]
-    }
+    "data": [],
+    "links": {
+        "first": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+        "last": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "https://www.blog1997.com/api/admin/sensitive-word-category",
+        "per_page": 10,
+        "to": 2,
+        "total": 0
+    },
+    "message": "success"
 }

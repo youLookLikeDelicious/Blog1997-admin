@@ -7,7 +7,7 @@
       @mouseleave="currentCommentIndex = -1"
     >
       <dt>
-        <user-info :user="comment.user" />
+        <avatar :user="comment.user"></avatar>
         <p class="reply-date inline-block">
           {{ comment.created_at }}
         </p>
@@ -52,7 +52,6 @@
 </template>
 
 <script>
-import UserInfo from './user-info'
 import { saveComment, deleteComment } from '~/api/article'
 export default {
   name: 'Comment',
@@ -74,9 +73,6 @@ export default {
       newComment: [],
       deletedId: []
     }
-  },
-  components: {
-    UserInfo
   },
   computed: {
     comments () {

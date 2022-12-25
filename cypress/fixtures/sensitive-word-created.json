@@ -1,0 +1,110 @@
+{
+  "data": [
+    {
+      "id": 555,
+      "word": "不高兴",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2022-10-06 23:17"
+    },
+    {
+      "id": 554,
+      "word": "A",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 553,
+      "word": "B",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 552,
+      "word": "C",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 551,
+      "word": "D",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 550,
+      "word": "E",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 549,
+      "word": "F",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 548,
+      "word": "G",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 547,
+      "word": "AA",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    },
+    {
+      "id": 546,
+      "word": "BBC",
+      "category_id": 1,
+      "category_name": "AAs",
+      "rank_text": "替换",
+      "created_at": "2021-10-06 23:17"
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/sensitive-word?page=1",
+    "last": "https://www.blog1997.com/api/admin/sensitive-word?page=56",
+    "prev": null,
+    "next": "https://www.blog1997.com/api/admin/sensitive-word?page=2"
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 56,
+    "path": "https://www.blog1997.com/api/admin/sensitive-word",
+    "per_page": 10,
+    "to": 10,
+    "total": 553,
+    "categoryList": [
+      {
+        "id": 1,
+        "name": "AAs"
+      },
+      {
+        "id": 2,
+        "name": "ASS"
+      }
+    ]
+  },
+  "message": "success"
+}

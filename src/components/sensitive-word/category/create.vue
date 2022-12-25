@@ -1,22 +1,20 @@
 <template>
   <!--  新建专题、修改专题-->
-  <transition
-    appear
-    @enter="enter"
-    @leave="leave"
-  >
-    <div v-if="visible" class="sensitive-word-inline-form flex relative-position">
-      <div class="mr-min">
+  <transition appear @enter="enter" @leave="leave">
+    <el-row v-if="visible" class="sensitive-word-inline-form flex relative-position">
+      <el-col :span="4" class="mr-min">
         <v-input v-model="model.name" theme="box" placeholder="分类名称"></v-input>
-      </div>
-      <div class="relative-position inline-block">
-        <v-select :options="shieldLevel" v-model="model.rank"></v-select>
-      </div>
-      <span class="ml-min">
+      </el-col>
+      <el-col :span="4" class="relative-position inline-block">
+        <el-select placeholder="屏蔽级别" v-model="model.rank" size="small" style="width: 100%" clearable>
+          <el-option v-for="level in shieldLevel" :key="level.id" :value="level.id" :label="level.name"></el-option>
+        </el-select>
+      </el-col>
+      <el-col :span="4" class="ml-min">
         <v-button type="primary" text icon="icofont-undo" @click="closeDialog">取消</v-button>
-        <v-button type="primary" text @click="submit" icon="icofont-upload-alt">提交</v-button>
-      </span>
-    </div>
+        <v-button type="primary" text @click="submit" :disabled="!allowSubmit" icon="icofont-upload-alt">提交</v-button>
+      </el-col>
+    </el-row>
   </transition>
 </template>
 
@@ -46,8 +44,6 @@ export default {
   },
   data () {
     return {
-      selfTopicName: this.topicName,
-      selfTopicId: this.topicId,
       model: {
         ...this.originModel
       }
@@ -63,6 +59,7 @@ export default {
 
 <style lang="scss">
 .sensitive-word-inline-form{
+  white-space: nowrap;
   margin-top: -2rem;
   margin-left: -3rem;
   align-items: center;

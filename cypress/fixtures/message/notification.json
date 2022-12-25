@@ -1,0 +1,422 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "type": "App\\Model\\Comment",
+            "content": "评论了您的文章",
+            "have_read": "yes",
+            "sender": 2,
+            "reported_id": 1,
+            "created_at": "2021-10-10 22:12",
+            "updated_at": "1664107564",
+            "operate_name": "",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 1,
+                "content": "<p>assssdd</p>",
+                "title": "",
+                "able_type": "App\\Model\\Article",
+                "able_id": 1,
+                "created_at": "2021-10-10 15:55",
+                "commentable": null,
+                "sub_comments": {
+                    "current_page": 1,
+                    "data": [
+                        {
+                            "id": 4,
+                            "title": "",
+                            "content": "<p>2122</p>",
+                            "root_id": 1,
+                            "able_id": 1,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 1,
+                            "user_id": 1,
+                            "reply_to": 2,
+                            "verified": "yes",
+                            "level": 2,
+                            "created_at": "2021-10-11 19:02",
+                            "updated_at": "1633950145",
+                            "user": {
+                                "id": 1,
+                                "name": "Master",
+                                "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+                            }
+                        }
+                    ],
+                    "first_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "from": 1,
+                    "last_page": 1,
+                    "last_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "next_page_url": null,
+                    "path": "https://www.blog1997.com/api/admin/notification",
+                    "per_page": 5,
+                    "prev_page_url": null,
+                    "to": 1,
+                    "total": 1
+                }
+            },
+            "user": {
+                "id": 2,
+                "name": "阿呆",
+                "avatar": ""
+            }
+        },
+        {
+            "id": 2,
+            "type": "App\\Model\\Comment",
+            "content": "留下了一些足迹",
+            "have_read": "yes",
+            "sender": 2,
+            "reported_id": 2,
+            "created_at": "2021-10-10 22:12",
+            "updated_at": "1664107564",
+            "operate_name": "",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 2,
+                "content": "<p>ssdddsdfadfsdf</p>",
+                "title": "",
+                "able_type": "Blog1997",
+                "able_id": 0,
+                "created_at": "2021-10-10 21:24",
+                "commentable": null,
+                "sub_comments": {
+                    "current_page": 1,
+                    "data": [
+                        {
+                            "id": 11,
+                            "title": "",
+                            "content": "<p>aaakkkakakakakakak</p>",
+                            "root_id": 2,
+                            "able_id": 2,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 0,
+                            "user_id": 2,
+                            "reply_to": 2,
+                            "verified": "yes",
+                            "level": 2,
+                            "created_at": "2021-10-11 22:31",
+                            "updated_at": "1633962692",
+                            "user": {
+                                "id": 2,
+                                "name": "阿呆",
+                                "avatar": ""
+                            }
+                        },
+                        {
+                            "id": 10,
+                            "title": "",
+                            "content": "<p>aaakkkakakakakakak</p>",
+                            "root_id": 2,
+                            "able_id": 2,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 0,
+                            "user_id": 2,
+                            "reply_to": 2,
+                            "verified": "yes",
+                            "level": 2,
+                            "created_at": "2021-10-11 22:30",
+                            "updated_at": "1633962623",
+                            "user": {
+                                "id": 2,
+                                "name": "阿呆",
+                                "avatar": ""
+                            }
+                        },
+                        {
+                            "id": 9,
+                            "title": "",
+                            "content": "<p>sssd</p>",
+                            "root_id": 2,
+                            "able_id": 3,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 0,
+                            "user_id": 2,
+                            "reply_to": 1,
+                            "verified": "yes",
+                            "level": 3,
+                            "created_at": "2021-10-11 22:14",
+                            "updated_at": "1633961682",
+                            "user": {
+                                "id": 2,
+                                "name": "阿呆",
+                                "avatar": ""
+                            }
+                        },
+                        {
+                            "id": 8,
+                            "title": "",
+                            "content": "<p>sssd</p>",
+                            "root_id": 2,
+                            "able_id": 6,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 0,
+                            "user_id": 2,
+                            "reply_to": 2,
+                            "verified": "yes",
+                            "level": 3,
+                            "created_at": "2021-10-11 22:13",
+                            "updated_at": "1633961629",
+                            "user": {
+                                "id": 2,
+                                "name": "阿呆",
+                                "avatar": ""
+                            }
+                        },
+                        {
+                            "id": 7,
+                            "title": "",
+                            "content": "<p>223</p>",
+                            "root_id": 2,
+                            "able_id": 6,
+                            "able_type": "App\\Model\\Comment",
+                            "commented": 0,
+                            "liked": 0,
+                            "article_id": 0,
+                            "user_id": 2,
+                            "reply_to": 2,
+                            "verified": "yes",
+                            "level": 3,
+                            "created_at": "2021-10-11 22:13",
+                            "updated_at": "1633961587",
+                            "user": {
+                                "id": 2,
+                                "name": "阿呆",
+                                "avatar": ""
+                            }
+                        }
+                    ],
+                    "first_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "from": 1,
+                    "last_page": 2,
+                    "last_page_url": "https://www.blog1997.com/api/admin/notification?page=2",
+                    "next_page_url": "https://www.blog1997.com/api/admin/notification?page=2",
+                    "path": "https://www.blog1997.com/api/admin/notification",
+                    "per_page": 5,
+                    "prev_page_url": null,
+                    "to": 5,
+                    "total": 8
+                }
+            },
+            "user": {
+                "id": 2,
+                "name": "阿呆",
+                "avatar": ""
+            }
+        },
+        {
+            "id": 6,
+            "type": "App\\Model\\Comment",
+            "content": "回复了相关内容",
+            "have_read": "yes",
+            "sender": 2,
+            "reported_id": 5,
+            "created_at": "2021-10-11 21:57",
+            "updated_at": "1664107564",
+            "operate_name": "",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 5,
+                "content": "<p>aaas</p>",
+                "title": "",
+                "able_type": "App\\Model\\Comment",
+                "able_id": 3,
+                "created_at": "2021-10-11 21:57",
+                "commentable": {
+                    "id": 3,
+                    "title": "",
+                    "content": "<p><br /><img class=\"lazy\" data-src=\"http://img.baidu.com/hi/jx2/j_0028.gif\" alt=\"j_0028.gif\" /></p>",
+                    "root_id": 2,
+                    "able_id": 2,
+                    "able_type": "App\\Model\\Comment",
+                    "commented": 0,
+                    "liked": 0,
+                    "article_id": 0,
+                    "user_id": 1,
+                    "reply_to": 2,
+                    "verified": "yes",
+                    "level": 2,
+                    "created_at": "2021-10-11 18:43",
+                    "updated_at": "1633949014",
+                    "user": {
+                        "id": 1,
+                        "name": "Master",
+                        "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+                    }
+                },
+                "sub_comments": {
+                    "current_page": 1,
+                    "data": [],
+                    "first_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "from": null,
+                    "last_page": 1,
+                    "last_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "next_page_url": null,
+                    "path": "https://www.blog1997.com/api/admin/notification",
+                    "per_page": 5,
+                    "prev_page_url": null,
+                    "to": null,
+                    "total": 0
+                }
+            },
+            "user": {
+                "id": 2,
+                "name": "阿呆",
+                "avatar": ""
+            }
+        },
+        {
+            "id": 10,
+            "type": "App\\Model\\Comment",
+            "content": "评论了您的文章",
+            "have_read": "yes",
+            "sender": 2,
+            "reported_id": 18,
+            "created_at": "2022-09-25 19:57",
+            "updated_at": "1664107564",
+            "operate_name": "",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 18,
+                "content": "<p>顶顶顶</p>",
+                "title": "",
+                "able_type": "App\\Model\\Article",
+                "able_id": 7,
+                "created_at": "2022-09-25 19:44",
+                "commentable": {
+                    "id": 7,
+                    "title": "dsadf",
+                    "is_origin": "yes",
+                    "order_by": 50,
+                    "summary": "asfd",
+                    "content": "asfd",
+                    "liked": 0,
+                    "visited": 0,
+                    "commented": 0,
+                    "user_id": 1,
+                    "topic_id": 1,
+                    "is_draft": "no",
+                    "is_markdown": "yes",
+                    "article_id": 0,
+                    "gallery_id": 7,
+                    "created_at": "1645964481",
+                    "updated_at": "1645964481",
+                    "user": {
+                        "id": 1,
+                        "name": "Master",
+                        "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+                    }
+                },
+                "sub_comments": {
+                    "current_page": 1,
+                    "data": [],
+                    "first_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "from": null,
+                    "last_page": 1,
+                    "last_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "next_page_url": null,
+                    "path": "https://www.blog1997.com/api/admin/notification",
+                    "per_page": 5,
+                    "prev_page_url": null,
+                    "to": null,
+                    "total": 0
+                }
+            },
+            "user": {
+                "id": 2,
+                "name": "阿呆",
+                "avatar": ""
+            }
+        },
+        {
+            "id": 11,
+            "type": "App\\Model\\Comment",
+            "content": "评论了您的文章",
+            "have_read": "yes",
+            "sender": 2,
+            "reported_id": 17,
+            "created_at": "2022-09-25 19:57",
+            "updated_at": "1664107564",
+            "operate_name": "",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 17,
+                "content": "<p>发大水</p>",
+                "title": "",
+                "able_type": "App\\Model\\Article",
+                "able_id": 7,
+                "created_at": "2022-09-25 19:34",
+                "commentable": {
+                    "id": 7,
+                    "title": "dsadf",
+                    "is_origin": "yes",
+                    "order_by": 50,
+                    "summary": "asfd",
+                    "content": "asfd",
+                    "liked": 0,
+                    "visited": 0,
+                    "commented": 0,
+                    "user_id": 1,
+                    "topic_id": 1,
+                    "is_draft": "no",
+                    "is_markdown": "yes",
+                    "article_id": 0,
+                    "gallery_id": 7,
+                    "created_at": "1645964481",
+                    "updated_at": "1645964481",
+                    "user": {
+                        "id": 1,
+                        "name": "Master",
+                        "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+                    }
+                },
+                "sub_comments": {
+                    "current_page": 1,
+                    "data": [],
+                    "first_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "from": null,
+                    "last_page": 1,
+                    "last_page_url": "https://www.blog1997.com/api/admin/notification?page=1",
+                    "next_page_url": null,
+                    "path": "https://www.blog1997.com/api/admin/notification",
+                    "per_page": 5,
+                    "prev_page_url": null,
+                    "to": null,
+                    "total": 0
+                }
+            },
+            "user": {
+                "id": 2,
+                "name": "阿呆",
+                "avatar": ""
+            }
+        }
+    ],
+    "links": {
+        "first": "https://www.blog1997.com/api/admin/notification?page=1",
+        "last": "https://www.blog1997.com/api/admin/notification?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "https://www.blog1997.com/api/admin/notification",
+        "per_page": 10,
+        "to": 5,
+        "total": 5,
+        "have_read": 5
+    },
+    "message": "success"
+}

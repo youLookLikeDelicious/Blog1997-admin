@@ -36,11 +36,12 @@ module.exports = {
       port: '9090',
       host: '0.0.0.0',
       liveReload: false,
-      compress: true,
-      watchOptions: {
-        aggregateTimeout: 300,
-        poll: 1000
-      }
+      compress: true
+      // watchOptions: {
+      //   ignored: '/node_modules',
+      //   aggregateTimeout: 500,
+      //   poll: 1000
+      // }
     },
     plugins: [
       new webpack.DefinePlugin(envKeys)

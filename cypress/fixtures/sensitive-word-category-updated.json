@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "id": 3,
+      "name": "不高兴",
+      "count": 553,
+      "rank": 1
+    },
+    {
+      "id": 1,
+      "name": "AA",
+      "count": 553,
+      "rank": 1
+    },
+    {
+      "id": 2,
+      "name": "ASS",
+      "count": 0,
+      "rank": 2
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+    "last": "https://www.blog1997.com/api/admin/sensitive-word-category?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/sensitive-word-category",
+    "per_page": 10,
+    "to": 2,
+    "total": 2
+  },
+  "message": "success"
+}

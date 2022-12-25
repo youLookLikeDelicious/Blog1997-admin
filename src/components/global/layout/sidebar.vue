@@ -205,7 +205,7 @@ export default {
           subMenu: [
             {
               url: '/gallery',
-              title: '搜索',
+              title: '图片列表',
               icon: 'icofont-image',
               permission: 'gallery.index'
             },
@@ -353,7 +353,7 @@ export default {
      * 获取子菜单
      *
      * @param {array} menus
-     * @returns {array} filterd menu
+     * @returns {array} filtered menu
      */
     filterMenu (menus) {
       return menus.filter((menu) => this.$can(menu.permission))
@@ -365,11 +365,11 @@ export default {
     execToggleAnimation (target) {
       const arrow = target.querySelector('.icofont-caret-down')
 
+      if (this.preEl && this.preEl !== target && this.isExpanded(this.preEl)) {
+        this.execToggleAnimation(this.preEl)
+      }
       // 展开操作
-      if (arrow.style.transform.indexOf('180') === -1) {
-        if (this.preEl && this.preEl !== target) {
-          this.execToggleAnimation(this.preEl)
-        }
+      if (!this.isExpanded(target)) {
         this.preEl = target
         arrow.style.transform = 'rotate(-180deg)'
       } else {
@@ -384,6 +384,16 @@ export default {
         easing: 'bezier(0.3, 0.7)',
         duration: 256
       })
+    },
+    /**
+     * 判断菜单是否是展开的
+     *
+     * @param {Element} target
+     * @return boolean
+     */
+    isExpanded (target) {
+      const arrow = target.querySelector('.icofont-caret-down')
+      return arrow.style.transform.indexOf('180') >= 0
     }
   },
   mounted () {

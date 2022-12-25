@@ -15,6 +15,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     "import/no-webpack-loader-syntax": "off",
     "camelcase": "off",
+    "no-unused-vars": "warn",
     "no-case-declarations": "off",
   }
 }

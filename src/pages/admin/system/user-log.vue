@@ -14,10 +14,11 @@
           end-placeholder="结束时间"
           value-format="yyyy-MM-dd"
           @change="getList"
+          style="width: 100%"
           :picker-options="pickerOptions">
         </el-date-picker>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="4">
         <v-select v-model="query.result" :options="statusList" @change="getList" placeholder="状态" clearable></v-select>
       </el-col>
     </template>

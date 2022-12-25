@@ -71,6 +71,10 @@ axios.interceptors.request.use(function (config) {
     config.params = {}
   }
 
+  if (/\/$/.test(config.url)) {
+    config.url = config.url.slice(0, -1)
+  }
+
   config.headers['X-CSRF-TOKEN'] = store.state.globalState.csrfToken
 
   return config

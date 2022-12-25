@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <article-summary
-      v-if="notificationAble.commentable && notificationAble.commentable.title"
+      v-if="notificationAble.able_type === 'App\\Model\\Article'"
       :article="notificationAble.commentable"
     />
     <comment v-else :comment="notificationAble.commentable" />

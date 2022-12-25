@@ -1,11 +1,12 @@
 <template>
   <div class="user-info">
-    <img
-      class="avatar"
-      :src="user.avatar"
-      :alt="alt"
-      onerror="this.src='/image/avatar.svg';this.onerror=null"
-    />
+    <el-image class="avatar" fit="cover" :src="user.avatar" :alt="alt">
+      <img
+        slot="error"
+        class="avatar"
+        src="/image/avatar.svg"
+      />
+    </el-image>
     <span v-if="user.name">{{ user.name }}</span>
   </div>
 </template>
@@ -33,7 +34,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .user-info {
   display: flex;
   align-items: center;

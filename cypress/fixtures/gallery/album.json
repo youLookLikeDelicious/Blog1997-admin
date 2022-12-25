@@ -1,0 +1,40 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "相册1",
+      "gallery_id": 28,
+      "desc": "",
+      "gallery": {
+        "id": 28,
+        "url": "https://www.blog1997.com/image/gallery/2022-09-05/829.578764001615ff1dfaf8d4e60.42187602.jpg"
+      }
+    },
+    {
+      "id": 2,
+      "name": "相册2",
+      "gallery_id": 31,
+      "desc": "",
+      "gallery": {
+        "id": 31,
+        "url": "https://www.blog1997.com/image/gallery/2022-09-05/58.685566001615ff1dfb1a76071.41032210.jpg"
+      }
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/gallery/album?page=1",
+    "last": "https://www.blog1997.com/api/admin/gallery/album?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 2,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/gallery/album",
+    "per_page": "20",
+    "to": 1,
+    "total": 1
+  },
+  "message": "success"
+}

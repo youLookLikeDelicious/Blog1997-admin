@@ -1,0 +1,32 @@
+{
+  "status": "success",
+  "message": "success",
+  "data": {
+    "id": 2,
+    "name": "PHP",
+    "summary": null,
+    "user_id": 1,
+    "is_public": 1,
+    "cover": "https://www.blog1997.com/image/manual/2022-02-10/672.3199950016462052a264e20a7.55559504.png",
+    "created_at": "1644505638",
+    "updated_at": "2022-02-10 23:07",
+    "deleted_at": null,
+    "catalogs": [
+      {
+        "id": 26,
+        "name": "第一章",
+        "level": 0,
+        "type": 1,
+        "pre_node_id": 0,
+        "next_node_id": 0,
+        "parent_id": 0,
+        "manual_id": 2,
+        "is_public": 1,
+        "created_at": "1667917949",
+        "updated_at": "2022-11-08 22:32",
+        "deleted_at": null,
+        "children": null
+      }
+    ]
+  }
+}

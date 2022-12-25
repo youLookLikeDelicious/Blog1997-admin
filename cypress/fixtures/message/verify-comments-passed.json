@@ -1,0 +1,48 @@
+{
+  "data": [
+    {
+      "id": 13,
+      "content": "<p>撒打发撒打发</p>",
+      "able_id": 7,
+      "able_type": "App\\Model\\Article",
+      "user_id": 1,
+      "created_at": "2022-09-25 11:55",
+      "verified": "no",
+      "user": {
+        "id": 1,
+        "name": "Master",
+        "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+      }
+    },
+    {
+      "id": 14,
+      "content": "<p>234234</p>",
+      "able_id": 7,
+      "able_type": "App\\Model\\Article",
+      "user_id": 1,
+      "created_at": "2022-09-25 11:55",
+      "verified": "no",
+      "user": {
+        "id": 1,
+        "name": "Master",
+        "avatar": "https://www.blog1997.com/image/avatar/2021-10-06/449.97207100163615dc2d4ed5358.62463263.jpg"
+      }
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/comment?page=1",
+    "last": "https://www.blog1997.com/api/admin/comment?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/comment",
+    "per_page": 10,
+    "to": 1,
+    "total": 2
+  },
+  "message": "success"
+}

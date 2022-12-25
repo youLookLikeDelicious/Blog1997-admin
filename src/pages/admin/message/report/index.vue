@@ -5,11 +5,16 @@
   @LastEditTime 2021-9-25
 -->
 <template>
-  <base-component
-    request-api="/admin/illegal-info"
-    @updated-data="updatedData"
-    :showHeader="false"
-  >
+  <base-component ref="base" request-api="/admin/illegal-info">
+    <template v-slot:search="{ query, getList }">
+      <el-col :span="4">
+        <el-select v-model="query.operate" size="small" style="width: 100%" placeholder="处理结果" clearable @change="getList">
+          <el-option label="未处理" value="undo"></el-option>
+          <el-option label="已忽略" value="ignore"></el-option>
+          <el-option label="已批准" value="approve"></el-option>
+        </el-select>
+      </el-col>
+    </template>
     <template v-slot:default="{ data }">
       <div class="illegal-info-head sub-container">
         <span>
@@ -29,89 +34,68 @@
             />
           </svg>
         </span>
-        <span>
-          <v-button :type="isShowTotal ? 'primary' : 'default'" text @click="isShowTotal = true">全部: {{ data.total }}条记录</v-button>
-        </span>
-        /
-        <span>
-          <v-button :type="isShowTotal ? 'default' : 'primary'" text @click="isShowTotal = false">未读{{ requestResult.notHaveReadCount }}</v-button>
-        </span>
         <div class="illegal-page-prompt">
           <p>批准:认证举报内容属实,将目标象予以删除</p>
-          <p>忽略:将消息标记为已读,不做其他处理</p>
-          <p>
-            是否已读:
-            <span class="orange-color">黄色</span>表示
-            <span class="orange-color">未读</span>,灰色表示已读
-          </p>
         </div>
       </div>
       <!-------------------------------------------------- 列表部分 ----------------------------------------------->
       <div class="sub-container">
-        <table class="illegal-info-table data-list">
-          <tr>
-            <td class="text-no-wrap">编号</td>
-            <td class="text-no-wrap">类型</td>
-            <td class="text-no-wrap">举报内容</td>
-            <td>举报原因</td>
-            <td class="text-no-wrap">处理结果</td>
-            <td class="text-no-wrap">操作</td>
-          </tr>
-          <tr v-for="(item, index) in data.records" :key="item.id">
-            <td class="text-no-wrap">{{ index | filterListNumber(data.pagination.currentPage) }}</td>
-            <td class="text-no-wrap">
+        <el-table :data="data" border>
+          <el-table-column label="类型" align="center">
+            <template v-slot="{ row }">
               <i
                 :class="[
-                  item.type === 'App\\Model\\Article'
+                  row.type === 'App\\Model\\Article'
                     ? 'icofont-memorial'
                     : 'icofont-speech-comments',
                 ]"
               />
-              {{ item.type | mailboxType }}
-            </td>
-            <!-- 如果举报的是文章，渲染一个指向文章的连接 -->
-            <td
-              v-if="item.type === 'App\\Model\\Article'"
-              class="text-align-left"
-            >
-              <a target="_blank" :href="item.content.split(',')[0]">{{
-                item.content.split(',')[0]
-              }}</a>
-            </td>
-            <!-- 如果举报的不是文章，直接显示举报的内容 -->
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <td
-              v-else
-              class="text-align-left"
-              v-html="item.notificationable.content"
-            />
-            <td
-              class="text-align-left"
-              v-html="item.content.split(',')[1]"
-            ></td>
-            <td>
-              <span v-if="item.operate === 'undo'" class="orange-color">
-                未读
-              </span>
+              {{ row.type | mailboxType }}
+            </template>
+          </el-table-column>
+          <el-table-column label="举报内容" align="center" show-overflow-tooltip>
+            <template v-slot="{ row }">
               <span
-                v-else-if="item.operate === 'ignore'"
-                style="color: #5584ca"
-              >
-                忽略
+                v-if="row.type === 'App\\Model\\Article'"
+                class="text-align-left">
+                <a target="_blank" :href="row.content.split(',')[0]">{{
+                  row.content.split(',')[0]
+                }}</a>
               </span>
-              <span v-else style="color: #bcf0a0"> 批准 </span>
-            </td>
-            <td class="text-no-wrap">
-              <template v-if="item.have_read === 'yes'">
-                <v-button type="primary" text>-</v-button>
-              </template>
+              <!-- 如果举报的不是文章，直接显示举报的内容 -->
+              <!-- eslint-disable-next-line vue/no-v-html -->
+              <span
+                v-else
+                class="text-align-left"
+                v-html="row.notificationable.content"
+              />
+            </template>
+          </el-table-column>
+          <el-table-column label="举报原因" align="center">
+            <template v-slot="{ row }">
+              <span
+                class="text-align-left"
+                v-html="row.content.split(',')[1]"
+              ></span>
+            </template>
+          </el-table-column>
+          <el-table-column label="处理结果" align="center">
+            <template v-slot="{ row }">
+              <el-tag :type="resultTagMap[row.operate]">{{ row.operate_name }}</el-tag>
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" align="center">
+            <template v-slot="{ row }">
+              <template v-if="row.operate !== 'undo'">
+                  <v-button type="primary" text>-</v-button>
+                </template>
               <template v-else>
-                <v-button type="primary" text icon="icofont-court-hammer" @click="approveIllegalInfo(index)">同 意</v-button>
-                <v-button type="danger" text icon="icofont-focus" @click="ignore(index)">忽 略</v-button>
+                <v-button type="primary" text icon="icofont-court-hammer" @click="approveIllegalInfo(row)">同 意</v-button>
+                <v-button type="danger" text icon="icofont-focus" @click="ignore(row)">忽 略</v-button>
               </template>
-            </td>
-          </tr>
-        </table>
+            </template>
+          </el-table-column>
+        </el-table>
       </div>
     </template>
   </base-component>
@@ -124,96 +108,58 @@ export default {
   data () {
     return {
       requestResult: {},
-      isShowTotal: true // 显示全部的记录数
+      readTagMap: { yes: 'success', no: 'warning' },
+      resultTagMap: { undo: 'warning', ignore: '', approve: 'success' }
     }
   },
   methods: {
     /**
      * 批准举报的信息
      *
-     * @param {Int} index 记录所在的索引
+     * @param {Object} row 处理的记录
      */
-    approveIllegalInfo (index) {
-      const record = this.requestResult.records[index]
-
+    approveIllegalInfo (row) {
       // 已经处理，不再做任何其他处理
-      if (record.operate !== 'undo') {
+      if (row.operate !== 'undo') {
         return
       }
 
-      approveInfo(record.id).then(() => {
-        // 将未读状态修改为已读状态
-        record.operate = 'approve'
-        this.decrementNotHaveRead()
-      })
+      approveInfo(row.id).then(this.$refs.base.getList)
     },
     /**
      * 忽略举报的信息
      * 并将其标记为已读
      *
-     *@param index 被标记已读的记录的记录的索引
+     *@param {Object} row 处理的记录
      */
-    ignore (index) {
-      const record = this.requestResult.records[index]
-      if (record.operate !== 'undo') {
+    ignore (row) {
+      if (row.operate !== 'undo') {
         return
       }
-      ignoreInfo(record.id).then(() => {
-        // 标记已读成功，修改是否已读的状态
-        record.operate = 'ignore'
-        this.decrementNotHaveRead()
-      })
-    },
-    /**
-     * 将未读的记录-1
-     */
-    decrementNotHaveRead () {
-      --this.requestResult.notHaveReadCount
-    },
-    /**
-     * 接收子组件更新来的数据
-     *
-     * @param {Object} data
-     */
-    updatedData (data) {
-      this.requestResult = { ...data }
+      ignoreInfo(row.id).then(this.$refs.base.getList)
     }
   }
 }
 </script>
 
 <style lang="scss">
-.illegal-info-table {
-  @extend %data-list-table;
-  .have-read {
-    fill: #999;
-  }
-  .not-have-read {
-    fill: #ffad33;
-  }
-  .disable {
-    cursor: not-allowed;
-    svg {
-      fill: #999;
-    }
-  }
-  .approve {
-    color: $red;
-  }
-  .ignore {
-    color: $blue;
-  }
-}
 .read-icon-svg {
   width: 3.5rem;
   height: 3.5rem;
 }
 .illegal-page-prompt {
+  display: inline-block;
   margin-top: 1.2rem;
+  margin-left: 1.2rem;
   font-size: 1rem;
   color: #999;
   p {
     padding: 0.3rem 0;
   }
+}
+.illegal-info-head {
+  display: flex;
+  align-items: center;
+  padding-bottom: 0 !important;
 }
 </style>

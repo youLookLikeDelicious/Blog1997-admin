@@ -54,7 +54,7 @@
             <el-col :span="24">
               <span>描述: </span>
               <span v-if="!infoData.showEditRemark">
-                {{ infoData.remark || '-' }} <v-button text icon="el-icon-edit" @click="handleEditRemark"></v-button>
+                {{ infoData.remark || '-' }} <v-button text icon="icofont-edit" @click="handleEditRemark"></v-button>
               </span>
             </el-col>
             <el-col v-if="infoData.showEditRemark">

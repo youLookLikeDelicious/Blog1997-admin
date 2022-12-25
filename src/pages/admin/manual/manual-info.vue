@@ -9,7 +9,7 @@
           <template slot="drop-down">
             <ul>
               <li @click="handleCreateCatalog(0, 2)"><i class="iconfont icon-24"></i>新建文档</li>
-              <li @click="handleCreateCatalog(0)"><i class="iconfont icon-mulu"></i>新建章节</li>
+              <li @click="handleCreateCatalog(0, 1)"><i class="iconfont icon-mulu"></i>新建章节</li>
               <!-- <li @click="handleImport"><i class="iconfont icon-daoru"></i>导入</li> -->
             </ul>
           </template>
@@ -46,7 +46,7 @@
           :render-content="renderCatalogContent" />
       </section>
     </article>
-    <create-catalog ref="createCatalog" :catalogs="manualInfo.catalogs" @success="getManualInfo"></create-catalog>
+    <create-catalog ref="createCatalog" :catalogs="catalogs" @success="getManualInfo"></create-catalog>
   </div>
 </template>
 
@@ -54,6 +54,8 @@
 import CreateCatalog from './components/create-catalog'
 import { getManualInfo, saveCatalog, deleteCatalog } from '~/api/manual'
 
+// 节点类型是文章
+const CATALOG_TYPE = 1
 export default {
   layout: 'pure',
   components: { CreateCatalog },
@@ -67,6 +69,33 @@ export default {
   },
   created () {
     this.getManualInfo()
+  },
+  computed: {
+    catalogs () {
+      if (!this.manualInfo.catalogs) return []
+      const catalogs = []
+      const handler = function (origin, filtered) {
+        origin.forEach(item => {
+          if (item.type !== CATALOG_TYPE) {
+            return
+          }
+          const { id, name } = item
+          const append = { id, name }
+          filtered.push(append)
+          if (item.children) {
+            append.children = []
+            handler(item.children, append.children)
+            if (!append.children.length) {
+              append.children = null
+            }
+          }
+        })
+
+        return filtered
+      }
+
+      return handler(this.manualInfo.catalogs, catalogs)
+    }
   },
   methods: {
     // 获取手册详情
@@ -270,30 +299,32 @@ export default {
           this.$setMessage({ msg: '该章节下还有内容,无法删除', status: false })
           return
         }
-        deleteCatalog(id).then(_ => {
-          this.getManualInfo()
-        })
-      } else {
-        // 删除文章
-
       }
+      deleteCatalog(id).then(_ => {
+        this.getManualInfo()
+      })
     },
     // 处理drop事件
-    handleDrop (draggingNode, { dropNode }, dropType) {
-      let { name, manual_id, is_public, pre_node, next_node, parent_id, type, id } = draggingNode.data
+    handleDrop (currentNode, interactNode, dropType) {
+      let { manual_id, is_public, pre_node_id, next_node_id, parent_id, id: interactNodeId } = interactNode.data
+      const { id, name } = currentNode.data
       switch (dropType) {
         case 'after':
-          pre_node = dropNode.data.id
+          next_node_id = undefined
+          pre_node_id = interactNodeId
           break
         case 'before':
-          pre_node = 0
+          pre_node_id = undefined
+          next_node_id = interactNodeId
           break
         case 'inner':
-          parent_id = dropNode.data.id
+          pre_node_id = undefined
+          next_node_id = undefined
+          parent_id = interactNodeId
           break
       }
 
-      this.handleSaveCatalog({ name, manual_id, is_public, pre_node, next_node, parent_id, type, id })
+      this.handleSaveCatalog({ name, manual_id, is_public, pre_node_id, next_node_id, parent_id, id })
     },
     allowDrop (draggingNode, dropNode, type) {
       if (type === 'inner' && dropNode.data.type === 2) {

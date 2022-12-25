@@ -3,6 +3,7 @@ describe('Test config system', () => {
         cy.intercept('post', Cypress.env('api_url') + '/oauth/currentUser', {
             fixture: 'user'
         }).as('user')
+        cy.intercept('get', Cypress.env('api_url') + '/csrf', { fixture: 'user/csrf.json' }).as('csrf')
     })
     
     /**
@@ -20,23 +21,24 @@ describe('Test config system', () => {
      */
     it('Test toggle enable comment', () => {
         cy.wait(1000)
-        cy.intercept('post', Cypress.env('api_url') + '/admin/system-setting/1', (req) => {
+        cy.intercept('put', Cypress.env('api_url') + '/admin/system-setting/*', (req) => {
             let fixture
+            console.log(JSON.stringify(req.body))
             switch (JSON.stringify(req.body)) {
-                case '{"enable_comment":"yes","verify_comment":"no","id":1,"_method":"PUT"}':
+                case '{"enable_comment":"yes","verify_comment":"no","id":1}':
                         fixture = { fixture: 'system-setting-disable-comment' }
                         break
-                case '{"enable_comment":"yes","verify_comment":"yes","id":1,"_method":"PUT"}':
+                case '{"enable_comment":"yes","verify_comment":"yes","id":1}':
                     fixture = { fixture: 'system-setting-enable-comment' }
                     break
-                case '{"enable_comment":"no","verify_comment":"yes","id":1,"_method":"PUT"}':
+                case '{"enable_comment":"no","verify_comment":"yes","id":1}':
                     fixture = { fixture: 'system-setting-disable-verify-comment' }
                     break
-                case '{"enable_comment":"yes","verify_comment":"yes","id":1,"_method":"PUT"}':
+                case '{"enable_comment":"yes","verify_comment":"yes","id":1}':
                     fixture = { fixture: 'system-setting-enable-comment' }
                     break
             }
-            console.log(fixture)
+            
             req.reply(fixture)
         }).as('setting.update')
 
@@ -58,7 +60,7 @@ describe('Test config system', () => {
      * 测试邮箱配置
      */
     it('Test config email', () => {
-        cy.intercept('post', Cypress.env('api_url') + '/admin/email-config/4', { fixture: 'email-config-update' }).as('email.config.update')
+        cy.intercept('put', Cypress.env('api_url') + '/admin/email-config/*', { fixture: 'email-config-update' }).as('email.config.update')
         cy.intercept('get', Cypress.env('api_url') + '/admin/email-config', { fixture: 'email-config' })
         cy.get('li[data-name=EmailSetting]').click()
         cy.get('input[name=email]').clear()

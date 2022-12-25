@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "奥赛德",
+      "cover": "https://www.blog1997.com/image/manual/2.jpg",
+      "updated_at": "2022-01-12 21:14"
+    },
+    {
+      "id": 2,
+      "name": "PHP",
+      "cover": "https://www.blog1997.com/image/manual/3.jpg",
+      "updated_at": "2022-02-10 23:07"
+    }
+  ],
+  "links": {
+    "first": "https://www.blog1997.com/api/admin/manual?page=1",
+    "last": "https://www.blog1997.com/api/admin/manual?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "path": "https://www.blog1997.com/api/admin/manual",
+    "per_page": "20",
+    "to": 2,
+    "total": 2
+  },
+  "message": "success"
+}

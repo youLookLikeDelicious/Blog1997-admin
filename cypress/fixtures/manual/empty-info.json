@@ -1,0 +1,16 @@
+{
+  "status": "success",
+  "message": "success",
+  "data": {
+    "id": 4,
+    "name": "Go",
+    "summary": "asdf",
+    "user_id": 1,
+    "is_public": 1,
+    "cover": "https://www.blog1997.com/image/manual/2022-09-26/650.908525001666331b4dcddcfa4.88183094.png",
+    "created_at": "1664201949",
+    "updated_at": "2022-09-26 22:19",
+    "deleted_at": null,
+    "catalogs": []
+  }
+}

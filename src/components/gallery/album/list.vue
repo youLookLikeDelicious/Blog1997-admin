@@ -102,9 +102,20 @@ export default {
   .album-box {
     border-radius: .5rem;
     height: 17rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: .1rem solid #DCDFE6;
     img{
-      height: 17rem;
+      height: 100%;
+    }
+    .iconfont {
+      transition: font-size .3s
+    }
+    &:hover {
+      .iconfont {
+        font-size: 16rem;
+      }
     }
     .album-name, .album-desc{
       z-index: 9;
@@ -131,6 +142,8 @@ export default {
     cursor: pointer;
     color: rgba(#f5f7fa, .82);
     text-align: center;
+    width: 100%;
+    height: 100%;
     line-height: 17rem;
     background-color: rgba($blue, .3);
     .icon-chakanxiangce{

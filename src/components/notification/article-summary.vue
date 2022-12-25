@@ -1,16 +1,20 @@
 <template>
   <div class="article-box">
-    <a class="article-title inline-block" :href="'/article/' + article.id" target="_blank">{{
-      article.title
-    }}</a>
-    <user-info :user="article.user" />
-    <article class="article-summary" v-html="article.summary">
-    </article>
+    <template v-if="article">
+      <a class="article-title inline-block" :href="'/article/' + article.id" target="_blank">{{
+        article.title
+      }}</a>
+      <avatar :user="article.user" />
+      <article class="article-summary" v-html="article.summary">
+      </article>
+    </template>
+    <template v-else>
+      <span class="no-data">文章已被删除</span>
+    </template>
   </div>
 </template>
 
 <script>
-import UserInfo from './user-info'
 export default {
   name: 'ArticleSummary',
   props: {
@@ -23,9 +27,6 @@ export default {
   },
   data () {
     return {}
-  },
-  components: {
-    UserInfo
   }
 }
 </script>

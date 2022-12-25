@@ -1,15 +1,19 @@
 <template>
   <transition appear @enter="enter" @leave="leave">
-    <div v-if="visible" class="create-sensitive-word flex">
-      <div class="relative-position inline-block mr-min">
+    <el-row :gutter="10" v-if="visible" class="create-sensitive-word flex">
+      <el-col :span="4">
         <v-input theme="box" v-model="model.word" placeholder="敏感词"></v-input>
-      </div>
-      <v-select v-model="model.category_id" :options="categoryList"></v-select>
+      </el-col>
+      <el-col :span="4">
+        <el-select v-model="model.category_id" size="small" style="width: 100%">
+          <el-option v-for="category in categoryList" :key="category.id" :value="category.id" :label="category.name"></el-option>
+        </el-select>
+      </el-col>
       <div class="link-btn-wrapper">
         <v-button type="primary" text icon="icofont-undo" @click="closeDialog">取消</v-button>
-        <v-button type="primary" text @click="submit" icon="icofont-upload-alt">提交</v-button>
+        <v-button type="primary" text @click="submit" :disabled="!allowSubmit" icon="icofont-upload-alt">提交</v-button>
       </div>
-    </div>
+    </el-row>
   </transition>
 </template>
 
@@ -33,7 +37,7 @@ export default {
         return {
           id: '',
           word: '',
-          category_id: 0
+          category_id: ''
         }
       }
     }

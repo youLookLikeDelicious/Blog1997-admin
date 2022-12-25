@@ -604,7 +604,7 @@ export default {
       cursor: pointer;
       color: #C0C4CC;
       font-size: 1.2rem;
-      margin-top: .7rem;
+      margin-top: .3rem;
       margin-right: .7rem;
     }
   }
@@ -663,6 +663,7 @@ export default {
         display: flex;
         padding: 0.5rem;
         cursor: pointer;
+        font-size: 1.4rem;
         margin: 0.3rem 0;
         transition: background-color .2s;
         justify-content: space-between;

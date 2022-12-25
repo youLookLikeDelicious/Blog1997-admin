@@ -1,0 +1,70 @@
+{
+    "data": [
+        {
+            "id": 7,
+            "sender": 1,
+            "receiver": -1,
+            "reported_id": 2,
+            "type": "App\\Model\\Article",
+            "content": "https://www.blog1997.com/article/Mg==,抄袭或未授权转载,暗室逢灯",
+            "created_at": "2022-09-24 23:20",
+            "operate": "undo",
+            "have_read": "yes",
+            "operate_name": "已批准",
+            "have_read_name": "已读",
+            "notificationable": {
+                "content": "该内容已被删除"
+            }
+        },
+        {
+            "id": 8,
+            "sender": 1,
+            "receiver": -1,
+            "reported_id": 12,
+            "type": "App\\Model\\Comment",
+            "content": "<p>阿斯弗</p>,段子或无意义的评论,是否",
+            "created_at": "2022-09-25 00:03",
+            "operate": "undo",
+            "have_read": "yes",
+            "operate_name": "已忽略",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 12,
+                "content": "<p>阿斯弗</p>"
+            }
+        },
+        {
+            "id": 9,
+            "sender": 1,
+            "receiver": -1,
+            "reported_id": 12,
+            "type": "App\\Model\\Comment",
+            "content": "<p>阿斯弗</p>,政治反动,sdf",
+            "created_at": "2022-09-25 00:11",
+            "operate": "undo",
+            "have_read": "yes",
+            "operate_name": "未处理",
+            "have_read_name": "已读",
+            "notificationable": {
+                "id": 12,
+                "content": "<p>阿斯弗</p>"
+            }
+        }
+    ],
+    "links": {
+        "first": "https://www.blog1997.com/api/admin/illegal-info?page=1",
+        "last": "https://www.blog1997.com/api/admin/illegal-info?page=1",
+        "prev": null,
+        "next": null
+    },
+    "meta": {
+        "current_page": 1,
+        "from": 1,
+        "last_page": 1,
+        "path": "https://www.blog1997.com/api/admin/illegal-info",
+        "per_page": 10,
+        "to": 3,
+        "total": 3
+    },
+    "message": "success"
+}

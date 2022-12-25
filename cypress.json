@@ -1,8 +1,7 @@
 {
   "baseUrl": null,
-  "video": false,
+  "video": true,
   "videoCompression": false,
-  "experimentalRunEvents": true,
   "responseTimeout": 10000,
   "requestTimeout": 10000,
   "port": 1997,
@@ -13,6 +12,9 @@
   "env": {
     "host": "http://localhost:9090",
     "api_url": "https://www.blog1997.com/api",
-    "image_url": "https://www.blog1997.com"
+    "domain": "https://www.blog1997.com"
+  },
+  "e2e": {
+    "excludeSpecPattern": "helper.js"
   }
 }

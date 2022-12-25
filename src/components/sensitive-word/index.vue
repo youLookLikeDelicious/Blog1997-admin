@@ -1,20 +1,18 @@
 <template>
   <base-component ref="base" :request-api="requestApi" :showCreate="true" :forceRenderContent="true">
     <!-- 搜索部分 begin -->
-    <template v-slot:search="{ data, batchDelete, meta }">
+    <template v-slot:search="{ query, meta, getList }">
       <el-col :span="4">
-        <v-input theme="box" v-model="filter.word" placeholder="敏感词"></v-input>
+        <v-input theme="box" v-model="query.word" placeholder="敏感词" @change="getList"></v-input>
       </el-col>
-      <el-col :span="5">
-        <div class="inline-block ml-min">
-          <v-select v-model="filter.category_id" placeholder="分类" :options="meta.categoryList" />
-        </div>
+      <el-col :span="4">
+        <v-select v-model="query.category_id" placeholder="分类" :options="meta.categoryList" @change="getList" />
       </el-col>
     </template>
     <template v-slot:rightButton="{ handleShowCreate }">
-      <el-col class="right-btn">
+      <el-col class="right-btn" :span="5">
         <v-button type="primary" icon="icofont-upload-alt" @click="handleImport">导 入</v-button>
-        <v-button type="primary" icon="icofont-ui-edit" @click="handleShowCreate">新 建</v-button>
+        <v-button type="primary" icon="el-icon-plus" @click="handleShowCreate">添 加</v-button>
       </el-col>
     </template>
     <!-- 搜索部分 end -->
@@ -35,8 +33,6 @@
         edit,
         create,
         getList,
-        selectAll,
-        hasSelectAll,
         deleteRecord
       }"
     >
@@ -60,7 +56,7 @@
         <el-table-column label="创建时间" prop="created_at" align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template v-slot="{ row, $index }">
-            <v-button type="primary" text icon="icofont-ui-edit" @click="edit($index)">编 辑</v-button>
+            <v-button type="primary" text icon="icofont-edit" @click="edit($index)">编 辑</v-button>
             <v-button type="danger" text icon="icofont-ui-delete" @click="deleteRecord(row.id)">删 除</v-button>
           </template>
         </el-table-column>
@@ -90,10 +86,6 @@ export default {
   },
   data () {
     return {
-      filter: {
-        category_id: 0,
-        word: ''
-      },
       requestApi: requestApi,
       baseApi: requestApi
     }

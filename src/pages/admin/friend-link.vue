@@ -32,7 +32,7 @@
         <el-table-column label="创建时间" prop="created_at" align="center"></el-table-column>
         <el-table-column label="操作" align="center">
           <template v-slot="{ row, $index }">
-            <v-button type="primary" text @click="edit($index)" icon="el-icon-edit">编辑</v-button>
+            <v-button type="primary" text @click="edit($index)" icon="icofont-edit">编辑</v-button>
             <v-button type="danger" text @click="deleteRecord(row.id)" icon="el-icon-delete">删除</v-button>
           </template>
         </el-table-column>

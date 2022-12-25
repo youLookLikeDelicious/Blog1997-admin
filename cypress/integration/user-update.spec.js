@@ -19,7 +19,7 @@ describe('Test log', () => {
     cy.intercept('get', 'https://www.blog1997.com/image/avatar/2021-01-04/792.071792001615ff318151187d1.11539176.jpg', { fixture: 'images/new-avatar' })
     cy.intercept('post', Cypress.env('api_url') + '/user/update/2', { fixture: 'user-change-avatar' }).as('user.change.avatar')
 
-    cy.get('.profile input[type=file]').selectFile('images/new-avatar')
+    cy.get('.profile input[type=file]').selectFile('cypress/fixtures/images/new-avatar.jpg')
     cy.wait('@user.change.avatar')
     cy.wait(1000)
   })

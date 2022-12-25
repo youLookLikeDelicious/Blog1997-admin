@@ -27,6 +27,7 @@
             align="right"
             size="small"
             unlink-panels
+            style="max-width: 100%"
             range-separator="至"
             start-placeholder="拍摄时间"
             end-placeholder="拍摄时间"
@@ -73,7 +74,7 @@
     </base-component>
     <!-- 上传图片 -->
     <upload-image
-      ref="upload"
+      ref="create"
       @create="handleUploadImage"
     />
   </div>
@@ -133,7 +134,7 @@ export default {
       this.bigImageComponent.handleVisible()
     },
     handleShowUpload () {
-      this.$refs.upload.handleVisible()
+      this.$refs.create.handleVisible()
     },
     /**
      * 获取相册列表列表
@@ -193,11 +194,6 @@ export default {
   .el-image{
     width: 100%;
   }
-  img {
-    width: 100%;
-    border-radius: 0.5rem;
-    cursor: pointer;
-  }
   .tool-bar {
     left: 100%;
     width: 100%;
@@ -220,7 +216,6 @@ export default {
     position: absolute;
   }
   .link-btn-default {
-
     &:hover {
         color: #e7eef8;
     }
@@ -228,6 +223,27 @@ export default {
     &:active {
         color: #ebecee;
     }
-}
+  }
+  .el-image {
+    width: 30rem;
+    height: 21rem;
+    overflow: hidden;
+    &:hover {
+      img {
+        width: 32rem;
+        height: 23rem;
+        margin-left: -.5rem;
+        margin-top: -.5rem;
+      }
+    }
+  }
+  img {
+    width: 100%;
+    height: 21rem;
+    object-fit: cover;
+    cursor: pointer;
+    transition: width .3s, height .3s, margin .3s;
+    border-radius: 0.5rem;
+  }
 }
 </style>

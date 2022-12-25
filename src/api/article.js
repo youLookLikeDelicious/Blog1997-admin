@@ -81,7 +81,7 @@ export function approveComment (data) {
  * 评论审核驳回
  */
 export function rejectComment (data) {
-  return axios.delete('/admin/comment/reject', data)
+  return axios.post('/admin/comment/reject', { ...data, _method: 'DELETE' })
 }
 
 /**
