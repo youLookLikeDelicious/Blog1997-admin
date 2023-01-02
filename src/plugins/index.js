@@ -1,5 +1,7 @@
-/* eslint-disable no-useless-escape */
+/* eslint-disable import/first */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
+import '~/config/app-config.js'
 import Vue from 'vue'
 import animate from './vendor/animate'
 import axios from './vendor/axios'
@@ -30,15 +32,16 @@ Vue.use(Verify)
 Vue.use(auth)
 Vue.use(lazy)
 Vue.use(jsonToFormData)
+
 Vue.use({
   install (vue) {
     vue.prototype.$hideCascader = hideCascader
-    Vue.prototype.TITLE = TITLE
-    Vue.prototype.APP_URL = APP_URL
-    Vue.prototype.API_URL = API_URL
-    Vue.prototype.RSA_PUB_KEY = RSA_PUB_KEY
-    Vue.prototype.WECHAT_APP_ID = WECHAT_APP_ID
-    Vue.prototype.GIT_CLIENT_ID = GIT_CLIENT_ID
+    Vue.prototype.TITLE = config.VUE_TITLE || TITLE
+    Vue.prototype.APP_URL = config.VUE_APP_URL || APP_URL
+    Vue.prototype.API_URL = config.VUE_API_URL || API_URL
+    Vue.prototype.RSA_PUB_KEY = config.VUE_RSA_PUB_KEY || RSA_PUB_KEY
+    Vue.prototype.WECHAT_APP_ID = config.VUE_WECHAT_APP_ID || WECHAT_APP_ID
+    Vue.prototype.GIT_CLIENT_ID = config.VUE_GIT_CLIENT_ID || GIT_CLIENT_ID
   }
 })
 
