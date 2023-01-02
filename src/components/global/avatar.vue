@@ -4,7 +4,7 @@
       <img
         slot="error"
         class="avatar"
-        src="/image/avatar.svg"
+        src="/admin/image/avatar.svg"
       />
     </el-image>
     <span v-if="user.name">{{ user.name }}</span>

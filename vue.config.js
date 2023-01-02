@@ -7,24 +7,30 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[next] = JSON.stringify(env[next])
   return prev
 }, {})
-
+if (process.env.NODE_ENV === 'production') {
+  envKeys.RSA_PUB_KEY = '""'
+}
+const defPlugin = new webpack.DefinePlugin(envKeys)
 module.exports = {
+  publicPath: '/admin/',
   pages: {
     index: {
-      entry: 'src/main.js',
+      entry: ['src/main.js'],
       template: 'public/index.html',
       filename: 'index.html',
+      gmap_key: envKeys.GMAP_KEY,
       chunks: ['chunk-vendors', 'chunk-common', 'index']
     },
-    login: {
-      entry: 'src/auth.js',
-      template: 'public/login.html',
-      filename: 'login.html',
-      chunks: ['chunk-vendors', 'chunk-common', 'login']
+    auth: {
+      entry: ['src/auth.js'],
+      template: 'public/auth.html',
+      filename: 'auth.html',
+      chunks: ['chunk-vendors', 'chunk-common', 'auth']
     }
   },
   // webpack 配置
   configureWebpack: {
+    cache: false,
     resolve: {
       alias: {
         '~': path.resolve(__dirname, 'src')
@@ -35,8 +41,9 @@ module.exports = {
       hot: true,
       port: '9090',
       host: '0.0.0.0',
-      liveReload: false,
-      compress: true
+      liveReload: true,
+      compress: false,
+      https: true
       // watchOptions: {
       //   ignored: '/node_modules',
       //   aggregateTimeout: 500,
@@ -44,8 +51,25 @@ module.exports = {
       // }
     },
     plugins: [
-      new webpack.DefinePlugin(envKeys)
-    ]
+      defPlugin
+    ],
+    module: {
+      rules: [
+        {
+          test: /app-config\.js$/i,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {
+                name: 'js/[name].[hash].[ext]',
+                esModule: false,
+                emitFile: true
+              }
+            }
+          ]
+        }
+      ]
+    }
   },
   css: {
     loaderOptions: {
@@ -56,5 +80,6 @@ module.exports = {
         @import "~/assets/sass/_placeholder.scss";`
       }
     }
-  }
+  },
+  parallel: false
 }

@@ -1,10 +1,18 @@
 <template>
-  <base-component ref="base" requestApi="/admin/article">
+  <base-component ref="base" requestApi="/admin/article" :prop-query="params">
     <template v-slot:tools="{ meta, query, getList }">
       <el-row :span="24" class="article-tab mb-min">
-        <v-button :type="!query.type ? 'primary' : ''" text icon="icofont-archive" @click="() => { query.topicId = ''; query.type = ''; getList() }">全部 ({{ meta.aggregate || 0 }})</v-button>
-        <v-button :type="query.type === 'draft' ? 'primary' : ''" text icon="icofont-bucket" @click="() => { query.topicId = ''; query.type = 'draft'; getList() }">草稿箱 ({{ meta.draft || 0 }})</v-button>
-        <v-button :type="query.type === 'deleted' ? 'primary' : ''" text icon="icofont-ui-delete" @click="() => { query.topicId = ''; query.type = 'deleted'; getList() }">回收站 ({{ meta.deleted || 0 }})</v-button>
+        <el-tabs v-model="params.type" @tab-click="getList">
+          <el-tab-pane name="">
+            <v-button slot="label" text icon="icofont-archive" >全部 ({{ meta.aggregate || 0 }})</v-button>
+          </el-tab-pane>
+          <el-tab-pane name="draft">
+            <v-button slot="label" text icon="icofont-archive" >草稿箱 ({{ meta.draft || 0 }})</v-button>
+          </el-tab-pane>
+          <el-tab-pane name="deleted">
+            <v-button  slot="label" text icon="icofont-archive" >回收站 ({{ meta.deleted || 0 }})</v-button>
+          </el-tab-pane>
+        </el-tabs>
       </el-row>
     </template>
     <template v-slot:search="{ data, query, meta, getList }">
@@ -59,14 +67,13 @@
               </span>
             </div>
             <div>
-              <v-button type="primary" text @click="createWeChatMaterial(article.id)" icon="icofont-wechat">创建微信素材</v-button>&nbsp;&nbsp;&nbsp;&nbsp;
               <router-link
-                v-if="type !== 'deleted'"
-                class="icofont-edit link-btn-primary mr-min"
-                :to="'/article/create/' + article.id"
-              >
-               &nbsp;编辑</router-link>
-              <v-button v-if="isDeleteList" type="primary" text @click="restoreArticle(article.id)" icon="icofont-refresh">回复</v-button>
+              v-if="!isDeleteList"
+              class="icofont-edit link-btn-primary mr-min"
+              :to="'/article/create/' + article.id"
+              >编辑</router-link>
+              <v-button type="primary" text @click="createWeChatMaterial(article.id)" icon="icofont-wechat">创建微信素材</v-button>
+              <v-button v-if="isDeleteList" type="primary" text @click="restoreArticle(article.id)" icon="icofont-refresh">恢复</v-button>
               <v-button type="danger" text danger @click="deleteRecord(article.id)" icon="icofont-delete">{{ isDeleteList ? '彻底删除' : '删除' }}</v-button>
             </div>
           </div>
@@ -83,12 +90,15 @@ export default {
   data () {
     return {
       orderBy: '', // 排序的方式
-      type: '' // 类型
+      // 请求参数
+      params: {
+        type: ''
+      }
     }
   },
   computed: {
     isDeleteList () {
-      return this.type === 'deleted'
+      return this.params.type === 'deleted'
     }
   },
   methods: {
@@ -99,13 +109,8 @@ export default {
      */
     restoreArticle (id) {
       restoreArticle(id).then(() => {
-        const records = this.$children[0].requestResult.records
-        const index = records.findIndex((record) => record.id === id)
-        records.splice(index, 1)
+        this.$refs.base.getList()
       })
-        .then(() => {
-          this.$refs.base.getList()
-        })
     },
     /**
      * 设置文章统计的数量

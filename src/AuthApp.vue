@@ -41,7 +41,7 @@ export default {
   }
 }
 .auth-page {
-  background-image: url("/image/background.jpg");
+  background-image: url("/admin/image/background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;

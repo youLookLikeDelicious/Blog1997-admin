@@ -43,6 +43,7 @@
             href="/"
             @click.prevent.stop
             @click="submit"
+            @keyup.enter="submit"
             :class="[{'btn-disable': !allowSubmit}, 'register-btn', 'btn-enable']"
             >提交</a
           >
@@ -66,13 +67,14 @@ export default {
         password_confirmation: '',
         token: ''
       },
+      isSending: false,
       passwordConfirmError: ''
     }
   },
   mixins: [passwordMixin],
   computed: {
     allowSubmit () {
-      return this.model.password && this.model.password_confirmation && this.strength === 3
+      return this.model.password && this.model.password_confirmation && this.strength === 3 && !this.isSending
     }
   },
   components: {
@@ -84,11 +86,14 @@ export default {
         return
       }
 
+      this.isSending = true
       updatePassword(this.model)
         .then(() => {
           window.setTimeout(() => {
             this.$router.push({ name: 'Login' })
           }, 200)
+        }).finally(_ => {
+          this.isSending = false
         })
     }
   },

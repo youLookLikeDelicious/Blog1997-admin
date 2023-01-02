@@ -1,12 +1,13 @@
 <template>
   <!-- 有两个主题 type="box|text" -->
-  <a
+  <button
     v-if="text"
-    href="/"
+    type="button"
     :title="title"
-    @click.prevent="handleClick"
+    @click="handleClick"
     :class="[
       'v-button',
+      {'text-button': text},
       'link-btn-' + type,
       { 'btn-disable': disabled },
     ]"
@@ -15,23 +16,23 @@
         <i :class="icon"></i>
       </template>
       <slot></slot>
-    </a>
-  <a
+    </button>
+  <button
     v-else
-    @click.prevent="handleClick"
+    type="button"
+    @click="handleClick"
     :class="[
       'v-button',
       'btn-' + type,
       { 'btn-disable': disabled }
     ]"
-    href="/"
     :title="title"
     >
     <template v-if="icon">
       <i :class="icon"></i>
     </template>
     <slot></slot>
-  </a>
+  </button>
 </template>
 
 <script>
@@ -75,11 +76,22 @@ export default {
     },
     mouseleave: {
       type: Function
+    },
+    href: {
+      type: String,
+      default () {
+        return '/'
+      }
     }
   },
   methods: {
     handleClick () {
       if (this.disabled) {
+        return
+      }
+
+      if (this.href !== '/') {
+        window.open(this.href, '_blank')
         return
       }
       this.$emit('click')
@@ -107,7 +119,12 @@ export default {
   color: #666 !important;
   border: .1rem solid rgba(#999, .2);
 }
+.text-button {
+  border-color: transparent;
+  background-color: transparent;
+}
 .v-button{
+  cursor: pointer;
   font-size: 1.4rem;
   white-space: nowrap;
   &:not(first-child) {

@@ -44,20 +44,20 @@
             <div class="notification-subject">
               <!-- 被评论通知 -->
               <div v-if="type === 'App\\Model\\Comment'">
-                <comment
+                <!-- <comment
                   :comment="{
                     id: notificationable.id,
                     content: notificationable.content,
                     user: user,
                     created_at: created_at,
                   }"
-                />
+                /> -->
                 <comment-subject :notification-able="notificationable" />
                 <v-button
                   v-if="
-                    notificationable.sub_comments &&
-                    notificationable.sub_comments.current_page <
-                    notificationable.sub_comments.last_page
+                    notificationable.replies &&
+                    notificationable.replies.current_page <
+                    notificationable.replies.last_page
                   "
                   text
                   style="margin-left: 2.2rem"
@@ -82,7 +82,7 @@
 
 <script>
 import CommentSubject from '~/components/notification/comment-subject'
-import comment from '~/components/notification/comment'
+// import comment from '~/components/notification/comment'
 import { getNotificationComment } from '~/api/article'
 const requestApi = '/admin/notification'
 export default {
@@ -93,8 +93,8 @@ export default {
     }
   },
   components: {
-    CommentSubject,
-    comment
+    CommentSubject
+    // comment
   },
   methods: {
     /**
@@ -121,12 +121,12 @@ export default {
     getMoreReply (index) {
       const dataList = this.$refs.base.dataList
       const notification = dataList[index]
-      getNotificationComment(notification.id, { page: notification.notificationable.sub_comments.current_page + 1 })
+      getNotificationComment(notification.id, { page: notification.notificationable.replies.current_page + 1 })
         .then((response) => {
-          const subComments = notification.notificationable.sub_comments
-          this.$refs.base.dataList[index].notificationable.sub_comments = {
+          const replies = notification.notificationable.replies
+          this.$refs.base.dataList[index].notificationable.replies = {
             ...response.data.data,
-            data: subComments.data.concat(response.data.data.data)
+            data: replies.data.concat(response.data.data.data)
           }
         })
     },

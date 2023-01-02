@@ -46,7 +46,7 @@
       :visible.sync="dialogVisible"
       title="发布文章"
       width="62rem"
-      height="40rem"
+      height="45rem"
       @confirm="submit"
       :disableConfirm="!allowSubmit"
     >

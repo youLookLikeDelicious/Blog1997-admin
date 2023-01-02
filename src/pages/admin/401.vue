@@ -6,7 +6,7 @@
         <p><span> 401 | permission deny </span></p>
         <p>你没有相关的权限，访问当前的页面</p>
         <p>
-          <router-link to="/">返回首页</router-link>
+          <a href="/">返回首页</a>
         </p>
       </div>
     </div>

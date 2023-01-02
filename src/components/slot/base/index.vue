@@ -153,7 +153,7 @@ export default {
     /**
      * 请求列表
      *
-     * @param {Boolean} getOrigin 是否获取原始数据
+     * @param {Boolean} getOrigin 是否请求接口
      */
     getList (getOrigin = true) {
       if (!getOrigin && typeof this.$parent.search === 'function') {
@@ -166,11 +166,11 @@ export default {
           delete query[key]
         }
       }
-      this.$axios.get(this.requestApi, { params: query }).then((response) => {
-        const resData = response.data
-        this.dataList = resData.data
-        this.meta = resData.meta
-        this.$emit('updated-data', { data: resData.data, meta: resData.meta })
+      this.$axios.get(this.requestApi, { params: query }).then(({ data: responseData }) => {
+        const { meta, data } = responseData
+        this.dataList = data
+        this.meta = meta
+        this.$emit('updated-data', { data, meta })
       })
     },
     /**

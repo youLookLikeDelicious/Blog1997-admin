@@ -4,6 +4,8 @@
     :show-header="false"
     :force-render-content="true"
     :hiddenPagination="true"
+    @updated-data="handleUpdateData"
+    ref="base"
   >
     <template v-slot:default>
       <div class="profile">
@@ -35,14 +37,7 @@
                   placeholder="请输入用户名"
                 ></v-input>
               </div>
-              <a
-                v-if="userName && userName !== user.name"
-                @click.prevent="resetName"
-                class="reset-btn"
-                name="submit-name"
-                href="/"
-                ><i class="icofont-upload-alt"></i> 提交</a
-              >
+              <v-button type="primary" text icon="icofont-upload-alt" @click="resetName" v-if="userName && userName !== user.name">提 交</v-button>
             </td>
           </tr>
           <tr>
@@ -59,14 +54,7 @@
                   placeholder="请输入邮箱"
                 ></v-input>
               </div>
-              <a
-                v-if="userEmail && userEmail !== user.email && emailIsValide"
-                @click.prevent="resetEmail"
-                class="reset-btn"
-                name="submit-email"
-                href="/"
-                ><i class="icofont-upload-alt"></i> 提交</a
-              >
+              <v-button type="primary" text icon="icofont-upload-alt" @click="resetEmail" v-if="userEmail && userEmail !== user.email && emailIsValide">提 交</v-button>
               <span class="error" v-if="!emailIsValide">
                 未识别的邮箱格式
               </span>
@@ -77,37 +65,19 @@
             <td>
               <div class="bind flex">
                 <i class="wechat social-account"></i>
-                <a
-                  v-if="checkBindState(1)"
-                  class="reset-btn"
-                  @click.prevent="unbind(1)"
-                  href="/"
-                  >解绑</a
-                >
-                <a v-else :href="wechatHref" target="_top">绑定</a>
+                <v-button type="primary" text @click="unbind(1)" v-if="checkBindState(1)">解绑</v-button>
+                <v-button v-else type="primary" text :href="wechatHref">绑定</v-button>
               </div>
               <div class="bind flex">
                 <i class="git social-account"></i>
-                <a
-                  v-if="checkBindState(2)"
-                  class="reset-btn"
-                  @click.prevent="unbind(2)"
-                  href="/"
-                  >解绑</a
-                >
-                <a v-else target="_top" :href="githubHref">绑定</a>
+                <v-button type="primary" text @click="unbind(2)" v-if="checkBindState(2)">解绑</v-button>
+                <v-button v-else type="primary" text :href="githubHref">绑定</v-button>
               </div>
-              <div class="bind flex">
+              <!-- <div class="bind flex">
                 <i class="qq social-account"></i>
-                <a
-                  v-if="checkBindState(3)"
-                  class="reset-btn"
-                  @click.prevent="unbind(3)"
-                  href="/"
-                  >解绑</a
-                >
-                <a v-else @click.prevent href="/">绑定</a>
-              </div>
+                <v-button type="primary" text @click="unbind(3)" v-if="checkBindState(3)">解绑</v-button>
+                <v-button v-else type="primary">绑定</v-button>
+              </div> -->
             </td>
           </tr>
           <tr>
@@ -146,6 +116,7 @@ export default {
         conflictAccount: { name: 'sdf' },
         socialAccount: { name: 'soc' }
       },
+      dataList: [],
       showDialog: false
     }
   },
@@ -167,7 +138,7 @@ export default {
       const baseurl = 'https://open.weixin.qq.com/connect/qrconnect?'
       const query = [
         `appid=${this.WECHAT_APP_ID}`,
-        `redirect_uri=${this.APP_URL}/admin/profile/wechat`,
+        `redirect_uri=${this.APP_URL}/admin/sso/wechat`,
         'response_type=code',
         'scope=snsapi_login',
         'state=state'
@@ -178,7 +149,7 @@ export default {
       const baseUrl = 'https://github.com/login/oauth/authorize?'
       const query = [
         'client_id=' + this.GIT_CLIENT_ID,
-        `redirect_uri=${this.APP_URL}/admin/profile/github`
+        `redirect_uri=${this.APP_URL}/admin/sso/github`
       ]
 
       return baseUrl + query.join('&')
@@ -239,23 +210,21 @@ export default {
      * @return {boolean}
      */
     checkBindState (type) {
-      const data = this.$children[0].requestResult
-
-      if (!(data instanceof Array)) {
+      if (!(this.dataList instanceof Array)) {
         return false
       }
       const finder = (item) => item.type === type
-      return data.find(finder)
+      return this.dataList.find(finder)
     },
     /**
      * @param {int} type
      * @return {void}
      */
     unbind (type) {
-      const index = this.$children[0].requestResult.findIndex(item => item.type === type)
-      unbind(this.$children[0].requestResult[index].id)
+      const socialAccount = this.dataList.find(item => item.type === type)
+      unbind(socialAccount.id)
         .then(() => {
-          this.$children[0].requestResult.splice(index, 1)
+          this.$refs.base.getList()
         })
     },
     /**
@@ -279,45 +248,12 @@ export default {
       if (!this.userEmail) {
         this.userEmail = this.user.email
       }
+    },
+    // 获取列表数据
+    handleUpdateData ({ data }) {
+      this.dataList = data
+      this.$forceUpdate()
     }
-  },
-  mounted () {
-    // bind操作会跳转到该页面
-    // 获取参数
-    const params = window.location.search.match(/(code)=([^&]+)/i)
-
-    if (!params || !params.length) {
-      return
-    }
-
-    const query = [params[0]]
-
-    if (this.type && ['wechat', 'github', 'qq'].includes(this.type)) {
-      query.push('type=' + this.$route.params.type)
-    }
-
-    const action = this.$route.query.action || 'bind'
-
-    this.$axios
-      .post(`/user/${action}?${query.join('&')}`)
-      .then((response) => {
-        this.$children[0].requestResult.push(response.data.data)
-      })
-      .catch((error) => {
-        const message = error.response.data.message
-        if (message === '该账号已被绑定') {
-          this.showDialog = true
-          this.conflictInfo = error.response.data.data
-          return {}
-        }
-      })
-      .finally(() => {
-        const path = this.$route.path
-        if (this.type) {
-          path.replace(this.type, '')
-        }
-        this.$router.push(path)
-      })
   }
 }
 </script>
@@ -368,7 +304,7 @@ export default {
   .social-account {
     width: 3rem;
     height: 3rem;
-    margin: 0.7rem 3rem 0.7rem 0;
+    margin: 0.7rem 0 0.7rem 0;
     display: inline-block;
   }
   .bind {

@@ -3,11 +3,13 @@
     border-radius: .3rem;
     padding: .5rem .9rem;
     transition: background-color .5s;
+    border: 1px solid #dcdfe6;
 }
 
 %btn {
     @extend %base-btn;
     background-color: #6CACFF;
+    border-color: #6CACFF;
     transition: background-color .7s;
 
     // background-image: linear-gradient(to bottom right, #8DEBFF, #6CACFF);

@@ -1,37 +1,41 @@
 <template>
   <div class="comment-box" v-if="comments.length">
-    <dl
-      v-for="(comment, index) in comments"
-      :key="index"
-      @mouseenter="currentCommentIndex = index"
-      @mouseleave="currentCommentIndex = -1"
-    >
-      <dt>
-        <avatar :user="comment.user"></avatar>
-        <p class="reply-date inline-block">
-          {{ comment.created_at }}
-        </p>
-        <transition-group name="reply" appear tag="span">
-          <span v-if="currentCommentIndex === index" key="reply">
-            <v-button
-              text
-              icon="icofont-speech-comments"
-              type="primary"
-              @click="clickReplyBtn(index, comment.id)"
-            >回复</v-button>
-          </span>
-          <span v-if="currentCommentIndex === index && comment.user_id === $store.state.user.id" key="delete">
-            <v-button
-              text
-              type="danger"
-              @click="deleteComment(comment.id)"
-              icon="icofont-delete"
-            >删除</v-button>
-          </span>
-        </transition-group>
-      </dt>
-      <dd class="comment" v-html="comment.content"></dd>
-    </dl>
+    <div :key="key">
+      <dl
+        v-for="(comment, index) in comments"
+        :key="index"
+        @mouseenter="currentCommentIndex = index"
+        @mouseleave="currentCommentIndex = -1"
+      >
+        <dt>
+          <avatar :user="comment.user"></avatar>
+          <div class="sub-title-wrapper">
+            <p class="reply-date inline-block">
+              {{ comment.created_at }}
+            </p>
+            <transition-group name="reply" appear tag="span">
+              <span v-if="currentCommentIndex === index" key="reply">
+                <v-button
+                  text
+                  icon="icofont-speech-comments"
+                  type="primary"
+                  @click="clickReplyBtn(index, comment.id)"
+                >回复</v-button>
+              </span>
+              <span v-if="currentCommentIndex === index && comment.user_id === $store.state.user.id" key="delete">
+                <v-button
+                  text
+                  type="danger"
+                  @click="deleteComment(comment.id)"
+                  icon="icofont-delete"
+                >删除</v-button>
+              </span>
+            </transition-group>
+          </div>
+        </dt>
+        <dd class="comment" v-html="comment.content"></dd>
+      </dl>
+    </div>
     <!-- 评论部分 -->
     <transition name="editor">
       <div v-show="editorVisible" ref="editor" class="editor-wrapper">
@@ -71,24 +75,23 @@ export default {
       currentCommentIndex: -1,
       currentCommentId: '',
       newComment: [],
-      deletedId: []
+      deletedId: [],
+      key: 1
     }
   },
   computed: {
     comments () {
-      let comments =
+      const comments =
         this.comment instanceof Array
           ? this.comment
           : this.comment && this.comment.content
             ? [this.comment]
             : []
 
-      comments = comments.concat(this.newComment)
-
       const filterCallback = (item) => {
         return !this.deletedId.includes(item.id)
       }
-      return comments.filter(filterCallback)
+      return [...comments.filter(filterCallback), ...this.newComment]
     }
   },
   methods: {
@@ -123,13 +126,16 @@ export default {
         able_type: 'comment',
         able_id: this.currentCommentId,
         content
-      }).then((resposne) => {
+      }).then((response) => {
         this.newComment.push({
-          ...resposne.data.data,
+          ...response.data.data,
           user: this.$store.state.user
         })
         this.hidEditor()
         this.editor.setContent('')
+        setTimeout(_ => {
+          // this.key = (this.key + 1) % 2
+        })
       })
     },
     /**
@@ -171,6 +177,11 @@ export default {
       })
     }
   },
+  beforeUpdate () {
+    if (!this.editorVisible) {
+      this.$nextTick(_ => this.$initFormula(this.$el))
+    }
+  },
   mounted () {
     window.addEventListener('click', this.clickInWindow)
   },
@@ -193,11 +204,18 @@ export default {
   opacity: 0;
 }
 .comment-box {
+  .sub-title-wrapper {
+    display: flex;
+    height: 2.1rem;
+    overflow: hidden;
+    margin-bottom: .7rem;
+    align-content: flex-end;
+  }
   .reply-date {
     color: #777;
     font-size: 1.2rem;
     padding-left: 4rem;
-    margin-bottom: 1.2rem;
+    padding-top: .3rem;
     margin-right: 1.2rem;
   }
   .icofont-delete{

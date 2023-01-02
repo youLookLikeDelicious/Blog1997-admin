@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "commit": "cz",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "version": "npx auto-changelog -p --commit-limit false && git add CHANGELOG.md"
   },
   "dependencies": {
     "@antv/data-set": "^0.11.7",

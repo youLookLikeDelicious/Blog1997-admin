@@ -108,7 +108,7 @@ export default {
 
       this.$axios.post(this.postUrl, this.model).then(() => {
         this.$router.push({
-          path: '/login',
+          path: '/auth/login',
           query: { email: this.model.email }
         })
       })

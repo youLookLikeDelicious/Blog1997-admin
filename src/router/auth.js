@@ -12,7 +12,7 @@ Vue.use(VueRouter)
  */
 const routes = [
   {
-    path: '/login',
+    path: '/auth/login',
     name: 'Login',
     component: login
   }, {
@@ -20,7 +20,7 @@ const routes = [
     name: 'Register',
     component: register
   }, {
-    path: '/password/reset',
+    path: '/auth/password/reset',
     name: 'PasswordRest',
     component: PasswordRest
   }

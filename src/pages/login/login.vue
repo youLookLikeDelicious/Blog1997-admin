@@ -33,7 +33,7 @@
               </div>
               <div class="capcha-wrapper">
                 <img
-                  :src="`${this.API_URL}/captcha?${captchaRand}`"
+                  :src="`${API_URL}/captcha?${captchaRand}`"
                   @click="refreshCaptcha"
                   alt="验证码"
                 />
@@ -81,7 +81,7 @@ export default {
       const baseUrl = 'https://open.weixin.qq.com/connect/qrconnect?'
       const query = [
         `appid=${this.WECHAT_APP_ID}`,
-        `redirect_uri=${this.APP_URL}/admin/login%3ftype=wechat%26redirect=admin`,
+        'redirect_uri=' + encodeURI(`${document.location.origin}/auth/login?type=wechat&redirect=admin`),
         'response_type=code',
         'scope=snsapi_login',
         'state=state'
@@ -93,7 +93,7 @@ export default {
       const baseUrl = 'https://github.com/login/oauth/authorize?'
       const query = [
         'client_id=' + this.GIT_CLIENT_ID,
-        `redirect_uri=${this.APP_URL}/admin/login%3ftype=github%26redirect=admin`
+        'redirect_uri=' + encodeURI(`${document.location.origin}/auth/login?type=github&redirect=admin`)
       ]
       return baseUrl + query.join('&')
     },
@@ -128,10 +128,9 @@ export default {
      * 通过账号密码登陆
      */
     login ($e) {
-      if ($e !== 'click' && (!this.allowSubmit || $e.keyCode) && $e.keyCode !== 13) {
+      if (!this.allowSubmit || ($e !== 'click' && (!this.allowSubmit || $e.keyCode) && $e.keyCode !== 13)) {
         return
       }
-
       const formData = this.getFormData()
       login(formData).then(() => this.toHome())
         .catch(() => {
@@ -153,7 +152,7 @@ export default {
      * 跳转到管理员页面
      */
     toHome () {
-      window.location.replace('/')
+      window.location.replace('/admin')
     },
     /**
      * 刷新验证码

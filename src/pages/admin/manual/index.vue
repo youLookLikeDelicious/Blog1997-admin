@@ -34,6 +34,7 @@
                 <p>{{ manual.updated_at }}</p>
               </div>
             </router-link>
+            <div class="mask"></div>
           </div>
         </div>
       </template>
@@ -98,6 +99,19 @@ export default {
         visibility: visible;
         right: 1.2rem;
       }
+      .mask {
+        opacity: 1;
+      }
+    }
+    .mask {
+      background-color: rgba(#333, .3);
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transition: opacity .3s;
     }
     .el-dropdown{
       z-index: 9;
@@ -133,7 +147,9 @@ export default {
       width: 100%;
       padding: 1.2rem;
       position: absolute;
-      // background-color: rgba(#333, .3);
+      z-index: 2;
+      // background-color: rgba(#666, .3);
+      // text-shadow: .3rem .2rem .5rem #dcdfe6;
       h2 {
         color: #f5f7fa;
         font-size: 1.6rem;

@@ -15,6 +15,7 @@ Vue.prototype.$animate = animate
 
 Vue.use(axios)
 loadProgressBar()
+
 store.dispatch('globalState/GET_CSRF_TOKEN')
 new Vue({
   store,

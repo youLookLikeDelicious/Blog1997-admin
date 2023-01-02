@@ -86,7 +86,8 @@ const routes = [{
       permission: 'article.create,article.store'
     }
   }]
-}, {
+},
+{
   path: '/published',
   name: 'published',
   component: Published,
@@ -98,7 +99,8 @@ const routes = [{
       path: '/'
     })
   }
-}, {
+},
+{
   // 相册路由
   path: '/gallery',
   name: 'gallery',
@@ -106,7 +108,8 @@ const routes = [{
   meta: {
     permission: 'gallery.index'
   }
-}, {
+},
+{
   path: '/gallery/album',
   component: Album,
   meta: {
@@ -125,7 +128,8 @@ const routes = [{
       props: true
     }
   ]
-}, {
+},
+{
   path: '/gallery/place',
   name: 'albumPlace',
   component: () => import('@/pages/admin/gallery/place'),
@@ -139,7 +143,8 @@ const routes = [{
   meta: {
     permission: 'friend-link.index'
   }
-}, {
+},
+{
   path: '/message',
   component: BaseLayout,
   children: [{
@@ -148,20 +153,23 @@ const routes = [{
     meta: {
       permission: 'illegal-info.index'
     }
-  }, {
+  },
+  {
     path: 'comments',
     component: VerifyComments,
     meta: {
       permission: 'comment.index'
     }
-  }, {
+  },
+  {
     path: 'notification',
     component: Notification,
     meta: {
       permission: 'notification.index'
     }
   }]
-}, {
+},
+{
   path: '/sensitive-word',
   component: SensitiveWord,
   children: [{
@@ -170,59 +178,69 @@ const routes = [{
     meta: {
       permission: 'sensitive-word-category.index'
     }
-  }, {
+  },
+  {
     path: ':id?',
     component: SensitiveWordIndex,
     meta: {
       permission: 'sensitive-word.index'
     }
   }]
-}, {
+},
+{
   path: '/manager',
   component: Manager
-}, {
+},
+{
   path: '/auth',
   component: Auth,
   meta: {
     permission: 'auth.index'
   }
-}, {
+},
+{
   path: '/user',
   component: User,
   meta: {
     // permission: 'user.index'
   }
-}, {
+},
+{
   path: '/role',
   component: Role,
   meta: {
     permission: 'role.index'
   }
-}, {
+},
+{
   path: '/system/setting',
   component: Setting,
   meta: {
     permission: 'system-setting.index'
   }
-}, {
+},
+{
   path: '/system/user-log',
   component: UserLog,
   meta: {
     permission: 'system.log'
   }
-}, {
+},
+{
   path: '/system/schedule-log',
   component: ScheduleLog,
   meta: {
     permission: 'system.log'
   }
-}, {
-  path: '/profile/:type?',
+},
+{
+  path: '/profile',
   component: Profile,
   meta: {
     permission: 'user.profile'
   }
-}, {
+},
+{
   path: '/manual',
   component: BaseLayout,
   // meta: { permission: 'manual.index' },
@@ -239,10 +257,16 @@ const routes = [{
       component: () => import('@/pages/admin/manual/create-article')
     }
   ]
-}, {
+},
+{
   path: '/401',
   component: PermissionDeny
-}, {
+},
+{
+  path: '/sso/:type?',
+  component: () => import('@/pages/admin/sso')
+},
+{
   path: '*',
   component: NotFound
 }
@@ -250,14 +274,15 @@ const routes = [{
 
 const router = new VueRouter({
   mode: 'history',
-  routes
+  routes,
+  base: 'admin'
 })
 
 /**
  * 重定向到登陆页面
  */
 const redirectToLogin = () => {
-  window.location.replace('/login')
+  window.location.replace('/auth/login')
 }
 
 // 为路由设置前置守卫
