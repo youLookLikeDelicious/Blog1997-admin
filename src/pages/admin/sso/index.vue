@@ -13,8 +13,9 @@ export default {
     }
 
     const query = [params[0]]
+    const type = this.$route.params.type
 
-    if (this.type && ['wechat', 'github', 'qq'].includes(this.type)) {
+    if (['wechat', 'github', 'qq'].includes(type)) {
       query.push('type=' + this.$route.params.type)
     }
 
