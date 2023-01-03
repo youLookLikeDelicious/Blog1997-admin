@@ -216,8 +216,9 @@ export default {
     position: absolute;
   }
   .link-btn-default {
+    color: #e7eef8;
     &:hover {
-        color: #e7eef8;
+      color: #d9e3f1;
     }
 
     &:active {

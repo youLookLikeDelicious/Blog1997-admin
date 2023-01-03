@@ -42,9 +42,9 @@
                 <div class="album-name">{{ item.name }}</div>
                 <div class="album-desc" :title="item.desc">{{ item.desc }}</div>
               </div>
-              <div class="tool-bar">
-                <v-button text icon="icofont-ui-delete" @click="deleteRecord(item.id)"></v-button>
+              <div class="tool-bar" style="z-index=9">
                 <v-button text icon="icofont-ui-edit" @click="handleUpdateAlbum({ name: item.name, desc: item.desc}, item.id)"></v-button>
+                <v-button text icon="icofont-ui-delete" @click="deleteRecord(item.id)"></v-button>
               </div>
             </div>
             <div class="image-info">{{ item.date_time }}</div>

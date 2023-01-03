@@ -11,7 +11,7 @@
       <el-form ref="form" :model="model">
         <el-row style="padding-left: 2.7rem">
           <el-form-item prop="album" label="" :rules="{ required: true, message: '请填写相册', trigger: 'change' }">
-            <v-select v-model="model.album" :options="albumList" allowCreate placeholder="相册" :props="{ value: 'name' }"></v-select>
+            <v-select v-model="model.album" :options="albumList" allowCreate placeholder="相册" :props="{ value: 'name', label: 'label' }"></v-select>
           </el-form-item>
         </el-row>
       </el-form>
@@ -69,7 +69,7 @@ export default {
     // 获取相册列表
     loadData () {
       getAlbumAll().then(res => {
-        this.albumList = res.data.data
+        this.albumList = res.data.data.map(item => ({ name: item.name, label: item.name }))
       })
     },
     close () {

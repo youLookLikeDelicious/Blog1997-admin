@@ -1,7 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
-
 const env = dotenv.config().parsed
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[next] = JSON.stringify(env[next])
@@ -10,6 +9,7 @@ const envKeys = Object.keys(env).reduce((prev, next) => {
 if (process.env.NODE_ENV === 'production') {
   envKeys.RSA_PUB_KEY = '""'
 }
+
 const defPlugin = new webpack.DefinePlugin(envKeys)
 module.exports = {
   publicPath: '/admin/',
@@ -62,8 +62,8 @@ module.exports = {
               loader: 'file-loader',
               options: {
                 name: 'js/[name].[hash].[ext]',
-                esModule: false,
-                emitFile: true
+                emitFile: true,
+                esModule: process.env.NODE_ENV === 'production'
               }
             }
           ]

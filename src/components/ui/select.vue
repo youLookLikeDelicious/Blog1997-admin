@@ -45,7 +45,7 @@
               disabled: item.disabled
             }"
             @click="toggleItem(index)"
-            v-html="item.name || item"
+            v-html="item[props.label] || item"
           ></li>
         </ul>
       </div>
@@ -149,14 +149,14 @@ export default {
       if (!this.inputValue && !this.createList.length) {
         return this.options.length
           ? this.options
-          : [{ name: '暂无记录', [this.props.value]: false }]
+          : [{ [this.props.label]: '暂无记录', [this.props.value]: false }]
       }
 
       // 正则匹配选项
       let result = []
       if (this.inputValue) {
         const preg = new RegExp(`.*${this.inputValue}.*`, 'i')
-        result = this.options.filter((item) => preg.test(item.name || item))
+        result = this.options.filter((item) => preg.test(item[[this.props.label]] || item))
       } else {
         result = [...this.options]
       }
@@ -165,12 +165,12 @@ export default {
       if (this.allowCreate) {
         result.push(...this.createList)
         if (this.inputValue) {
-          result.push({ name: this.inputValue, [this.props.value]: -1 })
+          result.push({ [this.props.label]: this.inputValue, [this.props.value]: -1 })
         }
       }
 
       if (!result.length) {
-        result.push({ name: '暂无记录', [this.props.value]: false })
+        result.push({ [this.props.label]: '暂无记录', [this.props.value]: false })
       }
 
       return result
@@ -263,13 +263,13 @@ export default {
       newName = newName || this.inputValue
 
       const createListIndex = this.createList.findIndex(
-        (item) => item.name === newName
+        (item) => item[this.props.label] === newName
       )
 
       if (!newName || createListIndex >= 0) {
         return
       }
-      this.createList.push({ name: newName, [this.props.value]: -1 })
+      this.createList.push({ [this.props.label]: newName, [this.props.value]: -1 })
     },
     /**
      * 返回选中的元素
@@ -283,7 +283,7 @@ export default {
         .concat(this.createList)
         .filter((item) =>
           values.includes(
-            this.checkItemIsCreatedByUser(item) ? item.name : item[this.props.value]
+            this.checkItemIsCreatedByUser(item) ? item[this.props.label] : item[this.props.value]
           )
         )
     },
@@ -297,7 +297,7 @@ export default {
       // 如果取消选中的值 是自定义创建的，移除之
       if (this.checkItemIsCreatedByUser(this.selectedOptions[index])) {
         const index = this.createList.findIndex(
-          (item) => item.name === this.inputValue
+          (item) => item[this.props.label] === this.inputValue
         )
         this.createList.splice(index, 1)
       }
@@ -333,7 +333,7 @@ export default {
       if (!this.multiple) {
         this.syncValue(
           this.checkItemIsCreatedByUser(currentItem)
-            ? currentItem.name
+            ? currentItem[this.props.label]
             : currentItem[this.props.value]
         )
         return
@@ -350,7 +350,7 @@ export default {
       // id === -1表示选项是用户创建的
       result.push(
         this.checkItemIsCreatedByUser(currentItem)
-          ? currentItem.name
+          ? currentItem[this.props.label]
           : currentItem[this.props.value] || currentItem
       )
 
@@ -422,7 +422,7 @@ export default {
     checkItemIsSelected (item) {
       const finder = (currentItem) =>
         this.checkItemIsCreatedByUser(currentItem)
-          ? item.name === currentItem.name
+          ? item[this.props.label] === currentItem[this.props.label]
           : item[this.props.value] === currentItem[this.props.value]
       const index = this.selectedOptions.findIndex(finder)
       return index >= 0 ? index : false
@@ -501,7 +501,7 @@ export default {
       if (!item) {
         return ''
       }
-      const tag = item.name || item
+      const tag = item[this.props.label] || item
       return tag.replace(/&nbsp;/g, '')
     },
     /**
