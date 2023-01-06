@@ -62,6 +62,7 @@
 
 <script>
 import { login, loginBySocialCount } from '~/api/user'
+import { getCsrfToken } from '~/api/system'
 import JSEncrypt from 'jsencrypt'
 export default {
   layout: 'login',
@@ -100,6 +101,9 @@ export default {
     allowSubmit () {
       return this.model.email && this.model.password && this.model.captcha
     }
+  },
+  created () {
+    getCsrfToken()
   },
   beforeMount () {
     document.documentElement.addEventListener('keyup', this.login)

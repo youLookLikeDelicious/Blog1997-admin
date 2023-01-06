@@ -56,7 +56,7 @@ module.exports = {
     module: {
       rules: [
         {
-          test: /app-config/i,
+          test: path.resolve(__dirname, 'src/config/app-config.js'),
           use: [
             {
               loader: 'file-loader',

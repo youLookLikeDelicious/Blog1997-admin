@@ -1,21 +1,21 @@
 # blog1997-admin
 
+![introduce](https://img.wenhairu.com/images/2023/01/06/7pe0S.png)
 Blog1997 Admin Part
 
-### 项目管理员界面演示
+## 安装
 
-这是由 cypress 测试工具，录制的 E2E 测试过程。作为演示素材
-[![Watch the video](https://raw.github.com/GabLeRoux/WebMole/master/ressources/WebMole_Youtube_Video.png)](http://go.plvideo.cn/front/video/preview?vid=43876a053a5729ff357674c4390011c9_4)
+请查看[文档](https://github.com/youLookLikeDelicious/blog1997-docker)
 
-### 开发
+## 开发
 
 npm run dev
 
-### 构建
+## 构建
 
 npm run build
 
-### e2e
+## e2e
 
 npm run test:e2e
 
