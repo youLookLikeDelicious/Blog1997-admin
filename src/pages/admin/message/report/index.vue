@@ -45,7 +45,7 @@
             <template v-slot="{ row }">
               <i
                 :class="[
-                  row.type === 'App\\Model\\Article'
+                  row.type === 'article'
                     ? 'icofont-memorial'
                     : 'icofont-speech-comments',
                 ]"
@@ -56,7 +56,7 @@
           <el-table-column label="举报内容" align="center" show-overflow-tooltip>
             <template v-slot="{ row }">
               <span
-                v-if="row.type === 'App\\Model\\Article'"
+                v-if="row.type === 'article'"
                 class="text-align-left">
                 <a target="_blank" :href="row.content.split(',')[0]">{{
                   row.content.split(',')[0]
@@ -81,7 +81,7 @@
           </el-table-column>
           <el-table-column label="处理结果" align="center">
             <template v-slot="{ row }">
-              <el-tag :type="resultTagMap[row.operate]">{{ row.operate_name }}</el-tag>
+              <el-tag :type="resultTagMap[row.operate]" size="mini">{{ row.operate_name }}</el-tag>
             </template>
           </el-table-column>
           <el-table-column label="操作" align="center">

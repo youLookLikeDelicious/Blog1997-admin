@@ -8,7 +8,7 @@
         <div class="tree-node">
           <span :style="{ width: depth * 2 + 'em', display: 'inline-block'}"></span>
           <v-button v-if="leaf[childrenKey]"
-            type="text"
+            text
             :icon="'icofont-caret-down ' + (visibleleafStack.includes(index) ? 'list-slide-up' : 'list-slide-down')"
             @click="toggleleaf(index)"
             ></v-button>
@@ -120,7 +120,7 @@ export default {
     /**
      * 判断是否显示子元素
      *
-     * @return {boolearn}
+     * @return {boolean}
      */
     isVisible (index) {
       return this.visibleleafStack.indexOf(index) >= 0
@@ -246,11 +246,11 @@ export default {
   .no-child {
     height: 2rem;
     width: 0;
-    margin-right: 0.7rem;
+    margin-right: 3.3rem;
     display: inline-block;
   }
   .first-no-child{
-    width: .7em;
+    width: 2.8rem;
   }
   .v-button:not(first-child){
     margin-left: 0;

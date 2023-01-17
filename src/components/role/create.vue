@@ -94,6 +94,7 @@ export default {
      */
     close () {
       this.authList = []
+      this.authorities = []
       this.$refs.form.resetFields()
     }
   }

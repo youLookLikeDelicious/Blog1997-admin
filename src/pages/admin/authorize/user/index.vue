@@ -132,4 +132,10 @@ export default {
     font-size: 1.2rem;
   }
 }
+
+.el-tag {
+  &:not(:first-child) {
+    margin-left: 1.2rem;
+  }
+}
 </style>

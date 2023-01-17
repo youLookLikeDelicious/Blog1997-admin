@@ -55,7 +55,7 @@
                   : "待激活"
               }}
             </td>
-            <td>{{ manager.created_at | dateFormat }}</td>
+            <td>{{ manager.created_at }}</td>
             <td>
               <v-button type="primary" text icon="icofont-edit" @click="edit(index)">编辑</v-button>
             </td>

@@ -39,22 +39,13 @@ function sensitiveWordRank (rank) {
  */
 function mailboxType (type) {
   switch (type) {
-    case 'App\\Model\\Article':
+    case 'article':
       return '文章'
-    case 'App\\Model\\Comment':
+    case 'comment':
       return '评论'
     case 3:
       return '通知'
   }
-}
-
-/**
- * 将Unix时间戳转为日期 + 时间
- * @param {int} unixTimestamp
- * @return {string}
- */
-function dateFormat (unixTimestamp) {
-  return new Date(unixTimestamp * 1000).toLocaleString()
 }
 
 function filterListNumber (index, currentPage) {
@@ -69,7 +60,6 @@ Vue.use({
   install (vue) {
     vue.filter('mailboxType', mailboxType)
     vue.filter('sensitiveWordRank', sensitiveWordRank)
-    vue.filter('dateFormat', dateFormat)
     vue.filter('filterListNumber', filterListNumber)
   }
 })

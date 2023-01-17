@@ -57,7 +57,7 @@
           </div>
           <div class="flex article-list-item-info-wrapper">
             <div class="article-list-item-info">
-              <span class="mr-min">{{ article.updated_at | dateFormat }}</span>
+              <span class="mr-min">{{ article.updated_at }}</span>
               <span class="icofont-eye mr-min"> {{ article.visited }} </span>
               <span class="icofont-google-talk mr-min">
                 {{ article.commented }}

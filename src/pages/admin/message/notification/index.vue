@@ -9,13 +9,13 @@
     <template v-slot:tools="{ meta, query, getList }">
       <div>
         <v-button :type="query.have_read ? 'default' : 'primary'" text @click="() => { query.have_read = ''; getList() }">
-          全部 ({{ meta.total || 0 }})
+          全部 ({{ meta.total_num || 0 }})
         </v-button>
         <v-button :type="query.have_read === 'yes' ? 'primary' : 'default'" text @click="() => { query.have_read = 'yes'; getList() }">
           已读({{ meta.have_read || 0 }})
         </v-button>
         <v-button :type="query.have_read === 'no' ? 'primary' : 'default'" text @click="() => { query.have_read = 'no'; getList() }">
-          未读({{ meta.total ? meta.total - meta.have_read : 0 }})
+          未读({{ meta.total_num ? meta.total_num - meta.have_read : 0 }})
         </v-button>
       </div>
     </template>
@@ -43,7 +43,7 @@
             </div>
             <div class="notification-subject">
               <!-- 被评论通知 -->
-              <div v-if="type === 'App\\Model\\Comment'">
+              <div v-if="type === 'comment'">
                 <!-- <comment
                   :comment="{
                     id: notificationable.id,
@@ -65,7 +65,7 @@
               </div>
               <!-- 被点赞通知 -->
               <div v-else>
-                <div v-if="notificationable.able_type === 'App\\Model\\Article'" class="mt-min">
+                <div v-if="notificationable.able_type === 'article'" class="mt-min">
                   <a :href="articleLink(notificationable.thumbable.id)" class="article-title" target="__blank">{{notificationable.thumbable.title}}</a>
                 </div>
                 <div v-else class="mt-min">

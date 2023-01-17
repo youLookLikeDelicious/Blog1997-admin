@@ -1,10 +1,10 @@
 <template>
   <div class="comment-subject">
     <article-summary
-      v-if="notificationAble.able_type === 'App\\Model\\Article'"
+      v-if="notificationAble.able_type === 'article'"
       :article="notificationAble.commentable"
     />
-    <comment v-else-if="notificationAble.commentable" :comment="notificationAble.commentable" @append-reply="handleAppendReply" />
+    <comment v-else-if="notificationAble.commentable" :comment="notificationAble.commentable" />
     <div v-else-if="!notificationAble.id" class="other-content">
       <div v-html="notificationAble.content"></div>
     </div>
