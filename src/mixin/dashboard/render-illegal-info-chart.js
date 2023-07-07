@@ -3,8 +3,8 @@ import {
 } from '@antv/g2'
 
 const IllegalType = {
-  1: '举报文章',
-  2: '举报评论'
+  article: '举报文章',
+  comment: '举报评论'
 }
 export default {
   methods: {
@@ -23,9 +23,7 @@ export default {
         height: 230
       })
 
-      chart.coordinate('theta', {
-        radius: 0.75
-      })
+      chart.coordinate('theta')
 
       // 载入数据源
       chart.data(data)
@@ -36,11 +34,11 @@ export default {
         }
       })
 
-      chart.legend('topic')
+      chart.legend('type')
       chart
         .interval()
         .position('count')
-        .shape('type')
+        .color('type')
         .label('count', {
           content: (data) => `${data.type}:  ${data.count}`
         })

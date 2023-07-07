@@ -2,6 +2,8 @@ const path = require('path')
 const webpack = require('webpack')
 const dotenv = require('dotenv')
 const env = dotenv.config().parsed
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[next] = JSON.stringify(env[next])
   return prev
@@ -15,22 +17,19 @@ module.exports = {
   publicPath: '/admin/',
   pages: {
     index: {
-      entry: ['src/main.js'],
+      entry: 'src/main.js',
       template: 'public/index.html',
       filename: 'index.html',
-      gmap_key: envKeys.GMAP_KEY,
-      chunks: ['chunk-vendors', 'chunk-common', 'index']
+      gmap_key: envKeys.GMAP_KEY
     },
     auth: {
-      entry: ['src/auth.js'],
+      entry: 'src/auth.js',
       template: 'public/auth.html',
-      filename: 'auth.html',
-      chunks: ['chunk-vendors', 'chunk-common', 'auth']
+      filename: 'auth.html'
     }
   },
   // webpack 配置
   configureWebpack: {
-    cache: false,
     resolve: {
       alias: {
         '~': path.resolve(__dirname, 'src')
@@ -52,18 +51,25 @@ module.exports = {
     },
     plugins: [
       defPlugin
+      // new webpack.HotModuleReplacementPlugin()
+      // new BundleAnalyzerPlugin()
     ],
+    optimization: {
+      splitChunks: {
+        maxSize: 1000000,
+        chunks: 'all'
+      }
+    },
     module: {
       rules: [
         {
-          test: path.resolve(__dirname, 'src/config/app-config.js'),
+          test: /app-config\.js$/,
           use: [
             {
               loader: 'file-loader',
               options: {
-                name: 'js/[name].[hash].[ext]',
-                emitFile: true,
-                esModule: process.env.NODE_ENV === 'production'
+                name: 'js/config.js',
+                emitFile: true
               }
             }
           ]
@@ -74,12 +80,11 @@ module.exports = {
   css: {
     loaderOptions: {
       sass: {
-        data: `
+        additionalData: `
         @import "~/assets/sass/_variables.scss";
         @import "~/assets/sass/_mixin.scss";
         @import "~/assets/sass/_placeholder.scss";`
       }
     }
-  },
-  parallel: false
+  }
 }

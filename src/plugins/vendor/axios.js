@@ -23,7 +23,7 @@ const hidWaitingAnimation = () => {
 axios.interceptors.response.use(function (response) {
   if (process.browser) {
     const message = response.data.message
-    if (message !== 'success') {
+    if (message !== 'success' && message) {
       store.commit('globalState/setPromptMessage', { msg: message, status: true })
     }
     // 取消等待动画
@@ -62,9 +62,13 @@ axios.interceptors.response.use(function (response) {
 
 // 如果在客户端中进行请求，开启等待动画
 axios.interceptors.request.use(function (config) {
+  //
+  const token = localStorage.getItem('APP_TOKEN')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   if (process.browser && config.url !== '/csrf') {
     requestStack.push(1)
-    // store.commit('globalState/setWaitingState', true)
   }
 
   if (!config.params) {
@@ -75,7 +79,7 @@ axios.interceptors.request.use(function (config) {
     config.url = config.url.slice(0, -1)
   }
 
-  config.headers['X-CSRF-TOKEN'] = store.state.globalState.csrfToken
+  // config.headers['X-CSRF-TOKEN'] = store.state.globalState.csrfToken
 
   return config
 }, function (error) {

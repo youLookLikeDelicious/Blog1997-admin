@@ -32,7 +32,7 @@ import renderUserChartMixin from '~/mixin/dashboard/render-user-chart'
 import renderIlligalInfoChartMixin from '~/mixin/dashboard/render-illegal-info-chart'
 import { dashboard } from '~/api/statistic'
 /**
- * Dashbord page
+ * Dashboard page
  * @example [none]
  */
 export default {

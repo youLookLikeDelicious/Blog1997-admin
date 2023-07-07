@@ -376,10 +376,10 @@ export default {
     margin: 1rem auto 0 auto;
     justify-content: space-between;
   }
-  /deep/.el-divider--horizontal{
+  :deep(.el-divider--horizontal) {
     margin-top: 1.7rem;
   }
-  /deep/.catalog-content{
+  :deep(.catalog-content) {
     flex: 1;
     display: flex;
     align-self: stretch;
@@ -398,7 +398,7 @@ export default {
       font-style: normal;
     }
   }
-  /deep/.el-tree-node__content{
+  :deep(.el-tree-node__content) {
     padding-top: .5rem;
     padding-bottom: .5rem;
     border-radius: .3rem;

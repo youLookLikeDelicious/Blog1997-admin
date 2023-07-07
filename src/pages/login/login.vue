@@ -33,7 +33,8 @@
               </div>
               <div class="capcha-wrapper">
                 <img
-                  :src="`${API_URL}/captcha?${captchaRand}`"
+                  v-if="captchaData.img"
+                  :src="captchaData.img"
                   @click="refreshCaptcha"
                   alt="验证码"
                 />
@@ -62,7 +63,7 @@
 
 <script>
 import { login, loginBySocialCount } from '~/api/user'
-import { getCsrfToken } from '~/api/system'
+import { getCsrfToken, getCaptcha } from '~/api/system'
 import JSEncrypt from 'jsencrypt'
 export default {
   layout: 'login',
@@ -72,9 +73,12 @@ export default {
       model: {
         email: '',
         password: '',
-        captcha: ''
+        captcha: '',
+        key: ''
       },
-      captchaRand: Math.random()
+      captchaData: {
+        img: ''
+      }
     }
   },
   computed: {
@@ -114,7 +118,7 @@ export default {
   mounted () {
     // 尝试获取email
     this.attemptGetEmail()
-
+    this.refreshCaptcha()
     // 获取参数
     const params = window.location.search.match(/(code|type|redirect)=([^&]+)/gi)
 
@@ -123,7 +127,8 @@ export default {
     }
 
     loginBySocialCount(params)
-      .then(() => {
+      .then((res) => {
+        localStorage.setItem('APP_TOKEN', res.data.data.token)
         window.location.replace('/admin')
       })
   },
@@ -136,7 +141,10 @@ export default {
         return
       }
       const formData = this.getFormData()
-      login(formData).then(() => this.toHome())
+      login(formData).then((res) => {
+        this.toHome()
+        localStorage.setItem('APP_TOKEN', res.data.data.token)
+      })
         .catch(() => {
           this.refreshCaptcha()
         })
@@ -162,7 +170,10 @@ export default {
      * 刷新验证码
      */
     refreshCaptcha () {
-      this.captchaRand = Math.random()
+      getCaptcha().then(res => {
+        this.model.key = res.data.key
+        this.captchaData.img = res.data.img
+      })
     },
     /**
      * 尝试获取邮箱

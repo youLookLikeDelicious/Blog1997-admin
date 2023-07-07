@@ -96,7 +96,7 @@ export default {
 
 <style lang="scss" scoped>
 .cover {
-  /deep/.el-image {
+  :deep(.el-image) {
     width: 12rem;
     height: 12rem;
     vertical-align: middle;

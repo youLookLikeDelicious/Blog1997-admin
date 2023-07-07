@@ -29,6 +29,7 @@ export default {
   methods: {
     logout () {
       this.$axios.post('/oauth/logout', { id: this.user.id }).then(() => {
+        localStorage.setItem('APP_TOKEN', '')
         this.$store.commit('user/setUser', {})
       })
     },

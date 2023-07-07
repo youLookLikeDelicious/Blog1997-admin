@@ -1,5 +1,10 @@
 import { axios } from '~/plugins/vendor/axios'
 
+// 获取验证码
+export function getCaptcha () {
+  return axios.get('/captcha')
+}
+
 /**
  * 获取系统配置信息
  */
